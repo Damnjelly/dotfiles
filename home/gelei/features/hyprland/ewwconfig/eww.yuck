@@ -1,0 +1,142 @@
+(defwindow mainbar
+          :monitor "Kamvas 16"
+          :geometry (geometry :x "-300px"
+                              :width "340px"
+                              :height "1896px"
+                              :anchor "left center")
+          :stacking "fg"
+          :exclusive true
+          (bar))
+
+(defwidget bar []
+          (box :orientation "h"
+               :space-evenly false
+               (popoutbar)
+               (sidebar)))
+
+(defwidget popoutbar []
+          (box :class "popoutbar"))
+
+(defwidget sidebar []
+          (centerbox :orientation "v"
+                     :class "sidebar"
+                     :width 36
+                     (topmenu)
+                     (centermenu)
+                     (bottommenu)))
+
+
+
+; ░        ░░      ░░       ░░
+; ▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒
+; ▓▓▓▓  ▓▓▓▓  ▓▓▓▓  ▓       ▓▓
+; ████  ████  ████  █  ███████
+; ████  █████      ██  ███████
+
+(defwidget topmenu []
+          (box :orientation "v"
+               :valign "start"
+               :halign "center"
+               :width 36
+               :space-evenly false
+               (icon)
+               (divider)
+               (apptray)))
+
+(defwidget icon []
+          (box :class "profilepicture"
+               :halign "center"))
+
+(defvar apptrayreveal false)
+
+(defwidget apptray []
+          (box :orientation "v"
+               :space-evenly false
+               :class "apptraybox"
+               (eventbox :cursor "pointer"
+                         :onclick {apptrayreveal != false 
+                                   ? "eww update apptrayreveal=false" 
+                                   : "eww update apptrayreveal=true"}
+                         (label :text {apptrayreveal != false
+                                       ? "" 
+                                       : ""}
+                                :class "icon-apptray"))
+               (revealer :transition "slidedown"
+                         :reveal apptrayreveal
+                         :duration "500ms"
+                         :class "apptrayrevealer"
+                    "hi")))
+
+
+
+; ░░      ░░        ░   ░░░  ░        ░        ░       ░░
+; ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒    ▒▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒
+; ▓  ▓▓▓▓▓▓▓      ▓▓▓  ▓  ▓  ▓▓▓▓  ▓▓▓▓      ▓▓▓       ▓▓
+; █  ████  █  ███████  ██    ████  ████  ███████  ███  ██
+; ██      ██        █  ███   ████  ████        █  ████  █
+
+(defwidget centermenu []
+          (box :orientation "v"
+               :valign "center"
+               :space-evenly false
+               (time)))
+
+(defwidget time []
+	        (box :orientation "v" 
+			         :class "timebox" 
+			         :valign "end"
+               :width 36
+	             (button :onclick "scripts/popup calendar"	
+			                 :class "time" hour)
+	                     (button	:onclick "scripts/popup calendar"	
+			                          :class "time" min)))
+
+(defpoll hour	:interval "1s"	"date '+%H'")
+(defpoll min	:interval "1s"	"date '+%M'")
+
+
+
+; ░       ░░░      ░░        ░        ░░      ░░  ░░░░  ░
+; ▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒▒▒▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒▒▒▒  ▒   ▒▒   ▒
+; ▓       ▓▓  ▓▓▓▓  ▓▓▓▓  ▓▓▓▓▓▓▓  ▓▓▓▓  ▓▓▓▓  ▓        ▓
+; █  ████  █  ████  ████  ███████  ████  ████  █  █  █  █
+; █       ███      █████  ███████  █████      ██  ████  █
+
+(defwidget bottommenu []
+          (box :orientation "v"
+               :valign "end"
+               :halign "center"
+               :width 36
+               :space-evenly false
+               (usedstorage)
+               (divider)
+               (boxlessbutton :command "reboot"
+                              :label ""
+                              :labelclass "icon-restartbutton")
+               (boxlessbutton :command "poweroff"
+                              :label "⏻"
+                              :labelclass "icon-poweroffbutton")))
+
+
+(defwidget usedstorage []
+          (box :orientation "v"
+               :space-evenly false
+               :class "usedstoragebox"
+               (progress :orientation "v"
+                         :value {round(EWW_DISK["/"].used_perc, 0)}
+                         :halign "center"
+                         :flipped true
+                         :class "progress-usedstorage")
+               (label :text ""
+                      :class "icon-usedstorage"
+                      )))
+
+(defwidget divider []
+          (box :orientation "v"
+               :class "divider"))
+
+(defwidget boxlessbutton [command label labelclass]
+          (eventbox :onclick command
+                    :cursor "pointer"
+                    (label :text label
+                           :class labelclass)))

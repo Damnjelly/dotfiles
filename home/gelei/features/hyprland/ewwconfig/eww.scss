@@ -1,0 +1,113 @@
+
+* {
+  all: unset;
+  color: $base05;
+}
+
+.popoutbar {
+  background-color: $base02;
+  border-color: $base0A;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  min-width: 300px;
+}
+
+.sidebar {
+  background-color: $base01;
+  background-size: contain;
+  border-bottom-right-radius: 15px;
+  border-color: $base07;
+  border-right-width: 2px;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-top-right-radius: 15px;
+  padding: 5px 0 15px 0px;
+}
+
+.profilepicture {
+  background-image: url("file:///home/gelei/profilepicture.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  border-radius: 30px;
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.icon-apptray {
+  font-size: 24;
+	color: $base02;
+  margin-right: 10px;
+}
+
+.apptraybox {
+  background-color: $base05;
+  border-radius: 8px;
+  padding: 6px 0 4px 0;
+	margin: 8px 4px 0 4px;
+}
+
+.apptrayrevealer {
+  margin: 400px 0 400px 0;
+}
+
+.timebox {
+  background-color: $base02;
+  border-radius: 120px;
+  padding: 30px 0 30px 0;
+  margin: 0 4px 0 4px;
+}
+
+.time {
+  all: unset;
+  color: $base02;
+  font-size: 18;
+}
+
+.progress-usedstorage {
+  all: unset;
+  trough {
+    background-color: $base02;
+    border-radius: 10px;
+    min-height: 100px;
+    min-width: 12px;
+    progress {
+      background-color: $base0E;
+      border-radius: inherit;
+      min-width: inherit;
+    }  
+  }
+}
+
+.icon-usedstorage {
+  color: $base04;
+  margin: 6px 8px 0 0;
+  font-size: 28;
+  font-weight: bold;
+}
+
+.usedstoragebox {
+  background-color: $base05;
+  border-radius: 8px;
+  padding: 18px 0 16px 0;
+	margin: 0 4px 12px 4px;
+}
+
+.divider {
+  background-color: $base05;
+  margin: 4px;
+  min-height: 1px;
+}
+
+.icon-poweroffbutton {
+  color: $base0F;
+  font-size: 22;
+  margin: 0 8px 0 0;
+}
+
+.icon-restartbutton {
+  color: $base09;
+  font-size: 34;
+  margin: 0 2px 0 0;
+}
