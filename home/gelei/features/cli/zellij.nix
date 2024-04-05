@@ -4,6 +4,7 @@
   config,
   ...
 }: {
+  stylix.targets.zellij.enable = true;
   xdg.configFile."zellij/quickstart.kdl".text = with config.lib.stylix.colors; ''
     layout {
     		default_tab_template {
@@ -37,7 +38,7 @@
     		}
     		tab name="Code"{
     				pane command="nvim" borderless=true
-    				pane name="terminal" size="20%" borderless=true
+    				pane size="20%" borderless=true
     		}
     }
   '';

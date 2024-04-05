@@ -1,4 +1,5 @@
 {...}: {
+  stylix.targets.nixvim.enable = true;
   programs.nixvim = {
     enable = true;
     globals.mapleader = ",";
@@ -63,8 +64,6 @@
       };
 
       nvim-colorizer.enable = true;
-
-      yanky.enable = true; # TODO: configure
 
       lualine.enable = true; # TODO: configure
 
@@ -207,6 +206,10 @@
         key = "<leader>l";
       }
       {
+        action = "<cmd>BufferClose<CR>";
+        key = "<leader>q";
+      }
+      {
         action = "<cmd>Telescope find_files<CR>";
         key = "<leader>ff";
       }
@@ -222,6 +225,14 @@
       {
         action = "<mcd>conform.format()<CR>";
         key = "<leader>ft";
+      }
+      {
+        action = "\"+p";
+        key = "<leader>p";
+      }
+      {
+        action = "\"+y";
+        key = "<leader>y";
       }
     ];
     extraConfigLuaPre = ''

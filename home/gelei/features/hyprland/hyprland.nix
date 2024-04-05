@@ -2,9 +2,10 @@
   # Startup script
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.swww}/bin/swww init &
-    ${pkgs.kitty}/bin/kitty ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl
+    ${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl
   '';
 in {
+  stylix.targets.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -16,7 +17,7 @@ in {
       ];
 
       # Set programs that you use
-      "$terminal" = "kitty zellij -l ~/.config/zellij/quickstart.kdl";
+      "$terminal" = "foot zellij -l ~/.config/zellij/quickstart.kdl";
       "$fileManager" = "yazi";
       "$menu" = "rofi-wayland --show drun";
 
@@ -44,12 +45,13 @@ in {
       general = with config.lib.stylix.colors; {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-        gaps_in = 14;
+        gaps_in = 8;
         gaps_out = 12;
 
-        border_size = 2;
-        "col.active_border" = lib.mkForce "#${base0C}";
-        "col.inactive_border" = lib.mkForce "#${base01}";
+        border_size = 4;
+        "col.active_border" = lib.mkForce "rgb(${base0C}) rgb(${base0D}) 60deg";
+        "col.inactive_border" = lib.mkForce "rgba(00${base01})";
+
         layout = "dwindle";
 
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
@@ -62,12 +64,8 @@ in {
         rounding = 16;
         blur = {
           enabled = false;
-          size = 2;
-          passes = 2;
-          new_optimizations = true;
-          ignore_opacity = true;
-          noise = 0;
         };
+        drop_shadow = false;
       };
 
       animations = {
@@ -143,10 +141,10 @@ in {
         "$mainMod, J, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+        "$mainMod, h, movefocus, l"
+        "$mainMod, l, movefocus, r"
+        "$mainMod, k, movefocus, u"
+        "$mainMod, j, movefocus, d"
 
         # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"

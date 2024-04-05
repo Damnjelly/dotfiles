@@ -6,13 +6,12 @@
   environment.systemPackages = with pkgs; [
     teams-for-linux
     hackneyed
-    gpu-screen-recorder
     remmina
     monspkgs.everest-mons
     #Utility
     opentabletdriver
+    zathura
     vesktop
-    firefox
 
     #Games
     osu-lazer-bin
@@ -26,7 +25,6 @@
   ];
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["CommitMono"];})
     kirsch
   ];
 }

@@ -9,7 +9,8 @@ in {
 		file.".config/yazi/plugins/smart-enter.yazi/init.lua".text = "${smart-enter-init}";
 		file.".config/yazi/init.lua".text = "${init}";
 		file.".config/yazi/plugins/starship.yazi/init.lua".text = "${starship}";
-	};
+  };
+  stylix.targets.yazi.enable = true;
 	programs.yazi = {
 		enable = true;
 		package = pkgs.yazi;
@@ -91,7 +92,14 @@ in {
 						desc = "Show media info";
 						for = "unix";
 					}
-				];
+        ];
+        viewPdf = [
+          {
+            exec = ''zathura "$@"'';
+            desc = "View with pdf viewer";
+            for = "unix";
+          }
+        ];
 			};
 
 			open = {
@@ -127,7 +135,11 @@ in {
 					{
 						mime = "*/javascript";
 						use = [ "edit" "reveal" ];
-					}
+          }
+          {
+            mime = "application/pdf";
+            use = [ "viewPdf" ];
+          }
 
 					# Archives
 					{

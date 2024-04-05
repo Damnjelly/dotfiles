@@ -74,6 +74,8 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
+  programs.nix-ld.enable = true;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -122,7 +124,12 @@
   };
 
   # Enable Steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];

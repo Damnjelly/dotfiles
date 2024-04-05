@@ -1,12 +1,11 @@
-{
-  pkgs,
-  inputs,
-  config,
-  ...
-}: {
+{ pkgs, inputs, config, ... }: 
+let
+  userChrome = builtins.readFile ./firefox-userChrome.css;
+in {
   config = {
     programs.firefox = with config.lib.stylix.colors; {
       enable = true;
+      package = pkgs.firefox;
       profiles.gelei = {
         search.engines = {
           "Nix Packages" = {
@@ -53,9 +52,13 @@
           "browser.toolbars.bookmarks.visibility" = "never";
         };
 
-        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [ bitwarden stylus ];
+        # Extensions can be found at: https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
+        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [ 
+          bitwarden 
+          stylus
+        ];
 
-        userChrome = ''
+        userChrome = ''        
 #fullscr-toggler { background-color: rgba(0, 0, 0, 0) !important; }
 :root {
   --uc-bg-color: #${base00};
