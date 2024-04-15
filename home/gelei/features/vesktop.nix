@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{ config, ... }: {
   config = with config.lib.stylix.colors; {
     home.file.".config/vesktop/settings/quickCss.css".text = ''
       :root {

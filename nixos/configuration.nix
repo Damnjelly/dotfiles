@@ -1,13 +1,6 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules from other flakes (such as nixos-hardware):
@@ -15,11 +8,11 @@
     # inputs.hardware.nixosModules.common-ssd
     # You can also split up your configuration and import pieces of it here:
     ./system-packages.nix
+    ./display-manager/greetd.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -32,26 +25,46 @@
       # neovim-nightly-overlay.overlays.default
     ];
     # Configure your nixpkgs instance
-    config = {
+    config = with config.lib.stylix.colors; {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      console = {
+        enable = true;
+        colors = [
+          "${base00}"
+          "${base01}"
+          "${base02}"
+          "${base03}"
+          "${base04}"
+          "${base05}"
+          "${base06}"
+          "${base07}"
+          "${base08}"
+          "${base09}"
+          "${base0A}"
+          "${base0B}"
+          "${base0C}"
+          "${base0D}"
+          "${base0E}"
+          "${base0F}"
+        ];
+        earlySetup = true;
+      };
     };
   };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = ["/etc/nix/path"];
+  nix.nixPath = [ "/etc/nix/path" ];
   environment = {
-    etc =
-      lib.mapAttrs' (name: value: {
-        name = "nix/path/${name}";
-        value.source = value.flake;
-      })
-      config.nix.registry;
+    etc = lib.mapAttrs' (name: value: {
+      name = "nix/path/${name}";
+      value.source = value.flake;
+    }) config.nix.registry;
   };
 
   nix.settings = {
@@ -73,8 +86,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
-
-  programs.nix-ld.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -119,20 +130,16 @@
   };
 
   # Enable remote destop
-  services.xrdp = {
-    enable = true;
-  };
+  services.xrdp = { enable = true; };
 
   # Enable Steam
   programs.steam = {
     enable = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   networking.hostName = "nixos";
 
@@ -140,8 +147,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.xserver.display = 1;
+
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"]; # or "nvidiaLegacy470 etc.
+  services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470 etc.
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -171,6 +180,7 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+
   };
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -184,8 +194,8 @@
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "12345";
       isNormalUser = true;
-      openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINTPCa7viXnGJdWfcYUHhQL+IqmiE03TxAp8h1M6+duD joren122@hotmail.com"];
-      extraGroups = ["networkmanager" "wheel"];
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINTPCa7viXnGJdWfcYUHhQL+IqmiE03TxAp8h1M6+duD joren122@hotmail.com" ];
+      extraGroups = [ "networkmanager" "wheel" ];
     };
   };
 

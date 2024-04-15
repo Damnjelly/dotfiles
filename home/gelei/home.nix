@@ -1,31 +1,33 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ config, pkgs, ...}: {
-  imports = [
-    ./features/cli
-    ./features/firefox/firefox.nix
-    ./features/hyprland
-    ./features/nixvim
-    ./features/vesktop.nix
+{ config, pkgs, outputs, inputs, ... }: {
+  imports = [ 
+   outputs.homeManagerModules.sunbeam
+   inputs.nixvim.homeManagerModules.nixvim 
+   inputs.stylix.homeManagerModules.stylix
+    ./features/cli 
+    ./features/firefox/firefox.nix 
+    ./features/hyprland 
+    ./features/nixvim 
+    ./features/vesktop.nix 
+    ./features/sunbeam
   ];
   # General theming
   stylix = {
     image = ./wallpaper.png;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
-               # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
-               
+    # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
+
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts;
-        name = "Commit Mono";
+        package = pkgs.hack-font;
+        name = "Hack";
       };
 
       serif = config.stylix.fonts.monospace;
       sansSerif = config.stylix.fonts.monospace;
       emoji = config.stylix.fonts.monospace;
-      sizes = {
-        terminal = 14;
-      };
+      sizes = { terminal = 14; };
     };
 
     cursor = {
@@ -33,34 +35,21 @@
       name = "Hackneyed";
       size = 16;
     };
-
     targets = {
       gtk.enable = true;
       fzf.enable = true; # TODO: Create separate nix file with theming
-      rofi.enable = true; # TODO: Either replace or create separate nix with theming
       zathura.enable = true;
     };
   };
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
+    overlays = builtins.attrValues outputs.overlays;
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for httpr://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
+  };
+  pam.sessionVariables = {
+   SSH_AUTH_SOCK = "${builtins.getEnv "XDG_RUNTIME_DIR"}/ssh-agent.socket";
   };
 
   home = {

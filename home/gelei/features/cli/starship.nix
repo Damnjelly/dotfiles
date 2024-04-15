@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{ pkgs, config, ... }: {
   programs.starship = with config.lib.stylix.colors; {
     enable = true;
     package = pkgs.starship;

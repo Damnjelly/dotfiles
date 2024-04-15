@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{ pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     teams-for-linux
     hackneyed
@@ -12,6 +8,7 @@
     opentabletdriver
     zathura
     vesktop
+    bkt
 
     #Games
     osu-lazer-bin
@@ -23,8 +20,5 @@
     godot_4
     blender
   ];
-
-  fonts.packages = with pkgs; [
-    kirsch
-  ];
+  fonts.packages = with pkgs; [ kirsch ];
 }

@@ -1,4 +1,5 @@
-{pkgs, config, lib, ...}: let
+{ pkgs, config, lib, ... }:
+let
   # Startup script
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.swww}/bin/swww init &
@@ -19,7 +20,7 @@ in {
       # Set programs that you use
       "$terminal" = "foot zellij -l ~/.config/zellij/quickstart.kdl";
       "$fileManager" = "yazi";
-      "$menu" = "rofi-wayland --show drun";
+      "$menu" = "rofi -show drun -show-icons";
 
       # Some default env vars.
       env = [
@@ -35,22 +36,19 @@ in {
         kb_rules = "";
 
         follow_mouse = 1;
-
-        touchpad = {
-          natural_scroll = "no";
-        };
+        touchpad = { natural_scroll = "no"; };
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
       };
 
       general = with config.lib.stylix.colors; {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-        gaps_in = 8;
+        gaps_in = 6;
         gaps_out = 12;
 
         border_size = 4;
         "col.active_border" = lib.mkForce "rgb(${base0C}) rgb(${base0D}) 60deg";
-        "col.inactive_border" = lib.mkForce "rgba(00${base01})";
+        "col.inactive_border" = lib.mkForce "rgb(${base01})";
 
         layout = "dwindle";
 
@@ -61,10 +59,8 @@ in {
       decoration = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         inactive_opacity = 0.85;
-        rounding = 16;
-        blur = {
-          enabled = false;
-        };
+        rounding = 2;
+        blur = { enabled = false; };
         drop_shadow = false;
       };
 
@@ -114,10 +110,6 @@ in {
         sensitivity = -0.5;
       };
 
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
-      # Example windowrule v2
-      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
       # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
       windowrulev2 = [
         "suppressevent maximize, class:.*" # Youll probably like this.
@@ -125,7 +117,12 @@ in {
         # These should never have opacity
         "opacity 1.0 override,class:^(net-runelite-client-RuneLite)$"
         "opacity 1.0 override,class:^(firefox)$"
+        "opacity 1.0 override,class:^(vesktop)$"
+        "workspace 1 silent,class:^(vesktop)$"
+        "workspace 2 silent,class:^(foot)$"
       ];
+
+      workspace = [ "2,border:false,rounding:false,gapsout:0" "1,border:false,rounding:false,gapsout:0" ];
 
       "$mainMod" = "SUPER";
 
@@ -134,19 +131,17 @@ in {
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
-        "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo, # dwindle"
-        "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, R, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, h, movefocus, l"
         "$mainMod, l, movefocus, r"
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
-
-        # Switch workspaces with mainMod + [0-9]
+       
+       # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"
@@ -169,27 +164,17 @@ in {
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-        # Example special workspace (scratchpad)
-        #"$mainMod, S, togglespecialworkspace, magic"
-        #"$mainMod SHIFT, S, movetoworkspace, special:magic"
-
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
-
-        # Rofi launcher
-        "$mainMod, S, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+        # App launcher
+        "$mainMod, S, exec, $menu"
+        "$mainMod, A, exec, ~/Documents/popup-opener.sh sunbeam"
 
         # Rectangle screenshot
-        "ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g \"$(slurp -w 0)\" $IMG && wl-copy < $IMG"
+        ''ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
         # Screenshot active window
         "CTRL ALT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && MONITOR=$(hyprctl activeworkspace -j | jq .monitor -r) && grim -o $MONITOR $IMG && wl-copy < $IMG"
       ];
 
-      bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "ALT, mouse:272, resizewindow"
-      ];
+      bindm = [ "$mainMod, mouse:272, movewindow" "ALT, mouse:272, resizewindow" ];
     };
   };
 }

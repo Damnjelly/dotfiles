@@ -1,8 +1,5 @@
-{pkgs, ...}: {
-  imports = [
-    ./hyprland.nix
-    ./eww.nix
-  ];
+{ pkgs, ... }: {
+imports = [ ./hyprland.nix ./rofi.nix ];
   home.packages = with pkgs; [
     grim # create screenshot
     slurp # get screen region
@@ -10,8 +7,7 @@
     swww # wallpaper daemon
     xdg-desktop-portal # desktop portal
     xdg-desktop-portal-gtk
-    rofi-wayland # applauncher
     dunst # notification daemon
-    eww # widget system
+    rofi-wayland # app launcher
   ];
 }
