@@ -11,6 +11,10 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
@@ -76,7 +80,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
 
           # > Our main home-manager configuration file <
-          modules = [ ./home/gelei/home.nix ];
+          modules = [ ./desktop/gelei/home.nix ];
         };
       };
     };

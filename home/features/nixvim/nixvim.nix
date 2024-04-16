@@ -1,10 +1,10 @@
-{ ... }: {
+{ config, ... }: {
   stylix.targets.nixvim.enable = true;
   programs.nixvim = {
     enable = true;
     globals.mapleader = ",";
 
-    colorschemes.kanagawa.enable = true;
+    colorschemes.${config.colorscheme}.enable = true;
 
     opts = {
       number = true;

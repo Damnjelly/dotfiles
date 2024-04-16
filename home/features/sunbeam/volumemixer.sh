@@ -94,6 +94,7 @@ if [ "$COMMAND" = "list-sinks" ]; then
 			type: "run", 
 			command: "switch-sink",
 			params: {sinkname: .name},
+			exit: true
 		}
 	]
 }' | jq -s '{ items: . }'
@@ -122,7 +123,8 @@ title: (.name + ", currently " + .volume),
 			title: "Select application", 
 			type: "run", 
 			command: "application-volume",
-			params: {"applicationid": .id}
+			params: {"applicationid": .id},
+			exit: true
 		}
 	]
 }' | jq -s '{ items: . }'

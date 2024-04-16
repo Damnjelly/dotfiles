@@ -1,21 +1,28 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ config, pkgs, outputs, inputs, ... }: {
+{ config, pkgs, outputs, inputs, lib, ... }: {
   imports = [ 
    outputs.homeManagerModules.sunbeam
    inputs.nixvim.homeManagerModules.nixvim 
    inputs.stylix.homeManagerModules.stylix
-    ./features/cli 
-    ./features/firefox/firefox.nix 
-    ./features/hyprland 
-    ./features/nixvim 
-    ./features/vesktop.nix 
-    ./features/sunbeam
+    ./../features/cli 
+    ./../features/firefox/firefox.nix 
+    ./../features/hyprland 
+    ./../features/nixvim 
+    ./../features/vesktop.nix 
+    ./../features/sunbeam
   ];
+  options = {
+    colorscheme = lib.mkOption {
+      type = lib.types.str;
+      default = "kanagawa";
+      example = "kanagawa";
+    };
+  };
   # General theming
   stylix = {
     image = ./wallpaper.png;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.colorscheme}.yaml";
     # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
 
     fonts = {

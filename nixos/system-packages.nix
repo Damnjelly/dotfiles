@@ -6,9 +6,7 @@
     monspkgs.everest-mons
     #Utility
     opentabletdriver
-    zathura
     vesktop
-    bkt
 
     #Games
     osu-lazer-bin

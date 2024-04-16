@@ -63,5 +63,9 @@ if [ "$COMMAND" = "list-desktop-files" ]; then
 }' | jq -s '{ items: . }'
 elif [ "$COMMAND" = "run-application" ]; then
 	APPLICATIONNAME=$(echo "$1" | jq -r '.params.applicationname')
-	j4-dmenu-desktop --dmenu="(cat &> /dev/null) | (echo '$APPLICATIONNAME')"
+	(set -m ;j4-dmenu-desktop --dmenu="(cat &> /dev/null) | (echo '$APPLICATIONNAME')" &)
+	while true; do
+		sleep 30
+	done
+	exit 0
 fi

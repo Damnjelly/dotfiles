@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 let
   # Startup script
   startupScript = pkgs.writeShellScriptBin "start" ''
@@ -9,6 +9,9 @@ in {
   stylix.targets.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
+    plugins = [
+      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
+    ];
     settings = {
       exec-once = "${startupScript}/bin/start";
       monitor = [
@@ -20,7 +23,7 @@ in {
       # Set programs that you use
       "$terminal" = "foot zellij -l ~/.config/zellij/quickstart.kdl";
       "$fileManager" = "yazi";
-      "$menu" = "rofi -show drun -show-icons";
+      "$menu" = "~/Documents/popup-opener.sh sunbeam";
 
       # Some default env vars.
       env = [
@@ -166,14 +169,12 @@ in {
 
         # App launcher
         "$mainMod, S, exec, $menu"
-        "$mainMod, A, exec, ~/Documents/popup-opener.sh sunbeam"
 
         # Rectangle screenshot
         ''ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
         # Screenshot active window
         "CTRL ALT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && MONITOR=$(hyprctl activeworkspace -j | jq .monitor -r) && grim -o $MONITOR $IMG && wl-copy < $IMG"
       ];
-
       bindm = [ "$mainMod, mouse:272, movewindow" "ALT, mouse:272, resizewindow" ];
     };
   };
