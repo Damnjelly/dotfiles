@@ -2,7 +2,7 @@
   services.greetd = {
     enable = true;
     package = pkgs.greetd.tuigreet;
-    settings = { default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --window-padding 1 -r -t --cmd hyprland"; };
+    settings = { default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --window-padding 1 -r -t --cmd Hyprland"; };
   };
   systemd.services.greetd.serviceConfig = {
     Type = "idle";

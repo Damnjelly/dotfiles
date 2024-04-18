@@ -21,8 +21,8 @@ in {
       ];
 
       # Set programs that you use
-      "$terminal" = "foot zellij -l ~/.config/zellij/quickstart.kdl";
-      "$fileManager" = "yazi";
+      "$terminal" = "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
+      "$fileManager" = "${pkgs.yazi}/bin/yazi";
       "$menu" = "~/Documents/popup-opener.sh sunbeam";
 
       # Some default env vars.
@@ -49,9 +49,9 @@ in {
         gaps_in = 6;
         gaps_out = 12;
 
-        border_size = 4;
+        border_size = 2;
         "col.active_border" = lib.mkForce "rgb(${base0C}) rgb(${base0D}) 60deg";
-        "col.inactive_border" = lib.mkForce "rgb(${base01})";
+        "col.inactive_border" = lib.mkForce "rgb(${base05})";
 
         layout = "dwindle";
 
@@ -62,7 +62,7 @@ in {
       decoration = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         inactive_opacity = 0.85;
-        rounding = 2;
+        rounding = 0;
         blur = { enabled = false; };
         drop_shadow = false;
       };
@@ -135,7 +135,6 @@ in {
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
-        "$mainMod, P, pseudo, # dwindle"
         "$mainMod, R, togglesplit, # dwindle"
 
         # Move focus with mainMod + arrow keys
@@ -169,6 +168,7 @@ in {
 
         # App launcher
         "$mainMod, S, exec, $menu"
+        "$mainMod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a"
 
         # Rectangle screenshot
         ''ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''

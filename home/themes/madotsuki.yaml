@@ -1,0 +1,18 @@
+scheme: "Madotsuki"
+author: "Gelei"
+base00: "99888D" # ----
+base01: "BEAAA5" # ---
+base02: "E2CBBD" # --
+base03: "4F414C" # -
+base04: "79607E" # +
+base05: "8E6F97" # ++
+base06: "443555" # +++
+base07: "59283e" # ++++
+base08: "b94562" # red
+base09: "E47126" # orange
+base0A: "ecd05f" # yellow
+base0B: "2f4240" # green
+base0C: "89c6cb" # aqua/cyan
+base0D: "102E83" # blue
+base0E: "8467a6" # purple
+base0F: "27091A" # brown

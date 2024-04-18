@@ -9,5 +9,6 @@ imports = [ ./hyprland.nix ./rofi.nix ];
     xdg-desktop-portal-gtk
     dunst # notification daemon
     rofi-wayland # app launcher
+    hyprpicker # colorpicker
   ];
 }

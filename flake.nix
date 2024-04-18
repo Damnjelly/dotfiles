@@ -80,7 +80,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
 
           # > Our main home-manager configuration file <
-          modules = [ ./desktop/gelei/home.nix ];
+          modules = [ ./home/desktop/home.nix ];
         };
       };
     };

@@ -100,11 +100,11 @@ in {
           }
 
           #back-button {
-            list-style-image: url("file:///home/gelei/Documents/nix-config/home/gelei/features/firefox/left-arrow.svg") !important;
+            list-style-image: url("file:///home/gelei/Documents/nix-config/home/features/firefox/left-arrow.svg") !important;
           }
 
           #forward-button {
-            list-style-image: url("file:///home/gelei/Documents/nix-config/home/gelei/features/firefox/right-arrow.svg") !important;
+            list-style-image: url("file:///home/gelei/Documents/nix-config/home/features/firefox/right-arrow.svg") !important;
           }
 
           /* Options with pixel amounts could need to be adjusted, as this only works for my laptop's display */
