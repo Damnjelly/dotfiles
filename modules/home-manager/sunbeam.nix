@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: 
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -55,9 +55,8 @@ in {
   };
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
-    xdg.configFile."sunbeam/sunbeam.json" = mkIf
-      (cfg.settings != { }) {
-        source = jsonFormat.generate "sunbeam.json" cfg.settings;
+    xdg.configFile."sunbeam/sunbeam.json" = mkIf (cfg.settings != { }) {
+      source = jsonFormat.generate "sunbeam.json" cfg.settings;
     };
   };
 }

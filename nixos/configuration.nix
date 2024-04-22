@@ -25,42 +25,24 @@
       # neovim-nightly-overlay.overlays.default
     ];
     # Configure your nixpkgs instance
-    config = with config.lib.stylix.colors; {
+    config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      console = {
-        enable = true;
-        colors = [
-          "${base00}"
-          "${base01}"
-          "${base02}"
-          "${base03}"
-          "${base04}"
-          "${base05}"
-          "${base06}"
-          "${base07}"
-          "${base08}"
-          "${base09}"
-          "${base0A}"
-          "${base0B}"
-          "${base0C}"
-          "${base0D}"
-          "${base0E}"
-          "${base0F}"
-        ];
-        earlySetup = true;
-      };
+      console = { earlySetup = true; };
     };
   };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; })) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+  nix.registry = (lib.mapAttrs (_: flake: { inherit flake; }))
+    ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
   # This will additionally add your inputs to the system's legacy channels
   # Making legacy nix commands consistent as well, awesome!
   nix.nixPath = [ "/etc/nix/path" ];
   environment = {
+    sessionVariables = { FLAKE = "/home/gelei/Documents/nix-config"; };
+    systemPackages = with pkgs; [ nh ];
     etc = lib.mapAttrs' (name: value: {
       name = "nix/path/${name}";
       value.source = value.flake;
@@ -83,6 +65,11 @@
 
   # Enable OpenGL
   hardware.opengl.enable = true;
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -132,14 +119,8 @@
   # Enable remote destop
   services.xrdp = { enable = true; };
 
-  # Enable Steam
-  programs.steam = {
-    enable = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
-  };
-
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome.gnome-keyring ];
 
   networking.hostName = "nixos";
 
@@ -194,7 +175,9 @@
       # Be sure to change it (using passwd) after rebooting!
       initialPassword = "12345";
       isNormalUser = true;
-      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINTPCa7viXnGJdWfcYUHhQL+IqmiE03TxAp8h1M6+duD joren122@hotmail.com" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINTPCa7viXnGJdWfcYUHhQL+IqmiE03TxAp8h1M6+duD joren122@hotmail.com"
+      ];
       extraGroups = [ "networkmanager" "wheel" ];
     };
   };

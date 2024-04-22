@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-imports = [ ./hyprland.nix ./rofi.nix ];
+  imports = [ ./hyprland.nix ];
   home.packages = with pkgs; [
     grim # create screenshot
     slurp # get screen region
@@ -8,7 +8,7 @@ imports = [ ./hyprland.nix ./rofi.nix ];
     xdg-desktop-portal # desktop portal
     xdg-desktop-portal-gtk
     dunst # notification daemon
-    rofi-wayland # app launcher
     hyprpicker # colorpicker
+    waybar
   ];
 }

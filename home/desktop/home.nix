@@ -1,15 +1,26 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ config, pkgs, outputs, inputs, lib, ... }: {
-  imports = [ 
-   outputs.homeManagerModules.sunbeam
-   inputs.nixvim.homeManagerModules.nixvim 
-   inputs.stylix.homeManagerModules.stylix
-    ./../features/cli 
-    ./../features/firefox/firefox.nix 
-    ./../features/hyprland 
-    ./../features/nixvim 
-    ./../features/vesktop.nix 
+{ config, pkgs, outputs, inputs, lib, ... }:
+let
+  customtheme = pkgs.writeTextFile {
+    name = "theme.yaml";
+    text = "${builtins.readFile ./../themes/madotsuki.yaml}";
+    destination = "/theme/theme.yaml";
+  };
+in {
+  imports = [
+    outputs.homeManagerModules.sunbeam
+    inputs.nixvim.homeManagerModules.nixvim
+    inputs.stylix.homeManagerModules.stylix
+    inputs.niri.homeModules.niri
+    ./../features/cli
+    ./../features/firefox/firefox.nix
+    ./../features/hyprland
+    ./../features/nixvim
+    ./../features/vesktop.nix
     ./../features/sunbeam
+    ./../features/niri
+    ./../features/games
+    ./../features/shell
   ];
   options = {
     colorscheme = lib.mkOption {
@@ -21,9 +32,10 @@
   config = {
     # General theming
     stylix = {
-      image = ./__madotsuki_poniko_monoko_uboa_sekomumasada_sensei_and_5_more_yume_nikki_drawn_by_tamasamaa__68e7ed2d0023a20cb9d36b3d2833a90c.jpg;
+      image = ./madotsuki.png;
 
-      #base16Scheme = "${theme}/theme.yaml";
+      #base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.colorscheme}.yaml";
+      base16Scheme = "${customtheme}/theme/theme.yaml";
       # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
 
       fonts = {
@@ -57,7 +69,7 @@
       };
     };
     pam.sessionVariables = {
-     SSH_AUTH_SOCK = "${builtins.getEnv "XDG_RUNTIME_DIR"}/ssh-agent.socket";
+      SSH_AUTH_SOCK = "${builtins.getEnv "XDG_RUNTIME_DIR"}/ssh-agent.socket";
     };
 
     home = {

@@ -5,7 +5,14 @@
     cmp = {
       enable = true;
       settings = {
-        sources = [ { name = "treesitter"; } { name = "buffer"; } { name = "nvim_lsp"; } { name = "path"; } { name = "yanky"; } { name = "luasnip"; } ];
+        sources = [
+          { name = "treesitter"; }
+          { name = "buffer"; }
+          { name = "nvim_lsp"; }
+          { name = "path"; }
+          { name = "yanky"; }
+          { name = "luasnip"; }
+        ];
         snippet.expand = ''
           function(args)
             require('luasnip').lsp_expand(args.body)
@@ -42,8 +49,10 @@
               end
             end, { "i", "s" })
           '';
-          "<Down>" = "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
-          "<Up>" = "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
+          "<Down>" =
+            "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
+          "<Up>" =
+            "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
         };
         window.completion.border = "shadow";
       };

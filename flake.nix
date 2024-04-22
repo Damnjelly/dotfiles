@@ -33,9 +33,12 @@
     stylix.url = "github:danth/stylix";
 
     nixpkgs-mons.url = "github:UlyssesZh/nixpkgs/everest-mons";
+
+    niri.url = "github:sodiboo/niri-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, zjstatus, nixvim, stylix, ... }@inputs:
+  outputs =
+    { self, nixpkgs, home-manager, zjstatus, nixvim, stylix, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;

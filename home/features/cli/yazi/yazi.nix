@@ -5,7 +5,8 @@ let
   starship = builtins.readFile ./yazi-starship-init.lua;
 in {
   home = {
-    file.".config/yazi/plugins/smart-enter.yazi/init.lua".text = "${smart-enter-init}";
+    file.".config/yazi/plugins/smart-enter.yazi/init.lua".text =
+      "${smart-enter-init}";
     file.".config/yazi/init.lua".text = "${init}";
     file.".config/yazi/plugins/starship.yazi/init.lua".text = "${starship}";
   };

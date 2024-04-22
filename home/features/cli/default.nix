@@ -1,5 +1,13 @@
 { pkgs, ... }: {
-  imports = [ ./bash.nix ./btop.nix ./fastfetch/fastfetch.nix ./starship.nix ./zellij.nix ./yazi/yazi.nix ./foot.nix ./fzf.nix ];
+  imports = [
+    ./btop.nix
+    ./fastfetch/fastfetch.nix
+    ./starship.nix
+    ./zellij.nix
+    ./yazi/yazi.nix
+    ./foot.nix
+    ./fzf.nix
+  ];
   home.packages = with pkgs; [
     diskonaut # disk analyser
     exiftool # read, write, edit EXIF meta info

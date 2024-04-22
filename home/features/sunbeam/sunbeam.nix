@@ -1,6 +1,6 @@
 { config, ... }: {
   xdg.configFile = {
-    "sunbeam/extensions/volumemixer.sh" = { 
+    "sunbeam/extensions/volumemixer.sh" = {
       text = "${builtins.readFile ./volumemixer.sh}";
       executable = true;
       onChange = "chmod +w ~/.config/sunbeam/extensions/volumemixer.sh";
@@ -10,7 +10,7 @@
       executable = true;
       onChange = "chmod +w ~/.config/sunbeam/extensions/applauncher.sh";
     };
-  };  
+  };
   programs.sunbeam = {
     enable = true;
     settings = {
@@ -20,17 +20,30 @@
           command = "Sunbeam open https://pomdtr.github.io/sunbeam";
           exit = true;
         }
+        {
+          title = "Power off Computer";
+          command = "poweroff";
+          exit = true;
+        }
+        {
+          title = "Reboot Computer";
+          command = "reboot";
+          exit = true;
+        }
       ];
       extensions = {
         nixpkgs = {
-          origin = "https://raw.githubusercontent.com/pomdtr/sunbeam/main/extensions/nixpkgs.ts";
+          origin =
+            "https://raw.githubusercontent.com/pomdtr/sunbeam/main/extensions/nixpkgs.ts";
         };
         #TODO: Figurue out how this outofstoresymlink shit works
         volumemixer = {
-          origin = "~/Documents/nix-config/home/features/sunbeam/volumemixer.sh";
+          origin =
+            "~/Documents/nix-config/home/features/sunbeam/volumemixer.sh";
         };
         applauncher = {
-          origin = "~/Documents/nix-config/home/features/sunbeam/applauncher.sh";
+          origin =
+            "~/Documents/nix-config/home/features/sunbeam/applauncher.sh";
         };
       };
     };

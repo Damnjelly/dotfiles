@@ -22,7 +22,8 @@ in {
               ];
             }];
 
-            icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            icon =
+              "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = [ "@np" ];
           };
         };
@@ -45,12 +46,16 @@ in {
 
         settings = {
           "browser.search.widget.inNavBar" = false;
-          "services.sync.prefs.sync.browser.urlbar.showSearchSuggestionsFirst" = false;
+          "services.sync.prefs.sync.browser.urlbar.showSearchSuggestionsFirst" =
+            false;
           "browser.toolbars.bookmarks.visibility" = "never";
         };
 
         # Extensions can be found at: https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
-        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [ bitwarden stylus ];
+        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+          bitwarden
+          stylus
+        ];
 
         userChrome = ''
           #fullscr-toggler { background-color: rgba(0, 0, 0, 0) !important; }

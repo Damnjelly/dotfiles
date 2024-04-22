@@ -9,19 +9,18 @@ in {
   stylix.targets.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = [
-      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
-    ];
+    plugins = [ ];
     settings = {
       exec-once = "${startupScript}/bin/start";
       monitor = [
-        "HDMI-A-1,																		highres,	0x0,		1, transform,1"
-        "desc:Lenovo Group Limited G27q-20 U6330RM1,	highrr,		1080x0,	1"
-        "desc:Lenovo Group Limited P27h-30 V30A4WKZ,	highres,	3640x0,	1"
+        "HDMI-A-1,																		highres,	300x1440,		1"
+        "desc:Lenovo Group Limited G27q-20 U6330RM1,	highrr,		0x0,	1"
+        "desc:Lenovo Group Limited P27h-30 V30A4WKZ,	highres,	2560x0,	1"
       ];
 
       # Set programs that you use
-      "$terminal" = "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
+      "$terminal" =
+        "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
       "$fileManager" = "${pkgs.yazi}/bin/yazi";
       "$menu" = "~/Documents/popup-opener.sh sunbeam";
 
@@ -47,10 +46,10 @@ in {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
         gaps_in = 6;
-        gaps_out = 12;
+        gaps_out = 24;
 
         border_size = 2;
-        "col.active_border" = lib.mkForce "rgb(${base0C}) rgb(${base0D}) 60deg";
+        "col.active_border" = lib.mkForce "rgb(${base08}) rgb(${base0E}) 60deg";
         "col.inactive_border" = lib.mkForce "rgb(${base05})";
 
         layout = "dwindle";
@@ -61,7 +60,7 @@ in {
 
       decoration = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        inactive_opacity = 0.85;
+        inactive_opacity = 1;
         rounding = 0;
         blur = { enabled = false; };
         drop_shadow = false;
@@ -87,7 +86,8 @@ in {
 
       dwindle = {
         # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        pseudotile =
+          "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = "yes"; # you probably want this
       };
 
@@ -103,7 +103,8 @@ in {
 
       misc = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper =
+          -1; # Set to 0 or 1 to disable the anime mascot wallpapers
       };
 
       # Example per-device config
@@ -125,7 +126,7 @@ in {
         "workspace 2 silent,class:^(foot)$"
       ];
 
-      workspace = [ "2,border:false,rounding:false,gapsout:0" "1,border:false,rounding:false,gapsout:0" ];
+      workspace = [ "1,gapsout:0" ];
 
       "$mainMod" = "SUPER";
 
@@ -142,8 +143,8 @@ in {
         "$mainMod, l, movefocus, r"
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
-       
-       # Switch workspaces with mainMod + [0-9]
+
+        # Switch workspaces with mainMod + [0-9]
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"
@@ -171,11 +172,13 @@ in {
         "$mainMod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a"
 
         # Rectangle screenshot
-        ''ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
+        ''
+          ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
         # Screenshot active window
         "CTRL ALT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && MONITOR=$(hyprctl activeworkspace -j | jq .monitor -r) && grim -o $MONITOR $IMG && wl-copy < $IMG"
       ];
-      bindm = [ "$mainMod, mouse:272, movewindow" "ALT, mouse:272, resizewindow" ];
+      bindm =
+        [ "$mainMod, mouse:272, movewindow" "ALT, mouse:272, resizewindow" ];
     };
   };
 }
