@@ -24,7 +24,7 @@
       in {
         # Open applications
         "Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
-        "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
+        "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
 
         # Actions
         "Mod+C".action = close-window;

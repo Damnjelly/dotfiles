@@ -1,13 +1,13 @@
 { config, ... }: {
   programs.nixvim = {
-    plugins.cmp.settings.window.completion.border = "single";
+    plugins.cmp.settings.window.completion.border = "shadow";
     colorschemes.kanagawa = {
       enable = true;
       settings = {
         colors = {
           palette = with config.lib.stylix.colors; {
             # Bg Shades
-            sumiInk0 = "#1c0d17";
+            sumiInk0 = "#${base01}";
             sumiInk1 = "#${base01}";
             sumiInk2 = "#261727";
             sumiInk3 = "#${base00}";

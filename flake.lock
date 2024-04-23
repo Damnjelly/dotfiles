@@ -1513,15 +1513,13 @@
       "locked": {
         "lastModified": 1713632424,
         "narHash": "sha256-8qv8u3LO68kSC7Nd0cO4y1KvzHgx+DbN+Trw3D26WSg=",
-        "owner": "dj95",
-        "repo": "zjstatus",
+        "path": "/nix/store/62k8gnsfkzc8n6syq1539cnzcy7qpai6-source",
         "rev": "583962d9383bc2d64a1ed00dc8d569d0edcbe58d",
-        "type": "github"
+        "type": "path"
       },
       "original": {
-        "owner": "dj95",
-        "repo": "zjstatus",
-        "type": "github"
+        "id": "zjstatus",
+        "type": "indirect"
       }
     }
   },

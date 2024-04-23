@@ -3,7 +3,7 @@
     ./btop.nix
     ./fastfetch/fastfetch.nix
     ./starship.nix
-    ./zellij.nix
+    ./zellij/zellij.nix
     ./yazi/yazi.nix
     ./foot.nix
     ./fzf.nix

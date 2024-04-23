@@ -1,9 +1,7 @@
 layout {
-		tab name="Files"{
-				pane command="yazi" borderless=true
-		}
-		tab name="Code"{
-				pane command="nvim" borderless=true
-				pane size="20%" borderless=true
-		} 
+	pane size=1 borderless=true {
+		plugin location="zellij:compact-bar"
+	}
+	pane command="nvim" borderless=true
+	pane size="20%" name="term"
 }

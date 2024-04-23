@@ -28,8 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zjstatus = { url = "github:dj95/zjstatus"; };
-
     stylix.url = "github:danth/stylix";
 
     nixpkgs-mons.url = "github:UlyssesZh/nixpkgs/everest-mons";
