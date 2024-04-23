@@ -2,7 +2,7 @@
 let
   xwayland = pkgs.writeShellScriptBin "xwayland" ''${builtins.readFile ./xwayland.sh}'';
 in {
-  environment.sessionVariables = {
+  home.sessionVariables = {
     SCRIPT_XWAYLAND = "${xwayland}/bin/xwayland";
   };
 }

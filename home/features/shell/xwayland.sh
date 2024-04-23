@@ -11,7 +11,7 @@ niri msg action spawn -- env DISPLAY=:0 $COMMANDS
 
 
 # sleep required else the width is applied to the wrong window
-sleep 0.1
+sleep 0.3
 if [ -n "$2" ]; then 
 	niri msg action set-column-width "$2" 
 fi

@@ -1,14 +1,9 @@
-{ pkgs, ... }:
-let
-  smart-enter-init = builtins.readFile ./yazi-smart-enter-init.lua;
-  init = builtins.readFile ./yazi-init.lua;
-  starship = builtins.readFile ./yazi-starship-init.lua;
-in {
+{ pkgs, ... }: {
   home = {
     file.".config/yazi/plugins/smart-enter.yazi/init.lua".text =
-      "${smart-enter-init}";
-    file.".config/yazi/init.lua".text = "${init}";
-    file.".config/yazi/plugins/starship.yazi/init.lua".text = "${starship}";
+      "${builtins.readFile ./yazi-smart-enter-init.lua}";
+    file.".config/yazi/init.lua".text = "${builtins.readFile ./yazi-init.lua}";
+    file.".config/yazi/plugins/starship.yazi/init.lua".text = "${builtins.readFile ./yazi-starship-init.lua}";
   };
   stylix.targets.yazi.enable = true;
   programs.yazi = {

@@ -16,12 +16,12 @@
         hash = "sha256-lm6QAOL1dm7aXxS2faK7od7vK15blidHc8u5C5rCDqw=";
       };
     });
-    vesktop = prev.vesktop.overrideAttrs (oldAttrs: {
+    vesktop = prev.vesktop.overrideAttrs (old: {
       desktopItems = [
-        (final.makeDesktopItem{
+        (final.makeDesktopItem {
           name = "vesktop";
           desktopName = "Vesktop";
-          exec = "vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
+          exec = "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
           icon = "vesktop";
           startupWMClass = "Vesktop";
           genericName = "Internet Messenger";
@@ -29,6 +29,18 @@
           categories = [ "Network" "InstantMessaging" "Chat" ];
         })
       ];
+    });
+    runelite = prev.runelite.overrideAttrs (old: {
+      desktop = final.makeDesktopItem {
+        name = "RuneLite";
+        type = "Application";
+        exec = "\\$SCRIPT_XWAYLAND runelite 1803 1006";
+        icon = "runelite";
+        comment = "Open source Old School RuneScape client";
+        desktopName = "RuneLite";
+        genericName = "Osrs";
+        categories = [ "Game" ];
+      };
     });
   };
   # When applied, the stable nixpkgs set (declared in the flake inputs) will

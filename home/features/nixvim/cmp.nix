@@ -10,8 +10,10 @@
           { name = "buffer"; }
           { name = "nvim_lsp"; }
           { name = "path"; }
-          { name = "yanky"; }
           { name = "luasnip"; }
+          { name = "dotenv"; }
+          { name = "fonts"; }
+          { name = "calc"; }
         ];
         snippet.expand = ''
           function(args)
@@ -54,7 +56,6 @@
           "<Up>" =
             "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
         };
-        window.completion.border = "shadow";
       };
     };
   };

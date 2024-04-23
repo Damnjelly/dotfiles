@@ -1,0 +1,9 @@
+layout {
+		tab name="Files"{
+				pane command="yazi" borderless=true
+		}
+		tab name="Code"{
+				pane command="nvim" borderless=true
+				pane size="20%" borderless=true
+		} 
+}

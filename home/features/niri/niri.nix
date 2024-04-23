@@ -31,8 +31,11 @@
         "Mod+D".action = center-column;
         "Mod+S".action = maximize-column;
         "Mod+A".action = fullscreen-window;
+
         "Ctrl+Alt+S".action = screenshot-screen;
-        "Shift+Alt+S".action = screenshot-screen;
+        "Shift+Alt+S".action = screenshot;
+
+        "Mod+P".action = sh "${pkgs.hyprpicker}/bin/hyprpicker -a";
 
         # Movement
         "Mod+Left".action  = focus-column-left;
@@ -44,44 +47,43 @@
         "Mod+K".action     = focus-window-up; 
         "Mod+L".action     = focus-column-right; 
 
-        "Mod+Shift+Left".action  = move-column-left; 
-        "Mod+Shift+Down".action  = consume-window-into-column; 
-        "Mod+Shift+Up".action    = expel-window-from-column; 
-        "Mod+Shift+Right".action = move-column-right;
-        "Mod+Shift+H".action     = move-column-left; 
-        "Mod+Shift+J".action     = consume-window-into-column; 
-        "Mod+Shift+K".action     = expel-window-from-column; 
-        "Mod+Shift+L".action     = move-column-right; 
+        "Mod+Alt+Left".action  = move-column-left; 
+        "Mod+Alt+Down".action  = consume-window-into-column; 
+        "Mod+Alt+Up".action    = expel-window-from-column; 
+        "Mod+Alt+Right".action = move-column-right;
+        "Mod+Alt+H".action     = move-column-left; 
+        "Mod+Alt+J".action     = consume-window-into-column; 
+        "Mod+Alt+K".action     = expel-window-from-column; 
+        "Mod+Alt+L".action     = move-column-right; 
 
-        "Mod+Alt+Ctrl+Left".action  = move-window-to-monitor-left; 
-        "Mod+Alt+Ctrl+Down".action  = move-window-to-monitor-down; 
-        "Mod+Alt+Ctrl+Up".action    = move-window-to-monitor-up; 
-        "Mod+Alt+Ctrl+Right".action = move-window-to-monitor-right;
-        "Mod+Alt+Ctrl+H".action     = move-window-to-monitor-left; 
-        "Mod+Alt+Ctrl+J".action     = move-window-to-monitor-down; 
-        "Mod+Alt+Ctrl+K".action     = move-window-to-monitor-up; 
-        "Mod+Alt+Ctrl+L".action     = move-window-to-monitor-right; 
+        "Mod+Alt+Ctrl+Left".action  = move-column-to-monitor-left; 
+        "Mod+Alt+Ctrl+Down".action  = move-column-to-monitor-down; 
+        "Mod+Alt+Ctrl+Up".action    = move-column-to-monitor-up; 
+        "Mod+Alt+Ctrl+Right".action = move-column-to-monitor-right;
+        "Mod+Alt+Ctrl+H".action     = move-column-to-monitor-left; 
+        "Mod+Alt+Ctrl+J".action     = move-column-to-monitor-down; 
+        "Mod+Alt+Ctrl+K".action     = move-column-to-monitor-up; 
+        "Mod+Alt+Ctrl+L".action     = move-column-to-monitor-right; 
 
         "Mod+M".action = set-column-width "+10%";
         "Mod+N".action = set-column-width "-10%";
-        "Mod+Shift+M".action = set-window-height "+10%";
-        "Mod+Shift+N".action = set-window-height "-10%";
+        "Mod+Alt+M".action = set-window-height "+10%";
+        "Mod+Alt+N".action = set-window-height "-10%";
       };
       
       layout = with config.lib.stylix.colors; {
-        gaps = 24;
+        gaps = 12;
         default-column-width = { proportion = 0.5; };
         focus-ring.enable = false;
         border = {
           enable = true;
           width = 2;
           active.gradient = {
+            angle = 45;
             from = "#${base08}";
             to = "#${base0E}";
-            angle = 45;
-            relative-to = "window";
           };
-          inactive.color = "#${base0D}";
+          inactive.color = "#${base04}";
         };
         struts = {
           left = 32;

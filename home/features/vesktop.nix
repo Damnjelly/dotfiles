@@ -5,7 +5,7 @@
           --base00: #${base00}; /* Black */
           --base01: #${base01}; /* Bright Black */
           --base02: #${base02}; /* Grey */
-          --base03: #${base00}; /* Brighter Grey */
+          --base03: #${base03}; /* Brighter Grey */
           --base04: #${base04}; /* Bright Grey */
           --base05: #${base05}; /* White */
           --base06: #${base06}; /* Brighter White */

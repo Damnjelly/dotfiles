@@ -74,7 +74,15 @@ in {
 
     home = {
       username = "gelei";
-      homeDirectory = "/home/gelei";
+
+      # the stupid override won't work so i'm making a separate desktop file
+      file.".local/share/applications/steam-gamescope.desktop".text = ''
+        [Desktop Entry]
+        Name=Runelite Wayland
+        Exec=$SCRIPT_XWAYLAND runelite 1803 1006
+        Type=Application
+      '';
+     homeDirectory = "/home/gelei";
     };
 
     # Enable home-manager and git

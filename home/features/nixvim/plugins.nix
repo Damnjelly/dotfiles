@@ -3,6 +3,7 @@
     autoclose.enable = true; # TODO: configure
     barbar.enable = true; # TODO: configure
     barbecue.enable = true;
+    gitblame.enable = true;
     neo-tree = {
       enable = true; # TODO: configure
       closeIfLastWindow = true;
