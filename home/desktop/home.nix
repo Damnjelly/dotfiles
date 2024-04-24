@@ -12,15 +12,15 @@ in {
     inputs.nixvim.homeManagerModules.nixvim
     inputs.stylix.homeManagerModules.stylix
     inputs.niri.homeModules.niri
-    ./../features/cli
-    ./../features/firefox/firefox.nix
-    ./../features/hyprland
-    ./../features/nixvim
-    ./../features/vesktop.nix
-    ./../features/sunbeam
-    ./../features/niri
-    ./../features/games
-    ./../features/shell
+    ./../../features/home-manager/cli
+    ./../../features/home-manager/firefox/firefox.nix
+    ./../../features/home-manager/hyprland
+    ./../../features/home-manager/nixvim
+    ./../../features/home-manager/vesktop.nix
+    ./../../features/home-manager/sunbeam
+    ./../../features/home-manager/niri
+    ./../../features/home-manager/games
+    ./../../features/home-manager/shell
   ];
   options = {
     colorscheme = lib.mkOption {

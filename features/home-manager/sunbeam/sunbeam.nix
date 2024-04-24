@@ -39,11 +39,11 @@
         #TODO: Figurue out how this outofstoresymlink shit works
         volumemixer = {
           origin =
-            "~/Documents/nix-config/home/features/sunbeam/volumemixer.sh";
+            "~/Documents/nix-config/home-manager/features/sunbeam/volumemixer.sh";
         };
         applauncher = {
           origin =
-            "~/Documents/nix-config/home/features/sunbeam/applauncher.sh";
+            "~/Documents/nix-config/home-manager/features/sunbeam/applauncher.sh";
         };
       };
     };
