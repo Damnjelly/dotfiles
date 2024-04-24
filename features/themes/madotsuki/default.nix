@@ -1,8 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   customtheme = pkgs.writeTextFile {
     name = "theme.yaml";
-    text = "${builtins.readFile ./../themes/madotsuki.yaml}";
+    text = "${builtins.readFile ./madotsuki.yaml}";
     destination = "/theme/theme.yaml";
   };
 in {
@@ -27,6 +27,11 @@ in {
       package = pkgs.hackneyed;
       name = "Hackneyed";
       size = 16;
+    };
+
+    # theme specific overrides might have to become a separate nix file
+    programs = {
+      foot.settings = { main = { font = lib.mkForce "Kirsch2x:size=20"; }; };
     };
   };
 }

@@ -14,7 +14,7 @@
     ./../../features/home-manager/niri
     ./../../features/home-manager/games
     ./../../features/home-manager/shell
-    ./theme.nix
+    ./../../features/themes/madotsuki.nix
   ];
   config = {
     nixpkgs = {

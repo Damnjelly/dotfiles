@@ -69,7 +69,7 @@
           specialArgs = { inherit inputs outputs; };
 
           # > Our main nixos configuration file <
-          modules = [ ./systems/configuration.nix ];
+          modules = [ ./systems/desktop/configuration.nix ];
         };
       };
 

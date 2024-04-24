@@ -6,12 +6,12 @@
     inputs.stylix.nixosModules.stylix
 
     # You can also split up your configuration and import pieces of it here:
-    ./../features/nixos/system-packages.nix
-    ./../features/nixos/boot/default.nix
+    ./../../features/nixos/system-packages.nix
+    ./../../features/nixos/boot/default.nix
+    ./../../features/themes/madotsuki.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./theme.nix
   ];
   nixpkgs = {
     # You can add overlays here
