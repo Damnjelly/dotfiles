@@ -9,5 +9,6 @@
     steam-tui
     steamPackages.steamcmd
   ];
+  stylix.targets = { gtk.enable = true; };
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 }

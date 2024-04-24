@@ -1,13 +1,6 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, outputs, lib, config, pkgs, ... }:
-let
-  customtheme = pkgs.writeTextFile {
-    name = "theme.yaml";
-    text = "${builtins.readFile ./../home/themes/madotsuki.yaml}";
-    destination = "/theme/theme.yaml";
-  };
-in {
+{ inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other NixOS modules here
   imports = [
     inputs.stylix.nixosModules.stylix
@@ -18,33 +11,8 @@ in {
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./theme.nix
   ];
-  # General theming
-  stylix = {
-    image = ./madotsuki.png;
-
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.colorscheme}.yaml";
-    base16Scheme = "${customtheme}/theme/theme.yaml";
-    # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
-
-    fonts = {
-      monospace = {
-        package = pkgs.hack-font;
-        name = "Hack";
-      };
-
-      serif = config.stylix.fonts.monospace;
-      sansSerif = config.stylix.fonts.monospace;
-      emoji = config.stylix.fonts.monospace;
-      sizes = { terminal = 14; };
-    };
-
-    cursor = {
-      package = pkgs.hackneyed;
-      name = "Hackneyed";
-      size = 16;
-    };
-  };
   nixpkgs = {
     # You can add overlays here
     overlays = [

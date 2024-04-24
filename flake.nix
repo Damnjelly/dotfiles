@@ -69,7 +69,7 @@
           specialArgs = { inherit inputs outputs; };
 
           # > Our main nixos configuration file <
-          modules = [ ./nixos/configuration.nix ];
+          modules = [ ./systems/configuration.nix ];
         };
       };
 
@@ -81,7 +81,7 @@
           extraSpecialArgs = { inherit inputs outputs; };
 
           # > Our main home-manager configuration file <
-          modules = [ ./home/desktop/home.nix ];
+          modules = [ ./systems/desktop/home.nix ];
         };
       };
     };
