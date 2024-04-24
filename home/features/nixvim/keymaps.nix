@@ -63,12 +63,12 @@
       {
         action = "<C-d>zz";
         mode = "n";
-        key = "<leader>d";
+        key = "<C-d>";
       }
       {
         action = "<C-u>zz";
         mode = "n";
-        key = "<leader>e";
+        key = "<C-u>";
       }
       {
         action = "nzzzv";
