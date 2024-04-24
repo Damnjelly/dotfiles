@@ -8,7 +8,7 @@
     # You can also split up your configuration and import pieces of it here:
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/boot/default.nix
-    ./../../features/themes/madotsuki.nix
+    ./../../features/themes/madotsuki
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -41,7 +41,6 @@
   # Making legacy nix commands consistent as well, awesome!
   nix.nixPath = [ "/etc/nix/path" ];
   environment = {
-    sessionVariables = { FLAKE = "/home/gelei/Documents/nix-config"; };
     systemPackages = with pkgs; [ nh ];
     etc = lib.mapAttrs' (name: value: {
       name = "nix/path/${name}";
@@ -166,6 +165,7 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    FLAKE = "/home/gelei/Documents/nix-config";
   };
 
   users.users = {

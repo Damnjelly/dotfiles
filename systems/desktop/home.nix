@@ -9,12 +9,12 @@
     ./../../features/home-manager/firefox/firefox.nix
     ./../../features/home-manager/hyprland
     ./../../features/home-manager/nixvim
-    ./../../features/home-manager/vesktop.nix
+    ./../../features/home-manager/discord/vesktop.nix
     ./../../features/home-manager/sunbeam
     ./../../features/home-manager/niri
     ./../../features/home-manager/games
     ./../../features/home-manager/shell
-    ./../../features/themes/madotsuki.nix
+    ./../../features/themes/madotsuki
   ];
   config = {
     nixpkgs = {

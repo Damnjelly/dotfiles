@@ -1,6 +1,4 @@
-{ pkgs, inputs, config, ... }:
-let userChrome = builtins.readFile ./firefox-userChrome.css;
-in {
+{ pkgs, inputs, config, ... }: {
   config = {
     programs.firefox = with config.lib.stylix.colors; {
       enable = true;
@@ -105,11 +103,11 @@ in {
           }
 
           #back-button {
-            list-style-image: url("file:///home/gelei/Documents/nix-config/features/home-manager/firefox/left-arrow.svg") !important;
+            list-style-image: url("./left-arrow.svg") !important;
           }
 
           #forward-button {
-            list-style-image: url("file:///home/gelei/Documents/nix-config/features/home-manager/firefox/right-arrow.svg") !important;
+            list-style-image: url("./left-arrow.svg") !important;
           }
 
           /* Options with pixel amounts could need to be adjusted, as this only works for my laptop's display */
