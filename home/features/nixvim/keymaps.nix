@@ -22,8 +22,12 @@
         key = "<leader>ff";
       }
       {
+        action = "<cmd>Telescope live_grep<CR>";
+        key = "<leader>fl";
+      }
+      {
         action = "<cmd>Telescope grep_string<CR>";
-        key = "<leader>gf";
+        key = "<leader>fg";
       }
 
       # neotree

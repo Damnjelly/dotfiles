@@ -9,5 +9,6 @@
     #inputs.nix-gaming.packages.${pkgs.system}.osu-stable
     r2modman
     runelite
+    prismlauncher
   ];
 }
