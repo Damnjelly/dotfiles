@@ -7,7 +7,7 @@ let
   };
 in {
   stylix = {
-    image = ./madotsuki.png;
+    image = ./wallpaper.png;
     base16Scheme = "${customtheme}/theme/theme.yaml";
     # To choose a theme, edit the text above ^ to any of https://github.com/tinted-theming/base16-schemes
 

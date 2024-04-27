@@ -10,5 +10,6 @@
     r2modman
     runelite
     prismlauncher
+    wl-gammactl
   ];
 }

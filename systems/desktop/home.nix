@@ -14,6 +14,8 @@
     ./../../features/home-manager/niri
     ./../../features/home-manager/games
     ./../../features/home-manager/shell
+    ./../../features/home-manager/work
+    ./../../features/home-manager/creative
     ./../../features/themes/madotsuki
   ];
   config = {
