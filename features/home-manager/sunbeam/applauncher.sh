@@ -11,7 +11,7 @@ fi
 if [ $# -eq 0 ]; then
 	jq -n '
 {
-	title: "Run",
+	title: "Launcher",
 	description: "launch app",
 	commands: 
 	[
@@ -36,7 +36,7 @@ if [ $# -eq 0 ]; then
 		}
 	]
 }'
-exit 0
+	exit 0
 fi
 
 # check if j4-dmenu-desktop is installed
@@ -56,16 +56,15 @@ if [ "$COMMAND" = "list-desktop-files" ]; then
 			title: "Run application", 
 			type: "run", 
 			command: "run-application",
-			params: {applicationname: .},
-			exit: true
+			exit: true,
+			params: {applicationname: .}
 		}
 	]
 }' | jq -s '{ items: . }'
+
 elif [ "$COMMAND" = "run-application" ]; then
 	APPLICATIONNAME=$(echo "$1" | jq -r '.params.applicationname')
 	(set -m ;j4-dmenu-desktop --dmenu="(cat &> /dev/null) | (echo '$APPLICATIONNAME')" &)
-	while true; do
-		sleep 30
-	done
-	exit 0
+	sleep 0.1
+	kill -9 $PPID
 fi

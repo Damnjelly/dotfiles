@@ -22,7 +22,7 @@ if [ $# -eq 0 ]; then
 		},
 		{
 			name: "switch-sink",
-			mode: "detail",
+			mode: "silent",
 			hidden: true,
 			title: "Switch to",
 			params: 
@@ -37,7 +37,7 @@ if [ $# -eq 0 ]; then
 		{
 			name: "device-volume",
 			title: "Change device volume",
-			mode: "detail",
+			mode: "silent",
 			params: 
 			[
 				{
@@ -55,7 +55,7 @@ if [ $# -eq 0 ]; then
 		{
 			name: "application-volume",
 			title: "Applications",
-			mode: "detail",
+			mode: "silent",
 			hidden: true,
 			params: 
 			[
@@ -73,7 +73,7 @@ if [ $# -eq 0 ]; then
 		}
 	]
 }'
-exit 0
+	exit 0
 fi
 
 # check if pactl is installed
@@ -94,23 +94,26 @@ if [ "$COMMAND" = "list-sinks" ]; then
 			type: "run", 
 			command: "switch-sink",
 			params: {sinkname: .name},
-			exit: true
 		}
 	]
 }' | jq -s '{ items: . }'
+
 elif [ "$COMMAND" = "switch-sink" ]; then
 	SINKNAME=$(echo "$1" | jq -r '.params.sinkname')
 	pactl set-default-sink "$SINKNAME"
+	kill -9 $PPID
 
 	INPUTS=$(pactl --format=json list sink-inputs | jq -r '.[].properties."object.serial"')
 	for INPUT in $INPUTS; do # Move all current inputs to the new default sound card
 		pactl move-sink-input "$INPUT" "$SINKNAME"
 	done
+	kill -9 $PPID
 
 # --- change device volume ---
 elif [ "$COMMAND" = "device-volume" ]; then
 	VOLUME=$(echo "$1" | jq -r '.params."Set device volume"')
 	pactl set-sink-volume @DEFAULT_SINK@ "$VOLUME"%
+	kill -9 $PPID
 
 # --- change application volume ---
 COMMAND=$(echo "$1" | jq -r '.command')
@@ -123,8 +126,7 @@ title: (.name + ", currently " + .volume),
 			title: "Select application", 
 			type: "run", 
 			command: "application-volume",
-			params: {"applicationid": .id},
-			exit: true
+			params: {"applicationid": .id}
 		}
 	]
 }' | jq -s '{ items: . }'
@@ -133,4 +135,5 @@ elif [ "$COMMAND" = "application-volume" ]; then
 	VOLUME=$(echo "$1" | jq -r '.params."Set application volume"')
 	APPLICATION=$(echo "$1" | jq -r '.params.applicationid')
 	pactl set-sink-input-volume "$APPLICATION" "$VOLUME"%
+	kill -9 $PPID
 fi
