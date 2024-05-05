@@ -192,5 +192,9 @@
         '';
       };
     };
+    home.persistence."/persist/home/${config.home.username}/firefox" = {
+      directories = [ ".mozilla/firefox/gelei" ];
+      allowOther = true;
+    };
   };
 }

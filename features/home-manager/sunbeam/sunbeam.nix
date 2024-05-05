@@ -1,16 +1,16 @@
 { config, ... }: {
-  xdg.configFile = {
-    "sunbeam/extensions/volumemixer.sh" = {
-      text = "${builtins.readFile ./volumemixer.sh}";
-      executable = true;
-      onChange = "chmod +w ~/.config/sunbeam/extensions/volumemixer.sh";
-    };
-    "sunbeam/extensions/applauncher.sh" = {
-      text = "${builtins.readFile ./applauncher.sh}";
-      executable = true;
-      onChange = "chmod +w ~/.config/sunbeam/extensions/applauncher.sh";
-    };
-  };
+  # xdg.configFile = {
+  #   "sunbeam/extensions/volumemixer.sh" = {
+  #     text = "${builtins.readFile ./volumemixer.sh}";
+  #     executable = true;
+  #     onChange = "chmod +w ~/.config/sunbeam/extensions/volumemixer.sh";
+  #   };
+  #   "sunbeam/extensions/applauncher.sh" = {
+  #     text = "${builtins.readFile ./applauncher.sh}";
+  #     executable = true;
+  #     onChange = "chmod +w ~/.config/sunbeam/extensions/applauncher.sh";
+  #   };
+  # };
   programs.sunbeam = {
     enable = true;
     settings = {
@@ -39,11 +39,11 @@
         #TODO: Figurue out how this outofstoresymlink shit works
         volumemixer = {
           origin =
-            "~/Documents/nix-config/features/home-manager/sunbeam/volumemixer.sh";
+            "~/Documents/nixos/features/home-manager/sunbeam/volumemixer.sh";
         };
         applauncher = {
           origin =
-            "~/Documents/nix-config/features/home-manager/sunbeam/applauncher.sh";
+            "~/Documents/nixos/features/home-manager/sunbeam/applauncher.sh";
         };
       };
     };

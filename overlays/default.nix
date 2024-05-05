@@ -21,7 +21,8 @@
         (final.makeDesktopItem {
           name = "vesktop";
           desktopName = "Vesktop";
-          exec = "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
+          exec =
+            "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
           icon = "vesktop";
           startupWMClass = "Vesktop";
           genericName = "Internet Messenger";

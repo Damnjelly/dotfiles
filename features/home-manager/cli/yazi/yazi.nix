@@ -3,7 +3,8 @@
     file.".config/yazi/plugins/smart-enter.yazi/init.lua".text =
       "${builtins.readFile ./yazi-smart-enter-init.lua}";
     file.".config/yazi/init.lua".text = "${builtins.readFile ./yazi-init.lua}";
-    file.".config/yazi/plugins/starship.yazi/init.lua".text = "${builtins.readFile ./yazi-starship-init.lua}";
+    file.".config/yazi/plugins/starship.yazi/init.lua".text =
+      "${builtins.readFile ./yazi-starship-init.lua}";
   };
   stylix.targets.yazi.enable = true;
   programs.yazi = {

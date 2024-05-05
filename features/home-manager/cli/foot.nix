@@ -2,6 +2,13 @@
   stylix.targets.foot.enable = true;
   programs.foot = {
     enable = true;
-    settings = { main = { font = lib.mkForce "Kirsch2x:size=20"; }; };
+    settings = { 
+      main = { 
+        font = lib.mkForce "Kirsch2x:size=20"; 
+      }; 
+      tweak = {
+        overflowing-glyphs = "yes";
+      };
+    };
   };
 }
