@@ -43,9 +43,12 @@
     };
 
     programs.git = {
+      enable = true;
       userName = "Damnjelly";
       userEmail = "joren122@hotmail.com";
     };
+
+    programs.ssh.addKeysToAgent = "yes";
 
     pam.sessionVariables = {
       SSH_AUTH_SOCK = "${builtins.getEnv "XDG_RUNTIME_DIR"}/ssh-agent.socket";

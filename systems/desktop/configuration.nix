@@ -16,8 +16,11 @@
   users.users = {
     gelei = {
       initialPassword = "12345";
-      isNormalUser = true;
       hashedPasswordFile = config.sops.secrets."desktop/gelei/pcpassword".path;
+
+      isNormalUser = true;
+
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZmrHtTrK7xz3DGGgZH9vaC0ZKpWKo4UqD3I2nmudaC joren122@hotmail.com" ];
       extraGroups = [ "networkmanager" "wheel" ];
     };
   };
