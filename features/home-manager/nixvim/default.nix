@@ -7,5 +7,5 @@
     ./keymaps.nix
     ./plugins.nix
   ];
-  home.packages = with pkgs; [ nixfmt ];
+  home.packages = with pkgs; [ nixfmt obsidian lazygit ];
 }

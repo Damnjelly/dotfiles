@@ -75,7 +75,7 @@
         scroll-step = 5;
         on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
       };
-      "disk" = { format = "{percentage_used}%"; };
+      "disk" = { format = " {percentage_used}%"; };
       "memory" = {
         interval = 5;
         format = "Mem {}%";
