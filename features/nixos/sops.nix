@@ -6,7 +6,7 @@
 
     age.keyFile = /persist/sops/ags/keys.txt;
 
-    secrets = { 
+    secrets = {
       "desktop/gelei/pcpassword".neededForUsers = true;
       "desktop/gelei/githubprivatessh" = {
         owner = "gelei";

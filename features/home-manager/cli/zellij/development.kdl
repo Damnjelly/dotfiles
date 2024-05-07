@@ -1,7 +1,21 @@
 layout {
-	pane size=1 borderless=true {
-		plugin location="zellij:compact-bar"
+	tab name="nvim" {
+		pane size=1 borderless=true {
+			plugin location="zellij:compact-bar"
+		}
+		pane command="nvim" borderless=true
+		pane size="20%" name="term"
 	}
-	pane command="nvim" borderless=true
-	pane size="20%" name="term"
+	tab name="git" {
+		pane size=1 borderless=true {
+			plugin location="zellij:compact-bar"
+		}
+		pane command="lazygit" borderless=true
+	}
+	tab name="files" {
+		pane size=1 borderless=true {
+			plugin location="zellij:compact-bar"
+		}
+		pane command="yazi" borderless=true
+	}
 }

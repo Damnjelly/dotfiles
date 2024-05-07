@@ -7,15 +7,15 @@
       Exec=$SCRIPT_XWAYLAND steam
       Type=Application
     '';
-   persistence."/persist/home/${config.home.username}/steam" = {
-     directories = [ 
-       {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
-       ".local/share/Celeste"
-     ];
-     allowOther = true;
-   };
+    persistence."/persist/home/${config.home.username}/steam" = {
+      directories = [
+        {
+          directory = ".local/share/Steam";
+          method = "symlink";
+        }
+        ".local/share/Celeste"
+      ];
+      allowOther = true;
+    };
   };
 }

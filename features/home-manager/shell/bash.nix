@@ -12,7 +12,7 @@
         "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
       gd =
         "sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations";
-      };
+    };
     initExtra = ''
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
