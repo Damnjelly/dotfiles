@@ -31,13 +31,7 @@
       sessionPath = [ "$HOME/.local/bin" ];
 
       persistence."/persist/home/${config.home.username}" = {
-        directories = [
-          "Downloads"
-          "Music"
-          "Pictures"
-          "Documents"
-          "Videos"
-        ];
+        directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
         allowOther = true;
       };
     };
