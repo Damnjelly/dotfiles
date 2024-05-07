@@ -94,6 +94,7 @@ in {
           struts = {
             left = 32;
             right = 32;
+            bottom = 20;
           };
         };
 

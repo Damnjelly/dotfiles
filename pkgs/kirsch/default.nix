@@ -12,7 +12,14 @@ in fetchzip {
   postFetch = ''
     mkdir -p $out/share/fonts/misc
     mv $out/*.otb $out/share/fonts/misc
-    rm $out/kirsch*
+    mv $out/*.pcf $out/share/fonts/misc
+    mv $out/*.dfont $out/share/fonts/misc
+
+    mkdir -p $out/share/fonts/woff2
+    mv $out/*.woff2 $out/share/fonts/woff2
+
+    mkdir -p $out/share/fonts/truetype
+    mv $out/*.ttf $out/share/fonts/truetype
   '';
 
   meta = with lib; {

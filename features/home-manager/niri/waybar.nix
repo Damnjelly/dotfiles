@@ -1,10 +1,11 @@
 { config, ... }: {
+  stylix.targets.waybar.enable = false;
   programs.waybar = {
     enable = true;
     settings = [{
       layer = "top";
       position = "top";
-      output = [ "HDMI-A-1" ];
+      output = [ "DP-1" ];
 
       modules-left = [
         "clock#1"
@@ -125,7 +126,7 @@
         };
       };
       "sway/language" = { format = "{short} {variant}"; };
-      "tray" = { "icon-size" = 18; };
+      "tray" = { "icon-size" = 32; };
       "temperature" = {
         critical-threshold = 80;
         format-critical = "{temperatureC}°C ";
@@ -138,15 +139,15 @@
     }];
     style = with config.lib.stylix.colors; ''
       * {
-           /* `otf-font-awesome` is required to be installed for icons */
-           font-family: "Kirsch2x";
-           font-size: 26px;
+           font-family: "Kirsch2x, sans-serif";
+           font-size: 32px;
        }
 
        window#waybar {
            background-color: #${base01};
            color: #${base0D};
        }
+       
        #workspaces button.focused {
            background-color: rgba(100, 100, 100, 0.07);
            box-shadow: inset 0 -3px #${base0D};
