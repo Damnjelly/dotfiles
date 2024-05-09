@@ -1,12 +1,18 @@
 { pkgs, ... }: {
   imports = [
-    ./nixvim.nix
     ./alpha.nix
+    ./barbar.nix
     ./cmp.nix
-    ./theme.nix
+    ./conform.nix
     ./keymaps.nix
-    ./plugins.nix
+    ./lsp.nix
+    ./neotree.nix
+    ./nixvim.nix
     ./obsidian.nix
+    ./plugins.nix
+    ./telescope.nix
+    ./theme.nix
+    ./treestitter.nix
   ];
   home.packages = with pkgs; [ nixfmt obsidian lazygit ];
 }
