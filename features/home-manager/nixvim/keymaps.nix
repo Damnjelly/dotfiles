@@ -2,54 +2,10 @@
   programs.nixvim = {
     globals.mapleader = " ";
     keymaps = [
-      # barbar
       {
-        action = "<cmd>BufferPrevious<CR>";
-        key = "<leader>h";
-      }
-      {
-        action = "<cmd>BufferNext<CR>";
-        key = "<leader>l";
-      }
-      {
-        action = "<cmd>BufferClose<CR>";
-        key = "<leader>q";
-      }
-
-      # telescope
-      {
-        action = "<cmd>Telescope find_files<CR>";
-        key = "<leader>ff";
-      }
-      {
-        action = "<cmd>Telescope live_grep<CR>";
-        key = "<leader>fl";
-      }
-      {
-        action = "<cmd>Telescope grep_string<CR>";
-        key = "<leader>fg";
-      }
-
-      # neotree
-      {
-        key = "<leader>n";
-        action = ":Neotree action=focus reveal toggle<CR>";
-        options.silent = true;
-      }
-
-      # conform
-      {
-        action = "<cmd>:Format<CR>";
-        key = "<leader>ft";
-      }
-
-      # gitsigns
-      {
-        action = "Gitsigns toggle_current_line_blame<CR>";
+        action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
         key = "<leader>gb";
       }
-
-      # misc
       {
         action = ":m '>+1<CR>gv=gv";
         mode = "v";
