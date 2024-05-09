@@ -43,6 +43,17 @@
         categories = [ "Game" ];
       };
     });
+    obsidian = prev.obsidian.overrideAttrs (old: {
+      desktopItem = final.makeDesktopItem {
+        name = "obsidian";
+        desktopName = "Obsidian";
+        comment = "Knowledge base";
+        icon = "obsidian";
+        exec = "obsidian --disable-gpu";
+        categories = [ "Office" ];
+        mimeTypes = [ "x-scheme-handler/obsidian" ];
+      };
+    });
   };
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.stable'
