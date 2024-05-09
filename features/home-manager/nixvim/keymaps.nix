@@ -29,6 +29,10 @@
         action = "<cmd>Telescope grep_string<CR>";
         key = "<leader>fg";
       }
+      {
+        action = "<cmd>ObsidianSearch<CR>";
+        key = "<leader>fo";
+      }
 
       # neotree
       {

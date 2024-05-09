@@ -12,6 +12,11 @@
         autoExpandWidth = true;
       };
     };
+    obsidian = {
+      enable = true;
+      dir = "~/Documents/obsidian";
+    };
+    noice.enable = true;
     nvim-colorizer.enable = true;
     lualine.enable = true; # TODO: configure
     telescope = {
