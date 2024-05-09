@@ -93,7 +93,7 @@
         interval = 5;
         format = "CPU {usage:2}%";
       };
-      
+
       "battery" = {
         states = {
           good = 95;

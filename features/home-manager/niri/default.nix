@@ -1,9 +1,5 @@
 { pkgs, inputs, ... }: {
-  imports = [
-    ./niri.nix
-    ./waybar.nix
-    ./i3.nix
-  ];
+  imports = [ ./niri.nix ./waybar.nix ./i3.nix ];
   home.packages = with pkgs; [
     swww
     xwayland

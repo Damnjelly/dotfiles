@@ -14,7 +14,7 @@ in {
         hotkey-overlay.skip-at-startup = true;
         spawn-at-startup = [
           { command = [ "${wallpaper}/bin/wallpaper.sh" ]; }
-          { command = [ "${ pkgs.waybar}/bin/waybar" ]; }
+          { command = [ "${pkgs.waybar}/bin/waybar" ]; }
         ];
 
         #TODO: fix
