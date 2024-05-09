@@ -14,7 +14,7 @@ in {
         hotkey-overlay.skip-at-startup = true;
         spawn-at-startup = [
           { command = [ "${wallpaper}/bin/wallpaper.sh" ]; }
-          { command = [ "waybar" ]; }
+          { command = [ "${ pkgs.waybar}/bin/waybar" ]; }
         ];
 
         #TODO: fix
@@ -87,14 +87,14 @@ in {
             active.gradient = {
               angle = 45;
               from = "#${base08}";
-              to = "#${base0E}";
+              to = "#${base07}";
             };
             inactive.color = "#${base04}";
           };
           struts = {
             left = 32;
             right = 32;
-            bottom = 20;
+            bottom = 32;
           };
         };
 
