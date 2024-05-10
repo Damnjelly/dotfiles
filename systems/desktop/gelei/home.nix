@@ -1,8 +1,10 @@
 { lib, inputs, config, ... }: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
+
     ./../../global-home.nix
     ./../../../users/gelei.nix
+
     ./../../../features/home-manager/cli
     ./../../../features/home-manager/creative
     ./../../../features/home-manager/discord/vesktop.nix

@@ -1,18 +1,20 @@
 { lib, pkgs, inputs, ... }: {
   imports = [
     inputs.disko.nixosModules.default
-    inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
+
+    ./hardware-configuration.nix
     ./gelei/config.nix
     ./../global-config.nix
+    (import ./disko.nix { device = "/dev/nvme0n1"; })
+
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/sops.nix
-    ./hardware-configuration.nix
-    (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
+
   theme = "madotsuki";
 
   programs.fuse.userAllowOther = true;
