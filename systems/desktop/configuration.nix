@@ -1,75 +1,20 @@
 { lib, pkgs, inputs, outputs, config, ... }: {
   imports = [
     inputs.disko.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
     inputs.impermanence.nixosModules.impermanence
     inputs.stylix.nixosModules.stylix
-    inputs.sops-nix.nixosModules.sops
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/sops.nix
     ./../../features/themes
+    ./../../gelei/config.nix
     ./hardware-configuration.nix
     (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
-
-  users.users = {
-    gelei = {
-      initialPassword = "12345";
-      hashedPasswordFile = config.sops.secrets."desktop/gelei/pcpassword".path;
-
-      isNormalUser = true;
-
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZmrHtTrK7xz3DGGgZH9vaC0ZKpWKo4UqD3I2nmudaC joren122@hotmail.com"
-      ];
-      extraGroups = [ "networkmanager" "wheel" ];
-    };
-  };
-
-  programs.fuse.userAllowOther = true;
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users.gelei = import ./home.nix;
-    backupFileExtension = "backup";
-  };
-
-  fileSystems."/persist".neededForBoot = true;
-  environment.persistence."/persist/system" = {
-    hideMounts = true;
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-    ];
-    files = [ "/etc/machine-id" ];
-  };
-  systemd.tmpfiles.rules = [
-    "d /persist/home/ 0777 root root-"
-    "d /persist/home/gelei/ 0700 gelei users-"
-  ];
-
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-      outputs.overlays.mons-package
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      console = { earlySetup = true; };
-    };
-  };
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    FLAKE = "./";
-    SOPS_AGE_KEY_FILE = /persist/sops/ags/keys.txt;
+    FLAKE = "/home/gelei/Documents/nixos";
   };
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
