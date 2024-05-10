@@ -1,22 +1,36 @@
-{ lib, pkgs, inputs, config, ... }: {
+{ lib, pkgs, inputs, ... }: {
   imports = [
     inputs.disko.nixosModules.default
+    inputs.sops-nix.nixosModules.sops
     inputs.impermanence.nixosModules.impermanence
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
+    ./gelei/config.nix
+    ./../global-config.nix
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/sops.nix
-    ./../../features/themes
-    ./../../gelei/config.nix
     ./hardware-configuration.nix
     (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
-  home-manager.options.programs.wpaperd.settings = {
-    DP-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
-    DP-2.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
-    HDMI-A-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+  theme = "madotsuki";
+
+  programs.fuse.userAllowOther = true;
+  fileSystems."/persist".neededForBoot = true;
+  environment.persistence."/persist/system" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+    ];
+    files = [ "/etc/machine-id" ];
   };
+  systemd.tmpfiles.rules = [
+    "d /persist/home/ 0777 root root-"
+    "d /persist/home/gelei/ 0700 gelei users-"
+  ];
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";

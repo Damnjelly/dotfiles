@@ -1,8 +1,7 @@
-{ inputs, outputs, config, ... }: {
+{ config, ... }: {
   imports = [
-    inputs.sops-nix.nixosModules.sops
-    ./../global-config.nix
   ];
+  # user
   users.users.gelei = {
     initialPassword = "12345";
     hashedPasswordFile = config.sops.secrets."desktop/gelei/pcpassword".path;
@@ -12,10 +11,18 @@
     ];
     extraGroups = [ "networkmanager" "wheel" ];
   };
+  home-manager.users.gelei = import ./home.nix;
+
+  # sops
   environment.sessionVariables.SOPS_AGE_KEY_FILE = /persist/sops/ags/keys.txt;
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users.gelei = import ./../../users/gelei/home.nix;
-    backupFileExtension = "backup";
+  sops = {
+    age.keyFile = /persist/sops/ags/keys.txt;
+    secrets = {
+      "desktop/gelei/pcpassword".neededForUsers = true;
+      "desktop/gelei/githubprivatessh" = {
+        owner = "gelei";
+        path = "/home/gelei/.ssh/id_ed25519";
+      };
+    };
   };
 }
