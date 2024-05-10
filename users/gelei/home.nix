@@ -1,5 +1,5 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ outputs, inputs, lib, config, ... }: {
+{ outputs, inputs, lib, ... }: {
   imports = [
     inputs.niri.homeModules.niri
     inputs.nixvim.homeManagerModules.nixvim
