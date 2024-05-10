@@ -1,10 +1,4 @@
-{ pkgs, config, ... }:
-let
-  wallpaper = pkgs.writeShellScriptBin "wallpaper.sh" ''
-    swww-daemon &
-    ${pkgs.swww}/bin/swww img ${config.stylix.image} &
-  '';
-in {
+{ pkgs, config, ... }: {
   config = {
     programs.niri = {
       enable = true;
@@ -13,7 +7,7 @@ in {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
         spawn-at-startup = [
-          { command = [ "${wallpaper}/bin/wallpaper.sh" ]; }
+          { command = [ "niri msg action spawn ${pkgs.wpaperd}/bin/wpaperd" ]; }
           { command = [ "${pkgs.waybar}/bin/waybar" ]; }
         ];
 

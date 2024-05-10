@@ -1,7 +1,8 @@
-{ lib, pkgs, inputs, outputs, config, ... }: {
+{ lib, pkgs, inputs, config, ... }: {
   imports = [
     inputs.disko.nixosModules.default
     inputs.impermanence.nixosModules.impermanence
+    inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
@@ -11,6 +12,11 @@
     ./hardware-configuration.nix
     (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
+  home-manager.options.programs.wpaperd.settings = {
+    DP-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+    DP-2.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+    HDMI-A-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+  };
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
