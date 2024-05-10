@@ -7,8 +7,13 @@
     };
   };
   config = {
+    home.file.".config/wpaperd/wallpapers/" = {
+      source = ./${config.theme}/wallpapers;
+      recursive = true;
+    };
+    programs.wpaperd.enable = true;
     stylix = {
-      image = ./${config.theme}/wallpaper.png;
+      image = ./${config.theme}/wallpapers/wallpaper.png;
       base16Scheme = ./${config.theme}/scheme.yaml;
 
       fonts = {
