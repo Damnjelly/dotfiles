@@ -22,10 +22,12 @@
   environment.persistence."/persist/system" = {
     hideMounts = true;
     directories = [
+      "/etc/nixos/"
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
     ];
     files = [ "/etc/machine-id" ];
   };
@@ -36,7 +38,7 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    FLAKE = "/home/gelei/Documents/nixos";
+    FLAKE = "/etc/nixos/";
   };
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
