@@ -43,7 +43,7 @@
               suffix = suffix .. string.char(math.random(65, 90))
             end
           end
-          return tostring(os.date("%a-%x")) .. "-" .. suffix
+          return tostring(os.date("%a/%x")) .. "-" .. suffix
         end
       '';
     };
