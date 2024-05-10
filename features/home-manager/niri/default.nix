@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }: {
-  imports = [ ./niri.nix ./waybar.nix ./i3.nix ];
+  imports = [ inputs.niri.homeModules.niri ./niri.nix ./waybar.nix ./i3.nix ];
   home.packages = with pkgs; [
     xwayland
     wl-clipboard # copy to clipboard

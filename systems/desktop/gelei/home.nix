@@ -1,9 +1,6 @@
-{ lib, outputs, inputs, config, ... }: {
+{ lib, inputs, config, ... }: {
   imports = [
-    inputs.niri.homeModules.niri
-    inputs.nixvim.homeManagerModules.nixvim
     inputs.impermanence.nixosModules.home-manager.impermanence
-    outputs.homeManagerModules.sunbeam
     ./../../global-home.nix
     ./../../../users/gelei.nix
     ./../../../features/home-manager/cli

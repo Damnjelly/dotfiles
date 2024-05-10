@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./alpha.nix
     ./barbar.nix
     ./cmp.nix
