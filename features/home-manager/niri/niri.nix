@@ -9,6 +9,7 @@
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
           { command = [ "${pkgs.waybar}/bin/waybar" ]; }
+          { command = [ "${pkgs.dunst}/bin/dunst" ]; }
         ];
 
         #TODO: fix
@@ -72,7 +73,7 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 12;
+          gaps = 32;
           default-column-width = { proportion = 0.5; };
           focus-ring.enable = false;
           border = {
@@ -88,7 +89,6 @@
           struts = {
             left = 32;
             right = 32;
-            bottom = 32;
           };
         };
 

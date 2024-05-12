@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+let
+  dunst =
+    pkgs.writeShellScriptBin "dunst" "${builtins.readFile ./dunst.sh}";
+in {
   stylix.targets.waybar.enable = false;
   programs.waybar = {
     enable = true;
@@ -9,55 +13,66 @@
 
       modules-left = [
         "clock#1"
-        "custom/right-arrow-dark"
-        "custom/right-arrow-light"
+        "custom/clock-arrow-right"
+        "custom/clock-arrow-left"
         "clock#2"
-        "custom/right-arrow-dark"
-        "custom/right-arrow-light"
+        "custom/clock-arrow-right"
+        "custom/clock-arrow-left"
         "clock#3"
-        "custom/right-arrow-dark"
-      ];
-      modules-center = [ ];
-      modules-right = [
-        "custom/left-arrow-dark"
-        "disk"
-        "custom/left-arrow-light"
-        "custom/left-arrow-dark"
+        "custom/clock-arrow-right"
+        "custom/pulseaudio-arrow-right"
         "pulseaudio"
-        "custom/left-arrow-light"
-        "custom/left-arrow-dark"
+        "custom/pulseaudio-arrow-left"
+        "custom/tray-arrow-right"
         "tray"
+        "custom/tray-arrow-left"
+      ];
+      modules-center = [
+        "custom/dunst-arrow-left"
+        "custom/dunst"
+        "custom/dunst-arrow-right"
+      ];
+      modules-right = [
+        "custom/disk-arrow-left"
+        "disk"
+        "custom/disk-arrow-right"
+        "custom/memory-arrow-left"
+        "memory"
+        "custom/memory-arrow-right"
+        "custom/cpu-arrow-left"
+        "cpu"
+        "custom/cpu-arrow-right"
+        "custom/bluetooth-arrow-left"
+        "custom/bluetooth"
+        "custom/bluetooth-arrow-right"
+        "custom/network-arrow-left"
+        "network"
       ];
 
-      "custom/left-arrow-dark" = {
-        format = "";
-        tooltip = false;
-      };
-      "custom/left-arrow-light" = {
-        format = "";
-        tooltip = false;
-      };
-      "custom/right-arrow-dark" = {
-        format = "";
-        tooltip = false;
-      };
-      "custom/right-arrow-light" = {
-        format = "";
-        tooltip = false;
-      };
+
 
       "clock#1" = {
         format = " {:%a} ";
         tooltip = false;
       };
       "clock#2" = {
-        format = " {:%H:%M} ";
+        format = "{:%H:%M} ";
         tooltip = false;
       };
       "clock#3" = {
-        format = " {:%d-%m} ";
+        format = "{:%d-%m} ";
         tooltip = false;
       };
+      "custom/clock-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/clock-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "pulseaudio" = {
         format = "{icon} {volume:2}%";
@@ -75,24 +90,90 @@
         scroll-step = 5;
         on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
       };
+      "custom/pulseaudio-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/pulseaudio-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
+
+      "custom/dunst" = {
+          exec = "${dunst}/bin/dunst.sh";
+          on-click = "dunstctl set-paused toggle";
+          restart-interval = 1;
+      };
+      "custom/dunst-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/dunst-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "disk" = { format = " {percentage_used}%"; };
+      "custom/disk-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/disk-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "memory" = {
         interval = 5;
         format = "Mem {}%";
       };
+      "custom/memory-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/memory-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "custom/bluetooth" = {
         format = "";
         tooltip-format = "Bluetooth";
         on-click = "${pkgs.blueman}/bin/blueman";
       };
+      "custom/bluetooth-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/bluetooth-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "cpu" = {
         interval = 5;
         format = "CPU {usage:2}%";
       };
+      "custom/cpu-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/cpu-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "battery" = {
         states = {
@@ -109,38 +190,74 @@
         full-at = "99";
         format-icons = [ "" "" "" "" "" ];
       };
+      "custom/battery-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/battery-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "network" = {
-        format = "{ifname}";
-        format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "{ifname} ";
-        format-disabled = "";
+        format = "{ifname} ";
+        format-wifi = "{essid} ({signalStrength}%)  ";
+        format-ethernet = "{ifname}  ";
+        format-disabled = " ";
         format-disconnected = "  ";
         tooltip-format = "{ifname}";
         tooltip-format-wifi = "{essid} {signalStrength}%  ";
         tooltip-format-ethernet = "{ifname}  ";
-        tooltip-format-disconnected = "Disconnected";
+        tooltip-format-disconnected = "Disconnected ";
         on-click =
-          "kitty --class=launcher --title='Connect to Network' -o tab_bar_style=hidden -e sh -c 'killall nmtui; nmtui'";
+          "foot --title='Connect to Network' sh -c 'killall nmtui; nmtui'";
         max-length = 50;
       };
+      "custom/network-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/network-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
+
+
 
       "tray" = { "icon-size" = 20; };
+      "custom/tray-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/tray-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
 
       "temperature" = {
         critical-threshold = 80;
         format-critical = "{temperatureC}°C ";
         format = "{temperatureC}°C ";
       };
+      "custom/temperature-arrow-left" = {
+        format = "";
+        tooltip = false;
+      };
+      "custom/temperature-arrow-right" = {
+        format = "";
+        tooltip = false;
+      };
     }];
     style = with config.lib.stylix.colors; ''
       * {
            font-family: "Kirsch2x, sans-serif";
-           font-size: 32px;
+           font-size: 30px;
        }
 
        window#waybar {
-           background-color: transparent;
+           background-color: #${base03};
            color: transparent;
        }
        
@@ -155,6 +272,14 @@
            border-radius: 0;    
        }
 
+       @keyframes blink {
+         to {
+           color: #${base0D};
+         }
+       }
+
+
+
        #clock,
        #battery,
        #cpu,
@@ -163,20 +288,60 @@
        #temperature,
        #network,
        #pulseaudio,
-       #custom-media,
+       #custom-bluetooth,
        #tray,
-       #idle_inhibitor,
+       #custom-dunst,
        #mpd {
            padding: 0 9px;
-           color: #${base02};
+           color: #${base03};
        }
 
+
+
+       #custom-clock-arrow-right {
+         padding: 0 2px 0 0;
+         color: #${base0C};
+         background: #${base03};
+       }
+       #custom-clock-arrow-left {
+         padding: 0 2px 0 0;
+         color: #${base03};
+         background: #${base0C};
+       }
        #clock {
            background-color: #${base0C};
        }
 
+
+
+       #custom-dunst-arrow-right {
+         padding: 0 2px 0 0;
+         color: #${base02};
+         background: #${base03};
+       }
+       #custom-dunst-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base02};
+         background: #${base03};
+       }
+       #custom-dunst {
+           background-color: #${base0C};
+       }
+
+
+
        #battery {
            background-color: #${base0D};
+       }
+       #custom-battery-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base0E};
+       }
+       #custom-battery-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base0E};
+         background: #${base03};
        }
 
        #battery.charging, #battery.plugged {
@@ -189,12 +354,6 @@
 
        #battery.good:not(.charging) {
            color: #${base0B};
-       }
-
-       @keyframes blink {
-           to {
-               color: #${base0D};
-           }
        }
 
        #battery.critical:not(.charging) {
@@ -219,121 +378,111 @@
            background-color: #${base01};
        }
 
+
+
+
        #cpu {
            background-color: #${base0E};
        }
+       #custom-cpu-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base0E};
+       }
+       #custom-cpu-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base0E};
+         background: #${base03};
+       }
+
+
 
        #memory {
            background-color: #${base0F};
        }
+       #custom-memory-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base0F};
+       }
+       #custom-memory-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base0F};
+         background: #${base03};
+       }
 
+
+
+       #custom-disk-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base07};
+       }
+       #custom-disk-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base07};
+         background: #${base03};
+       }
        #disk {
            background-color: #${base07};
        }
 
+
+
        #network {
            background-color: #${base07};
+       }
+       #custom-network-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base07};
+       }
+       #custom-network-arrow-left {
+         padding: 0 0 0 2px;
+         color: #${base07};
+         background: #${base03};
        }
 
        #network.disconnected {
            background-color: #${base08};
        }
 
+
+
        #pulseaudio {
-           background-color: #${base0A};
+         background-color: #${base0A};
        }
-
+       #custom-pulseaudio-arrow-right {
+         padding: 0 2px 0 0;
+         color: #${base03};
+         background: #${base0A};
+       }
+       #custom-pulseaudio-arrow-left {
+         padding: 0 2px 0 0;
+         color: #${base0A};
+         background: #${base03};
+       }
        #pulseaudio.muted {
-           background-color: #${base08};
+           color: #${base08};
        }
 
-       #custom-media {
-           background-color: #${base0B};
-           min-width: 100px;
-       }
 
-       #custom-media.custom-spotify {
-           background-color: #${base0B};
-       }
-
-       #custom-media.custom-vlc {
-           background-color: #${base09};
-       }
 
        #temperature {
            background-color: #${base09};
        }
-
-       #temperature.critical {
-           background-color: #${base08};
+       #custom-temperature-arrow-right {
+         padding: 0 0 0 2px;
+         color: #${base03};
+         background: #${base0E};
        }
-
-       #tray {
-           background-color: #${base0C};
-       }
-
-       #tray > .passive {
-           -gtk-icon-effect: dim;
-       }
-
-       #tray > .needs-attention {
-           -gtk-icon-effect: highlight;
-           background-color: #${base08};
-       }
-
-       #idle_inhibitor {
-           background-color: #${base04};
-       }
-
-       #idle_inhibitor.activated {
-           background-color: #${base06};
-           color: #${base04};
-       }
-
-       #custom-right-arrow-dark,
-       #custom-left-arrow-dark,
-       #custom-right-arrow-light,
-       #custom-left-arrow-light {
-         padding: 0px 0px 0px 0px;
-         margin: 0px 0px 0px 0px;
-         margin-top: 0px;
-         margin-bottom: 0px;
-       }
-
-
-       #custom-right-arrow-dark,
-       #custom-left-arrow-dark {
-         color: #${base02};
-       }
-       #custom-right-arrow-light,
-       #custom-left-arrow-light {
-         color: #${base01};
-         background: #${base02};
-       }
-
-       #workspaces button {
-         padding: 0 2px;
+       #custom-temperature-arrow-left {
+         padding: 0 0 0 2px;
          color: #${base0E};
+         background: #${base03};
        }
-       #workspaces button.focused {
-         color: #${base05};
-       }
-       #workspaces button:hover {
-         box-shadow: inherit;
-         text-shadow: inherit;
-       }
-       #workspaces button:hover {
-         background: #${base02};
-         border: #${base02};
-         padding: 0 3px;
-       }
-
-       #idle_inhibitor.deactivated {
-               color: rgb(180, 180, 180);
-       }
-
        #temperature.critical {
-           color: #${base08};
+           color: #${base09};
            animation-name: blink;
            animation-duration: 2s;
            animation-timing-function: linear;
@@ -341,15 +490,27 @@
            animation-direction: alternate;
        }
 
-       #clock,
-       #custom-bluetooth,
-       #network,
-       #pulseaudio,
-       #memory,
-       #cpu,
-       #battery,
-       #disk {
-         padding: 0 10px;
+
+
+       #tray {
+           background-color: #${base07};
+       }
+       #custom-tray-arrow-right {
+         padding: 0 2px 0 0;
+         color: #${base03};
+         background: #${base07};
+       }
+       #custom-tray-arrow-left {
+         padding: 0 2px 0 0;
+         color: #${base07};
+         background: #${base03};
+       }
+       #tray > .passive {
+           -gtk-icon-effect: dim;
+       }
+       #tray > .needs-attention {
+           -gtk-icon-effect: highlight;
+           color: #${base08};
        }    '';
   };
 }
