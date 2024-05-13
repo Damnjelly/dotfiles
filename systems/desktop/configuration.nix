@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, inputs, ... }: {
   imports = [
     inputs.disko.nixosModules.default
     inputs.impermanence.nixosModules.impermanence
@@ -140,15 +140,6 @@
 
   services.xserver.display = 1;
 
-  #   services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470 etc.
-  #   hardware.nvidia = {
-  #     modesetting.enable = true;
-  #     powerManagement.enable = true;
-  #     powerManagement.finegrained = false;
-  #     open = false;
-  #     nvidiaSettings = true;
-  #     package = config.boot.kernelPackages.nvidiaPackages.production;
-  #   };
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
