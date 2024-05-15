@@ -2,6 +2,6 @@
 # You can build them using 'nix build .#example'
 { pkgs ? import <nixpkgs> { } }: rec {
   kirsch = pkgs.callPackage ./kirsch { };
-  sunbeam-bin = pkgs.callPackage ./sunbeam-bin { };
+  sunbeam = pkgs.callPackage ./sunbeam { };
   #j4-dmenu-desktop = pkgs.callPackage ./j4-dmenu-desktop { };
 }

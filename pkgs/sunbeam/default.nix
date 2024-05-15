@@ -1,19 +1,16 @@
-{ lib, fetchzip }:
+{ lib, buildGoModule, fetchFromGitHub }:
 let
-  pname = "sunbeam-bin";
+  pname = "sunbeam";
   version = "v1.0.0";
-in fetchzip {
-  name = "${pname}-${version}";
-
-  url =
-    "https://github.com/pomdtr/sunbeam/releases/download/${version}/sunbeam-linux_amd64.tar.gz";
-  sha256 = "sha256-Q6ZIooUBn6V8CAOxflY4nprCZFRyEK0BVCBXUna2ICs=";
-  stripRoot = false;
-
-  postFetch = ''
-    mkdir -p $out/bin
-    mv $out/sunbeam $out/bin
-  '';
+in buildGoModule {
+  name = pname;
+  src = fetchFromGitHub {
+    owner = "pomdtr";
+    repo = pname;
+    rev = version;
+    hash = "sha256-X5LPRrI5VVCLnZLrjLyocexmReS5RdmQyJbbAvwFxs0=";
+  };
+  vendorHash = "sha256-V3dpE2V08PBp4nJuSuOH8VeTqqnC34kGT/ZdrxtV0W4=";
 
   meta = with lib; {
     homepage = "https://sunbeam.deno.dev/";
