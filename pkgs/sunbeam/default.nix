@@ -5,12 +5,19 @@ let
 in buildGoModule {
   name = pname;
   src = fetchFromGitHub {
-    owner = "pomdtr";
+    owner = "Damnjelly";
     repo = pname;
-    rev = version;
+    rev = "1e76a9f2c27d282d47b97b50df9428189cb7a0ff";
     hash = "sha256-X5LPRrI5VVCLnZLrjLyocexmReS5RdmQyJbbAvwFxs0=";
   };
   vendorHash = "sha256-V3dpE2V08PBp4nJuSuOH8VeTqqnC34kGT/ZdrxtV0W4=";
+# src = fetchFromGitHub {
+#   owner = "pomdtr";
+#   repo = pname;
+#   rev = version;
+#   hash = "sha256-X5LPRrI5VVCLnZLrjLyocexmReS5RdmQyJbbAvwFxs0=";
+# };
+# vendorHash = "sha256-V3dpE2V08PBp4nJuSuOH8VeTqqnC34kGT/ZdrxtV0W4=";
 
   meta = with lib; {
     homepage = "https://sunbeam.deno.dev/";
