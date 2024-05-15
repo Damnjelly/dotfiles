@@ -16,5 +16,9 @@
       action = "<cmd>Telescope grep_string<CR>";
       key = "<leader>fg";
     }
+    {
+      action = "<cmd>Telescope buffers<CR>";
+      key = "<leader>b";
+    }
   ];
 }

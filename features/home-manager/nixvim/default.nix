@@ -2,7 +2,7 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./alpha.nix
-    ./barbar.nix
+#   ./barbar.nix
     ./cmp.nix
     ./conform.nix
     ./keymaps.nix
