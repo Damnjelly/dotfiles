@@ -13,7 +13,7 @@ in {
       package = mkOption {
         type = types.package;
         # TODO: change this for the actual unpackaged sunbeam instead of sunbeam-bin at some point
-        default = pkgs.sunbeam-bin;
+        default = pkgs.sunbeam;
         defaultText = literalExpression "pkgs.sunbeam-bin";
         description = "The Sunbeam package to install";
       };
