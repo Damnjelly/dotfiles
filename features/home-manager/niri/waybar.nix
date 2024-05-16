@@ -1,7 +1,5 @@
-{ config, pkgs, ... }: 
-let
-  dunst =
-    pkgs.writeShellScriptBin "dunst" "${builtins.readFile ./dunst.sh}";
+{ config, pkgs, ... }:
+let dunst = pkgs.writeShellScriptBin "dunst" "${builtins.readFile ./dunst.sh}";
 in {
   stylix.targets.waybar.enable = false;
   programs.waybar = {
@@ -27,11 +25,8 @@ in {
         "tray"
         "custom/tray-arrow-left"
       ];
-      modules-center = [
-        "custom/dunst-arrow-left"
-        "custom/dunst"
-        "custom/dunst-arrow-right"
-      ];
+      modules-center =
+        [ "custom/dunst-arrow-left" "custom/dunst" "custom/dunst-arrow-right" ];
       modules-right = [
         "custom/disk-arrow-left"
         "disk"
@@ -48,8 +43,6 @@ in {
         "custom/network-arrow-left"
         "network"
       ];
-
-
 
       "clock#1" = {
         format = " {:%a} ";
@@ -71,8 +64,6 @@ in {
         format = "";
         tooltip = false;
       };
-
-
 
       "pulseaudio" = {
         format = "{icon} {volume:2}%";
@@ -99,12 +90,10 @@ in {
         tooltip = false;
       };
 
-
-
       "custom/dunst" = {
-          exec = "${dunst}/bin/dunst.sh";
-          on-click = "dunstctl set-paused toggle";
-          restart-interval = 1;
+        exec = "${dunst}/bin/dunst.sh";
+        on-click = "dunstctl set-paused toggle";
+        restart-interval = 1;
       };
       "custom/dunst-arrow-left" = {
         format = "";
@@ -115,8 +104,6 @@ in {
         tooltip = false;
       };
 
-
-
       "disk" = { format = " {percentage_used}%"; };
       "custom/disk-arrow-left" = {
         format = "";
@@ -126,8 +113,6 @@ in {
         format = "";
         tooltip = false;
       };
-
-
 
       "memory" = {
         interval = 5;
@@ -141,8 +126,6 @@ in {
         format = "";
         tooltip = false;
       };
-
-
 
       "custom/bluetooth" = {
         format = "";
@@ -158,8 +141,6 @@ in {
         tooltip = false;
       };
 
-
-
       "cpu" = {
         interval = 5;
         format = "CPU {usage:2}%";
@@ -172,8 +153,6 @@ in {
         format = "";
         tooltip = false;
       };
-
-
 
       "battery" = {
         states = {
@@ -199,8 +178,6 @@ in {
         tooltip = false;
       };
 
-
-
       "network" = {
         format = "{ifname} ";
         format-wifi = "{essid} ({signalStrength}%)  ";
@@ -223,8 +200,6 @@ in {
         format = "";
         tooltip = false;
       };
-
-
 
       "tray" = { "icon-size" = 20; };
       "custom/tray-arrow-left" = {
