@@ -3,6 +3,11 @@
     enable = true;
     dir = "~/Documents/obsidian";
     settings = {
+      completion = {
+        min_chars = 2;
+        nvim_cmp = true;
+      };
+      new_notes_location = "current_dir";
       follow_url_func = ''
         function(url)
         vim.fn.jobstart({"xdg-open", url})
@@ -43,13 +48,19 @@
               suffix = suffix .. string.char(math.random(65, 90))
             end
           end
-          return tostring(os.date("%a/%x")) .. "-" .. suffix
+          return tostring(os.date("%a-%x")) .. "-" .. suffix
         end
       '';
     };
   };
-  programs.nixvim.keymaps = [{
-    action = "<cmd>ObsidianSearch<CR>";
-    key = "<leader>fo";
-  }];
+  programs.nixvim.keymaps = [
+    {
+      action = "<cmd>ObsidianSearch<CR>";
+      key = "<leader>of";
+    }
+    {
+      action = "<cmd>ObsidianNew<CR>";
+      key = "<leader>on";
+    }
+  ];
 }

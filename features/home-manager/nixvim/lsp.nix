@@ -5,6 +5,7 @@
       nil_ls.enable = true;
       gdscript.enable = true;
       bashls.enable = true;
+      rust-analyzer.enable = true;
     };
   };
   programs.nixvim.keymaps = [ ];
