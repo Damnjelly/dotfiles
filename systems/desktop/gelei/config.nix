@@ -1,7 +1,5 @@
 { config, inputs, ... }: {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
+  imports = [ inputs.sops-nix.nixosModules.sops ];
   # user
   users.users.gelei = {
     initialPassword = "12345";

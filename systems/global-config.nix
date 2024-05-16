@@ -38,7 +38,7 @@
     };
 
     nixpkgs = {
-    # You can add overlays here
+      # You can add overlays here
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications

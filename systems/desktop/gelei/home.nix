@@ -24,17 +24,12 @@
       settings = {
         DP-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
         DP-2.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
-        HDMI-A-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+        HDMI-A-1.path =
+          "/home/${config.home.username}/.config/wpaperd/wallpapers/";
       };
     };
     home.persistence."/persist/home/${config.home.username}" = {
-      directories = [
-        "Downloads"
-        "Music"
-        "Pictures"
-        "Documents"
-        "Videos"
-      ];
+      directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
       allowOther = true;
     };
     home.stateVersion = lib.mkDefault "23.11";

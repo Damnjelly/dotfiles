@@ -29,7 +29,8 @@
     };
 
     stylix.base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
-    stylix.image = ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+    stylix.image =
+      ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
 
     programs.wpaperd.enable = true;
     programs.git.enable = true;
@@ -38,7 +39,7 @@
     pam.sessionVariables = {
       SSH_AUTH_SOCK = "${builtins.getEnv "XDG_RUNTIME_DIR"}/ssh-agent.socket";
     };
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+    # Nicely reload system units when changing configs
+    systemd.user.startServices = "sd-switch";
   };
 }
