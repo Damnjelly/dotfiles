@@ -7,6 +7,14 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
+    sunbeam = prev.sunbeam.overrideAttrs (old: {
+      src = final.fetchFromGitHub {
+        owner = "Damnjelly";
+        repo = "sunbeam";
+        rev = "1d50bf5af3714473cfa716f0aae5cb3ad91f494d";
+        hash = "sha256-LJWQESmsM+VzO4cRjTB8/Hiv4v7cbEMjZvltVLwGif0=";
+      };
+    });
     j4-dmenu-desktop = prev.j4-dmenu-desktop.overrideAttrs (old: {
       version = "develop feb 2024";
       src = final.fetchFromGitHub {
