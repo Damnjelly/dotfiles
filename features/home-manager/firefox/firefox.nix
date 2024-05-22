@@ -61,10 +61,10 @@
         ];
 
         userChrome = ''
-        #TabsToolbar
-        {
-            visibility: collapse;
-        }'';
+          #TabsToolbar
+          {
+              visibility: collapse;
+          }'';
       };
     };
     home.persistence."/persist/home/${config.home.username}/firefox" = {

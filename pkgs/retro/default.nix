@@ -1,4 +1,5 @@
-{ lib, buildGoModule, makeWrapper, pkg-config, alsa-lib, ffmpeg, yt-dlp, bash-completion, fetchFromGitHub }:
+{ lib, buildGoModule, makeWrapper, pkg-config, alsa-lib, ffmpeg, yt-dlp
+, bash-completion, fetchFromGitHub }:
 let
   pname = "retro";
   version = "v0.0.30";
@@ -14,7 +15,7 @@ in buildGoModule {
 
   nativeBuildInputs = [ makeWrapper pkg-config ];
   buildInputs = [ alsa-lib.dev ];
-# propagatedBuildInputs = [ yt-dlp ffmpeg bash-completion ];
+  # propagatedBuildInputs = [ yt-dlp ffmpeg bash-completion ];
 
   postInstall = ''
     mv $out/bin/client $out/bin/retro
@@ -26,8 +27,7 @@ in buildGoModule {
 
   meta = with lib; {
     homepage = "https://github.com/Malwarize/retro";
-    description =
-      "play music and continue your work on the terminal.";
+    description = "play music and continue your work on the terminal.";
     license = licenses.mit;
     #maintainers = with maintainers; [ Gelei ];
     platforms = [ "x86_64-linux" ]; # this is the only system i can test

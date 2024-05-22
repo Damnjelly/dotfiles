@@ -1,5 +1,6 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
+    inputs.sops-nix.nixosModules.sops
     inputs.disko.nixosModules.default
     inputs.impermanence.nixosModules.impermanence
     inputs.home-manager.nixosModules.home-manager
@@ -13,7 +14,6 @@
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/sops.nix
-    ./../../features/nixos/samba.nix
   ];
 
   theme = "madotsuki";
@@ -32,17 +32,31 @@
     ];
     files = [ "/etc/machine-id" ];
   };
+
   systemd.tmpfiles.rules = [
     "d /persist/home/ 0777 root root-"
     "d /persist/home/gelei/ 0700 gelei users-"
   ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    } # KDE Connect
+      ];
+    allowedUDPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    } # KDE Connect
+      ];
+  };
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
   };
+
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -140,7 +154,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  services.xserver.display = 1;  
+  services.xserver.display = 1;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

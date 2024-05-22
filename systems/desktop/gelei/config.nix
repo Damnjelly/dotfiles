@@ -1,6 +1,4 @@
-{ config, inputs, ... }: {
-  imports = [ inputs.sops-nix.nixosModules.sops ];
-  # user
+{ config, ... }: {
   users.users.gelei = {
     initialPassword = "12345";
     hashedPasswordFile = config.sops.secrets."desktop/gelei/pcpassword".path;
