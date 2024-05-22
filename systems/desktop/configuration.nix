@@ -13,6 +13,7 @@
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/sops.nix
+    ./../../features/nixos/samba.nix
   ];
 
   theme = "madotsuki";
@@ -40,6 +41,7 @@
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
   };
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -138,7 +140,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  services.xserver.display = 1;
+  services.xserver.display = 1;  
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

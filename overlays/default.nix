@@ -62,6 +62,14 @@
         mimeTypes = [ "x-scheme-handler/obsidian" ];
       };
     });
+#   niri-unstable = prev.niri-unstable.overrideAttrs (old: {
+#     src = final.fetchFromGitHub {
+#       owner = "Damnjelly";
+#       repo = "niri";
+#       rev = "779327a9ec8b7fac8780d9733fac4dc1c3cbb5f8";
+#       hash = "sha256-ccWQB+7URPYC0N0Jbzoi2cTjECSr42UsA2kKTOHe2oo=";
+#     };
+#   });
   };
   # When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.stable'

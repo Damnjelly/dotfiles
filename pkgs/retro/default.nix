@@ -1,16 +1,28 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{ lib, buildGoModule, makeWrapper, pkg-config, alsa-lib, ffmpeg, yt-dlp, bash-completion, fetchFromGitHub }:
 let
   pname = "retro";
-  version = "retro-v0.0.30";
+  version = "v0.0.30";
 in buildGoModule {
   name = pname;
   src = fetchFromGitHub {
     owner = "Malwarize";
     repo = pname;
     rev = version;
-    hash = "";
+    hash = "sha256-H4g8l4wwldHmBQ2qVOUw1rPDjZwHqE66uUBKPxE52n0=";
   };
-  vendorHash = "";
+  vendorHash = "sha256-ulMVoqVsOYLTzCJZV9Al5w56dQfwa4toaBZZsKC4stY=";
+
+  nativeBuildInputs = [ makeWrapper pkg-config ];
+  buildInputs = [ alsa-lib.dev ];
+# propagatedBuildInputs = [ yt-dlp ffmpeg bash-completion ];
+
+  postInstall = ''
+    mv $out/bin/client $out/bin/retro
+    mv $out/bin/server $out/bin/retroPlayer
+
+    wrapProgram $out/bin/retroPlayer \
+      --prefix PATH : ${lib.makeBinPath [ yt-dlp ffmpeg bash-completion ]}
+  '';
 
   meta = with lib; {
     homepage = "https://github.com/Malwarize/retro";
