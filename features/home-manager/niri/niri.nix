@@ -10,6 +10,7 @@
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
           { command = [ "${pkgs.waybar}/bin/waybar" ]; }
           { command = [ "${pkgs.dunst}/bin/dunst" ]; }
+          { command = [ "${pkgs.retro}/bin/retroPlayer" ]; }
         ];
 
         #TODO: fix
@@ -48,6 +49,15 @@
             "Mod+K".action = focus-window-up;
             "Mod+L".action = focus-column-right;
 
+            "Mod+Shift+Left".action = focus-monitor-left;
+            "Mod+Shift+Down".action = focus-monitor-down;
+            "Mod+Shift+Up".action = focus-monitor-up;
+            "Mod+Shift+Right".action = focus-monitor-right;
+            "Mod+Shift+H".action = focus-monitor-left;
+            "Mod+Shift+J".action = focus-monitor-down;
+            "Mod+Shift+K".action = focus-monitor-up;
+            "Mod+Shift+L".action = focus-monitor-right;
+
             "Mod+Alt+Left".action = move-column-left;
             "Mod+Alt+Down".action = consume-window-into-column;
             "Mod+Alt+Up".action = expel-window-from-column;
@@ -73,7 +83,7 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 32;
+          gaps = 8;
           default-column-width = { proportion = 0.5; };
           focus-ring.enable = false;
           border = {

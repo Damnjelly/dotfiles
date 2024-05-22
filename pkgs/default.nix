@@ -3,5 +3,6 @@
 { pkgs ? import <nixpkgs> { } }: rec {
   kirsch = pkgs.callPackage ./kirsch { };
   sunbeam = pkgs.callPackage ./sunbeam { };
+  retro = pkgs.callPackage ./retro { };
   #j4-dmenu-desktop = pkgs.callPackage ./j4-dmenu-desktop { };
 }

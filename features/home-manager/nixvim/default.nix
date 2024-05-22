@@ -15,5 +15,5 @@
     ./theme.nix
     ./treestitter.nix
   ];
-  home.packages = with pkgs; [ nixfmt obsidian lazygit ];
+  home.packages = with pkgs; [ nixfmt obsidian lazygit gdb ];
 }

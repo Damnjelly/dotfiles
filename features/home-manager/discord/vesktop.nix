@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   config = with config.lib.stylix.colors; {
     home = {
-      packages = with pkgs; [ vesktop ];
+      packages = with pkgs; [ vesktop obs-studio ];
       persistence."/persist/home/${config.home.username}/vesktop" = {
         directories = [ ".config/vesktop" ];
         allowOther = true;

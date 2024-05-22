@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  stylix.targets.kmscon.enable = true;
+  stylix.targets.kmscon.enable = false;
   services.kmscon = {
     enable = true;
     fonts = [{

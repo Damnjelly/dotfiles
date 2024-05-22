@@ -12,18 +12,10 @@ in {
       modules-left = [
         "clock#1"
         "custom/clock-arrow-right"
-        "custom/clock-arrow-left"
-        "clock#2"
-        "custom/clock-arrow-right"
-        "custom/clock-arrow-left"
-        "clock#3"
-        "custom/clock-arrow-right"
-        "custom/pulseaudio-arrow-right"
         "pulseaudio"
-        "custom/pulseaudio-arrow-left"
-        "custom/tray-arrow-right"
+        "custom/pulseaudio-arrow-right"
         "tray"
-        "custom/tray-arrow-left"
+        "custom/tray-arrow-right"
       ];
       modules-center =
         [ "custom/dunst-arrow-left" "custom/dunst" "custom/dunst-arrow-right" ];
@@ -45,15 +37,7 @@ in {
       ];
 
       "clock#1" = {
-        format = " {:%a} ";
-        tooltip = false;
-      };
-      "clock#2" = {
-        format = "{:%H:%M} ";
-        tooltip = false;
-      };
-      "clock#3" = {
-        format = "{:%d-%m} ";
+        format = " {:%a %H:%M %d-%m} ";
         tooltip = false;
       };
       "custom/clock-arrow-right" = {
@@ -232,7 +216,7 @@ in {
        }
 
        window#waybar {
-           background-color: #${base03};
+           background-color: transparent;
            color: transparent;
        }
        
@@ -276,7 +260,7 @@ in {
        #custom-clock-arrow-right {
          padding: 0 2px 0 0;
          color: #${base0C};
-         background: #${base03};
+         background: #${base0A};
        }
        #custom-clock-arrow-left {
          padding: 0 2px 0 0;
@@ -429,8 +413,8 @@ in {
        }
        #custom-pulseaudio-arrow-right {
          padding: 0 2px 0 0;
-         color: #${base03};
-         background: #${base0A};
+         color: #${base0A};
+         background: #${base07};
        }
        #custom-pulseaudio-arrow-left {
          padding: 0 2px 0 0;
@@ -448,8 +432,8 @@ in {
        }
        #custom-temperature-arrow-right {
          padding: 0 0 0 2px;
-         color: #${base03};
-         background: #${base0E};
+         color: #${base07};
+         background: transparent;
        }
        #custom-temperature-arrow-left {
          padding: 0 0 0 2px;
@@ -472,8 +456,8 @@ in {
        }
        #custom-tray-arrow-right {
          padding: 0 2px 0 0;
-         color: #${base03};
-         background: #${base07};
+         color: #${base07};
+         background: transparent;
        }
        #custom-tray-arrow-left {
          padding: 0 2px 0 0;

@@ -1,1 +1,4 @@
-{ ... }: { imports = [ ./greetd.nix ./kmscon.nix ]; }
+{ ... }: { imports = [ 
+  ./greetd.nix
+# ./kmscon.nix
+]; }

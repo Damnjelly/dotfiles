@@ -3,7 +3,7 @@
   programs.foot = {
     enable = true;
     settings = {
-      main = { font = lib.mkForce "Kirsch2x:size=20"; };
+      main = { font = lib.mkForce "Kirsch3x:size=20"; };
       tweak = { overflowing-glyphs = "yes"; };
     };
   };
