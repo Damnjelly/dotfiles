@@ -9,7 +9,6 @@
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
           { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-          { command = [ "${pkgs.dunst}/bin/dunst" ]; }
           { command = [ "${pkgs.retro}/bin/retroPlayer" ]; }
         ];
 
