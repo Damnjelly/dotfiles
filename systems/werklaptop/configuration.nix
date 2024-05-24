@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ lib, inputs, ... }: {
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
@@ -13,6 +13,7 @@
   ];
 
   theme = "madotsuki";
+  optinpermanence.enable = false;
 
   wsl = {
     enable = true;

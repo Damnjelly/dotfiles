@@ -5,6 +5,11 @@
       default = "madotsuki";
       example = "kanagawa";
     };
+    optinpermanence.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "enable permanence";
+    };
   };
 
   config = {
@@ -17,9 +22,11 @@
     };
 
     home = {
-      persistence."/persist/home/${config.home.username}" = {
-        directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
-        allowOther = true;
+      persistence = lib.mkIf config.optinpermanence.enable {
+        "/persist/home/${config.home.username}" = {
+          directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
+          allowOther = true;
+        };
       };
 
       file.".config/wpaperd/wallpapers/" = {

@@ -5,6 +5,11 @@
       default = "madotsuki";
       example = "kanagawa";
     };
+    optinpermanence.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "enable permanence";
+    };
   };
   config = {
     stylix = {

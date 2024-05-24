@@ -1,6 +1,7 @@
-{ lib, inputs, config, ... }: {
+{ lib, inputs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
+
     ./../../global-home.nix
     ./../../../users/gelei.nix
 

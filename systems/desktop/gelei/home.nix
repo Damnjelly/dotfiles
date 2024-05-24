@@ -1,5 +1,5 @@
 { lib, inputs, config, ... }: {
-  imports = [
+  imports = [ 
     inputs.impermanence.nixosModules.home-manager.impermanence
 
     ./../../global-home.nix
