@@ -37,52 +37,47 @@
     "d /persist/home/ 0777 root root-"
     "d /persist/home/gelei/ 0700 gelei users-"
   ];
-  networking.firewall = {
-    enable = true;
-    allowedTCPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    } # KDE Connect
-      ];
-    allowedUDPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    } # KDE Connect
-      ];
-  };
+
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
   };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
     if [[ -e /btrfs_tmp/root ]]; then
-        mkdir -p /btrfs_tmp/old_roots
-        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+    mkdir -p /btrfs_tmp/old_roots
+    timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+    mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
     fi
 
     delete_subvolume_recursively() {
-        IFS=$'\n'
-        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-            delete_subvolume_recursively "/btrfs_tmp/$i"
-        done
-        btrfs subvolume delete "$1"
+      IFS=$'\n'
+      for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+      delete_subvolume_recursively "/btrfs_tmp/$i"
+      done
+      btrfs subvolume delete "$1"
     }
 
     for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-        delete_subvolume_recursively "$i"
+    delete_subvolume_recursively "$i"
     done
 
     btrfs subvolume create /btrfs_tmp/root
     umount /btrfs_tmp
-  '';
+    '';
+  };
 
   nix.settings = {
     # Enable flakes and new 'nix' command
@@ -91,70 +86,87 @@
     auto-optimise-store = true;
   };
 
-  # Enable opentabletdriver
-  hardware.opentabletdriver.enable = true;
-  hardware.opentabletdriver.daemon.enable = true;
+  hardware = {
+    # Enable opentabletdriver
+    opentabletdriver.enable = true;
+    opentabletdriver.daemon.enable = true;
+  };
+
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
 
   programs.steam.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  services = {
+    xserver = {
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      display = 1;
+    };
+    # Enable remote destop
+    xrdp = { enable = true; };
 
-  # Enable OpenGL
-  hardware.opengl.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = false;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "nl_NL.UTF-8";
-    LC_IDENTIFICATION = "nl_NL.UTF-8";
-    LC_MEASUREMENT = "nl_NL.UTF-8";
-    LC_MONETARY = "nl_NL.UTF-8";
-    LC_NAME = "nl_NL.UTF-8";
-    LC_NUMERIC = "nl_NL.UTF-8";
-    LC_PAPER = "nl_NL.UTF-8";
-    LC_TELEPHONE = "nl_NL.UTF-8";
-    LC_TIME = "nl_NL.UTF-8";
+    # Enable sound with pipewire.
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
   };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
+
   security.rtkit.enable = true;
-  services.pipewire = {
+
+  xdg.portal = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+      gnome.gnome-keyring
+    ];
   };
 
-  # Enable remote destop
-  services.xrdp = { enable = true; };
+  networking = {
+    hostName = "nixos";
+    firewall = {
+      enable = true;
+      allowedTCPPortRanges = [{
+        from = 1714;
+        to = 1764;
+      }]; # KDE Connect
+      allowedUDPPortRanges = [{
+        from = 1714;
+        to = 1764;
+      }]; # KDE Connect
+    };
+  };
+# services.xserver.videoDrivers = ["nvidia"];
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-gnome
-    pkgs.gnome.gnome-keyring
-  ];
+# hardware.nvidia = {
+#   
+#   modesetting.enable = true;
+#   package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+#     version = "555.42.02";
+#     sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
+#     sha256_aarch64 = lib.fakeSha256;
+#     openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+#     settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+#     persistencedSha256 = lib.fakeSha256;
 
-  networking.hostName = "nixos";
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  services.xserver.display = 1;
+#   };
+# };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
