@@ -17,7 +17,7 @@ if [ $# -eq 0 ]; then
 	[
 		{ 
 			name: "list-desktop-files", 
-			title: "List applications", 
+			title: "🚀 List applications", 
 			mode: "filter"
 		},
 		{
@@ -43,7 +43,7 @@ fi
 if ! [ -x "$(command -v j4-dmenu-desktop)" ]; then
 	echo "j4-dmenu-desktop is not installed. Please install it." >&2
 	exit 1
-fi
+fi 
 
 COMMAND=$(echo "$1" | jq -r '.command')
 if [ "$COMMAND" = "list-desktop-files" ]; then

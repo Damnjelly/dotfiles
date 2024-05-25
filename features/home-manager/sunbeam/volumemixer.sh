@@ -17,7 +17,7 @@ if [ $# -eq 0 ]; then
 	[
 		{ 
 			name: "list-sinks", 
-			title: "Switch output device", 
+			title: "🔊 Switch output device", 
 			mode: "filter"
 		},
 		{
@@ -36,7 +36,7 @@ if [ $# -eq 0 ]; then
 		},
 		{
 			name: "device-volume",
-			title: "Change device volume",
+			title: "🎵 Change device volume",
 			mode: "silent",
 			params: 
 			[
@@ -49,7 +49,7 @@ if [ $# -eq 0 ]; then
 		},
 		{
 			name: "list-input-sinks",
-			title: "Change application volume",
+			title: "🎵 Change application volume",
 			mode: "filter"
 		},
 		{
@@ -80,7 +80,7 @@ fi
 if ! [ -x "$(command -v pactl)" ]; then
 	echo "pactl is not installed. Please install it." >&2
 	exit 1
-fi
+fi 
 
 # --- change output device ---
 COMMAND=$(echo "$1" | jq -r '.command')

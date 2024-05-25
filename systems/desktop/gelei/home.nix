@@ -1,5 +1,5 @@
-{ lib, inputs, config, ... }: {
-  imports = [ 
+{ lib, inputs, config, pkgs, ... }: {
+  imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
 
     ./../../global-home.nix
@@ -18,6 +18,22 @@
   ];
   config = {
     theme = "madotsuki";
+
+    stylix.fonts = {
+      monospace = {
+        package = pkgs.cascadia-code;
+        name = "Cascadia Code NF";
+      };
+
+      serif = {
+        package = pkgs.cascadia-code;
+        name = "Cascadia Mono NF";
+      };
+
+      sansSerif = config.stylix.fonts.serif;
+      emoji = config.stylix.fonts.monospace;
+      sizes.terminal = 14;
+    };
 
     programs.wpaperd = {
       enable = true;
