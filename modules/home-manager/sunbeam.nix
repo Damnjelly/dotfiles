@@ -12,9 +12,8 @@ in {
 
       package = mkOption {
         type = types.package;
-        # TODO: change this for the actual unpackaged sunbeam instead of sunbeam-bin at some point
         default = pkgs.sunbeam;
-        defaultText = literalExpression "pkgs.sunbeam-bin";
+        defaultText = literalExpression "pkgs.sunbeam";
         description = "The Sunbeam package to install";
       };
 
@@ -55,8 +54,13 @@ in {
   };
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
-    xdg.configFile."sunbeam/sunbeam.json" = mkIf (cfg.settings != { }) {
+    xdg.configFile."sunbeam/HMInit/sunbeam.json" = mkIf (cfg.settings != { }) {
+      executable = true;
       source = jsonFormat.generate "sunbeam.json" cfg.settings;
+      onChange = ''
+        cp ${config.xdg.configHome}/sunbeam/HMInit/sunbeam.json ${config.xdg.configHome}/sunbeam/sunbeam.json 
+        chmod u+w ${config.xdg.configHome}/sunbeam/sunbeam.json
+      '';
     };
   };
 }
