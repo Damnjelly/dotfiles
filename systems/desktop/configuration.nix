@@ -17,6 +17,7 @@
   ];
 
   theme = "madotsuki";
+  optinpermanence.enable = true;
 
   programs.fuse.userAllowOther = true;
   fileSystems."/persist".neededForBoot = true;
