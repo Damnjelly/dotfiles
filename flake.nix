@@ -19,8 +19,6 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
     impermanence.url = "github:nix-community/impermanence";
 
     niri.url = "github:sodiboo/niri-flake";
