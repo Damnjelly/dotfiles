@@ -18,6 +18,7 @@
   ];
   config = {
     theme = "madotsuki";
+    optinpermanence.enable = true;
 
     stylix.fonts = {
       monospace = {
