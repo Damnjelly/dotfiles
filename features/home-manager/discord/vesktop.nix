@@ -4,9 +4,8 @@
       packages = with pkgs; [ vesktop obs-studio ];
       persistence = lib.mkIf config.optinpermanence.enable {
         "/persist/home/${config.home.username}/vesktop" = {
-            directories = [ ".config/vesktop" ];
-            allowOther = true;
-          };
+          directories = [ ".config/vesktop" ];
+          allowOther = true;
         };
       };
       file.".config/vesktop/settings/quickCss.css".text = ''
