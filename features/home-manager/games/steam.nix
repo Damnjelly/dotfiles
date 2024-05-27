@@ -7,7 +7,7 @@
       Exec=$SCRIPT_XWAYLAND steam
       Type=Application
     '';
-    home.persistence = lib.mkIf config.optinpermanence.enable {
+    persistence = lib.mkIf config.optinpermanence.enable {
       "/persist/home/${config.home.username}/steam" = {
         directories = [
           {

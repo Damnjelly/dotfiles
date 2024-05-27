@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   config = with config.lib.stylix.colors; {
     home = {
       packages = with pkgs; [ vesktop obs-studio ];

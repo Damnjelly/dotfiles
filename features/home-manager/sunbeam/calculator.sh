@@ -32,15 +32,15 @@ if [ "$COMMAND" = "math" ]; then
         }'
         exit 0
     fi
-		awk "BEGIN {print "$QUERY"}"| jq -R '{
-		title: .,
+		awk "BEGIN {print "$QUERY"}"| jq 'split("\n") | if .[0]|startswith("awk: cmd. line:") == true then .[1]|ltrimstr("awk: cmd. line:1:              ") else .[0] end' | jq -R '{
+		title: "answer",
 		actions:
 		[
 			 {
 					 title: "Copy calculation",
 					 type: "copy",
 					 exit: true,
-					 text: \(split("\n") | if .[0]|startswith("awk: cmd. line:") == true then .[1]|ltrimstr("awk: cmd. line:1:              ") else .[0] end)
+					 text: .
 			 }
 		]
 }' | jq -s '{ dynamic: true, items: . }'
