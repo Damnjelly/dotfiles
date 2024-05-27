@@ -13,7 +13,7 @@ if [ $# -eq 0 ]; then
 	description: "Search NixOS packages",
 	preferences: [
 		{
-				name: "nix-channel",
+				name: "nixchannel",
 				title: "Nix Channel",
 				type: "string"
 		}
@@ -36,37 +36,32 @@ if ! [ -x "$(command -v nix-search)" ]; then
 	exit 1
 fi 
 
-CHANNEL=$(echo "$1" | jq -r '.preferences.nix-channel')
-if [ "$CHANNEL" = "null" ]; then
-	echo "Nix channel not specified (e.g '23.11' or 'unstable'). Please set it in your config." >&2
-    exit 1
-fi
-
+CHANNEL=$(echo "$1" | jq -r '.preferences.nixchannel')
 COMMAND=$(echo "$1" | jq -r '.command')
 if [ "$COMMAND" = "search-packages" ]; then
 	QUERY=$(echo "$1" | jq -r '.query')
     if [ "$QUERY" = "null" ]; then
         jq -n '{
-            emptyText: "Type anything to searchhhhh",
+            emptyText: "Type anything to search",
         }'
         exit 0
     fi
-		nix-search --json --channel "$CHANNEL" --query-string="$QUERY" | jq '.package_attr_name' | jq '{
-      title: .,
+		nix-search --json --channel "$CHANNEL" --query-string="$QUERY" | jq '{package_attr_name, package_position}' | jq --arg CHANNEL "$CHANNEL" '{
+      title: .package_attr_name,
       actions:
       [
          {
 						 title: "Copy package",
-						 exit: true,
 						 type: "copy",
-						 text: .
+						 exit: true,
+						 text: .package_attr_name
+         },
+         {
+						 title: "Open source",
+						 type: "open",
+						 exit: true,
+						 url: "\("https://github.com/NixOS/nixpkgs/blob/nixos-\($CHANNEL)/\(.package_position)"|scan("(^((?!:[0-9]).)*)").[0])"
          }
       ]
-}' | jq -s '{ items: . }'
-
-elif [ "$COMMAND" = "run-application" ]; then
-	APPLICATIONNAME=$(echo "$1" | jq -r '.params.applicationname')
-	(set -m ;j4-dmenu-desktop --dmenu="(cat &> /dev/null) | (echo '$APPLICATIONNAME')" &)
-	sleep 0.1
-	kill -9 $PPID
+}' | jq -s '{ dynamic: true, items: . }'
 fi
