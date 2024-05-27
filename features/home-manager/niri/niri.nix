@@ -37,6 +37,7 @@
             "Shift+Alt+S".action = screenshot;
 
             "Mod+P".action = sh "${pkgs.hyprpicker}/bin/hyprpicker -a";
+            "Mod+Y".action = sh "systemctl suspend";
 
             # Movement
             "Mod+Left".action = focus-column-left;

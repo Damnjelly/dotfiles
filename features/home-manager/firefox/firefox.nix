@@ -1,16 +1,16 @@
-{ pkgs, inputs, config, ... }: {
+{ pkgs, lib, inputs, config, ... }: {
   config = {
     programs.firefox = with config.lib.stylix.colors; {
       enable = true;
       profiles.gelei = {
         search.engines = {
-          "Nix Packages" = {
+          "myNixos" = {
             urls = [{
-              template = "https://search.nixos.org/packages";
+              template = "https://mynixos.com/";
               params = [
                 {
                   name = "type";
-                  value = "packages";
+                  value = "options";
                 }
                 {
                   name = "query";
@@ -20,27 +20,13 @@
             }];
             icon =
               "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = [ "@np" ];
+            definedAliases = [ "@mn" ];
           };
         };
         search.force = true;
 
-        bookmarks = [
-          {
-            name = "MyNixOS";
-            url = "https://mynixos.com/";
-          }
-          {
-            name = "NixOS Search";
-            url = "https://search.nixos.org/packages";
-          }
-          {
-            name = "Photopea";
-            url = "https://www.photopea.com/";
-          }
-        ];
-
         settings = {
+          "browser.startup.homepage" = "https://www.startpage.com/";
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "layers.acceleration.force-enabled" = true;
           "gfx.webrender.all" = true;
@@ -58,6 +44,7 @@
           sidebery
           ublock-origin
           vimium
+          startpage-private-search
         ];
 
         userChrome = ''
@@ -67,9 +54,11 @@
           }'';
       };
     };
-    home.persistence."/persist/home/${config.home.username}/firefox" = {
-      directories = [ ".mozilla/firefox/gelei" ];
-      allowOther = true;
+    home.persistence = lib.mkIf config.optinpermanence.enable {
+      "/persist/home/${config.home.username}/firefox" = {
+        directories = [ ".mozilla/firefox/gelei" ];
+        allowOther = true;
+      };
     };
   };
 }
