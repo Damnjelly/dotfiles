@@ -7,7 +7,7 @@ in fetchzip {
 
   url =
     "https://github.com/molarmanful/kirsch/releases/download/${version}/kirsch_${version}.zip";
-  sha256 = "sha256-CcwXKdw2al7sOA0JStT1RevAHy2RkjMKKvkN21di7no=";
+  sha256 = "sha256-BSfETygEniHJ4UGZJf+Kx+2QRPCvyOQBDOPIHlxBiwA=";
 
   postFetch = ''
     mkdir -p $out/share/fonts/misc
