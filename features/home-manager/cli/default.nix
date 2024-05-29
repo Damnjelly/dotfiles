@@ -24,6 +24,5 @@
     gum # a tool for glamorous shell scripts
     bat # cat with syntax highlighting
     browsh # text based browser
-    retro
   ];
 }

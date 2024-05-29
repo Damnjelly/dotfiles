@@ -3,10 +3,10 @@
   home-manager.users.joren = import ./home.nix;
 
   # sops
-#  environment.sessionVariables = rec {
-#    HOME_WIN = /mnt/c/Users/joren;
-#    SOPS_AGE_KEY_FILE = "${HOME_WIN}/Documents/keys.txt";
-#  };
+  #  environment.sessionVariables = rec {
+  #    HOME_WIN = /mnt/c/Users/joren;
+  #    SOPS_AGE_KEY_FILE = "${HOME_WIN}/Documents/keys.txt";
+  #  };
   sops = {
     age.keyFile = /mnt/c/Users/joren/Documents/keys.txt;
     secrets = {

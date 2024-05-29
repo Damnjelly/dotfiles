@@ -6,11 +6,7 @@
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
-        spawn-at-startup = [
-          { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
-          { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-          { command = [ "${pkgs.retro}/bin/retroPlayer" ]; }
-        ];
+        spawn-at-startup = [{ command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }];
 
         #TODO: fix
         window-rules = [{

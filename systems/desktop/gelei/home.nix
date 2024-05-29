@@ -6,6 +6,7 @@
     ./../../../users/gelei.nix
 
     ./../../../features/home-manager/cli
+    ./../../../features/home-manager/music
     ./../../../features/home-manager/creative
     ./../../../features/home-manager/discord/vesktop.nix
     ./../../../features/home-manager/firefox/firefox.nix
@@ -46,7 +47,14 @@
       };
     };
     home.persistence."/persist/home/${config.home.username}" = {
-      directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
+      directories = [
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Documents"
+        "Videos"
+        ".config/valent"
+      ];
       allowOther = true;
     };
     home.stateVersion = lib.mkDefault "23.11";

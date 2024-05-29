@@ -20,17 +20,15 @@
     wslConf.network.hostname = "werklaptop";
   };
 
-  environment.sessionVariables = {
-    FLAKE = "/etc/nixos/";
-  };
+  environment.sessionVariables = { FLAKE = "/etc/nixos/"; };
 
   nix.settings = {
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";  
-  
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }

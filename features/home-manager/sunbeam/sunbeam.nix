@@ -61,7 +61,8 @@
           origin = "${config.xdg.configHome}/sunbeam/volumemixer.sh";
         };
         google = {
-          origin = "https://raw.githubusercontent.com/pomdtr/sunbeam/main/extensions/google.sh";
+          origin =
+            "https://raw.githubusercontent.com/pomdtr/sunbeam/main/extensions/google.sh";
         };
         nixos-search = {
           origin = "${config.xdg.configHome}/sunbeam/nixos-search.sh";

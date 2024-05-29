@@ -3,7 +3,7 @@
   home.packages = with pkgs; [
     g4music
     tagger
-    clematishl
+    clematis
     gnome.adwaita-icon-theme
   ];
 }

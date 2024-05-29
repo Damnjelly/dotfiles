@@ -8,7 +8,7 @@
       Type=Application
     '';
     persistence = lib.mkIf config.optinpermanence.enable {
-     "/persist/home/${config.home.username}/runelite" = {
+      "/persist/home/${config.home.username}/runelite" = {
         directories = [ ".runelite" ];
         allowOther = true;
       };

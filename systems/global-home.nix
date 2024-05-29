@@ -38,6 +38,7 @@
     stylix.base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
     stylix.image =
       ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+    stylix.cursor.size = 16;
 
     programs.wpaperd.enable = true;
     programs.git.enable = true;

@@ -44,8 +44,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, stylix, disko, sops-nix, nixos-wsl, ...
-    }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, stylix, disko, sops-nix
+    , nixos-wsl, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
@@ -68,7 +68,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./systems/desktop/configuration.nix ];
         };
-	werklaptop = lib.nixosSystem {
+        werklaptop = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./systems/werklaptop/configuration.nix ];
         };

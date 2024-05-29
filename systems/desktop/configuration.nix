@@ -2,7 +2,7 @@
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.disko.nixosModules.default
-    inputs.impermanence.nixosModules.impermanence 
+    inputs.impermanence.nixosModules.impermanence
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
 
@@ -45,9 +45,15 @@
     FLAKE = "/etc/nixos/";
   };
 
+  security.polkit.enable = true;
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
+
+    # settings to get obs virtual camera working
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
 
     loader = {
       systemd-boot.enable = true;
@@ -55,28 +61,28 @@
     };
 
     initrd.postDeviceCommands = lib.mkAfter ''
-    mkdir /btrfs_tmp
-    mount /dev/root_vg/root /btrfs_tmp
-    if [[ -e /btrfs_tmp/root ]]; then
-    mkdir -p /btrfs_tmp/old_roots
-    timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-    mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-    fi
+      mkdir /btrfs_tmp
+      mount /dev/root_vg/root /btrfs_tmp
+      if [[ -e /btrfs_tmp/root ]]; then
+      mkdir -p /btrfs_tmp/old_roots
+      timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+      mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+      fi
 
-    delete_subvolume_recursively() {
-      IFS=$'\n'
-      for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-      delete_subvolume_recursively "/btrfs_tmp/$i"
+      delete_subvolume_recursively() {
+        IFS=$'\n'
+        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+        delete_subvolume_recursively "/btrfs_tmp/$i"
+        done
+        btrfs subvolume delete "$1"
+      }
+
+      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+      delete_subvolume_recursively "$i"
       done
-      btrfs subvolume delete "$1"
-    }
 
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-    delete_subvolume_recursively "$i"
-    done
-
-    btrfs subvolume create /btrfs_tmp/root
-    umount /btrfs_tmp
+      btrfs subvolume create /btrfs_tmp/root
+      umount /btrfs_tmp
     '';
   };
 
@@ -153,21 +159,21 @@
       }]; # KDE Connect
     };
   };
-# services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.videoDrivers = ["nvidia"];
 
-# hardware.nvidia = {
-#   
-#   modesetting.enable = true;
-#   package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-#     version = "555.42.02";
-#     sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
-#     sha256_aarch64 = lib.fakeSha256;
-#     openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-#     settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
-#     persistencedSha256 = lib.fakeSha256;
+  # hardware.nvidia = {
+  #   
+  #   modesetting.enable = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+  #     version = "555.42.02";
+  #     sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
+  #     sha256_aarch64 = lib.fakeSha256;
+  #     openSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+  #     settingsSha256 = "sha256-rtDxQjClJ+gyrCLvdZlT56YyHQ4sbaL+d5tL4L4VfkA=";
+  #     persistencedSha256 = lib.fakeSha256;
 
-#   };
-# };
+  #   };
+  # };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

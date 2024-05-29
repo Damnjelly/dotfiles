@@ -1,18 +1,7 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, clang
-, llvmPackages
-, xcb-util-cursor
-, xorg
-, glibc
-, libclang
-, musl
-, xwayland
-, makeWrapper
-}:
+{ lib, rustPlatform, fetchFromGitHub, clang, llvmPackages, xcb-util-cursor, xorg
+, glibc, libclang, musl, xwayland, makeWrapper }:
 
-rustPlatform.buildRustPackage rec {  
+rustPlatform.buildRustPackage rec {
   pname = "xwayland-satellite";
   version = "02bee5aea7d4e95abad5c6792f6caab1190a1e68";
 
@@ -27,21 +16,18 @@ rustPlatform.buildRustPackage rec {
 
   doCheck = false;
 
-  LIBCLANG_PATH = lib.makeLibraryPath [ llvmPackages.libclang.lib ];  BINDGEN_EXTRA_CLANG_ARGS =
-   (builtins.map (a: ''-I"${a}/include"'') [
+  LIBCLANG_PATH = lib.makeLibraryPath [ llvmPackages.libclang.lib ];
+  BINDGEN_EXTRA_CLANG_ARGS = (builtins.map (a: ''-I"${a}/include"'') [
     xcb-util-cursor.dev
     xorg.libxcb.dev
     musl.dev
-  ])
-  ++ [
-    ''-isystem ${llvmPackages.libclang.lib}/lib/clang/${lib.getVersion clang}/include''
+  ]) ++ [
+    "-isystem ${llvmPackages.libclang.lib}/lib/clang/${
+      lib.getVersion clang
+    }/include"
   ];
 
-  buildInputs = [
-    xcb-util-cursor
-    clang
-    makeWrapper
-  ];
+  buildInputs = [ xcb-util-cursor clang makeWrapper ];
 
   postInstall = ''
     wrapProgram $out/bin/xwayland-satellite \
