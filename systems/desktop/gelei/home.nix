@@ -48,12 +48,8 @@
     };
     home.persistence."/persist/home/${config.home.username}" = {
       directories = [
-        "Downloads"
-        "Music"
-        "Pictures"
-        "Documents"
-        "Videos"
         ".config/valent"
+        ".cache/valent"
       ];
       allowOther = true;
     };

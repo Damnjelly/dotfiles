@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./steam.nix ./runelite.nix ];
+  imports = [ ./osu.nix ./steam.nix ./runelite.nix ];
   home.packages = with pkgs; [
     monspkgs.everest-mons
     opentabletdriver

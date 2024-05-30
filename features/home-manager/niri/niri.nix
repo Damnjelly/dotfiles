@@ -79,7 +79,7 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 8;
+          gaps = 24;
           default-column-width = { proportion = 0.5; };
           focus-ring.enable = false;
           border = {
