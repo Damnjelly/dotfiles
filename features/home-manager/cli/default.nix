@@ -9,7 +9,6 @@
     ./fzf.nix
   ];
   home.packages = with pkgs; [
-    diskonaut # disk analyser
     exiftool # read, write, edit EXIF meta info
     fastfetch # fetcmodulesh
     ffmpegthumbnailer # video thumbnailer
@@ -23,6 +22,5 @@
     wget # web downloader
     gum # a tool for glamorous shell scripts
     bat # cat with syntax highlighting
-    browsh # text based browser
   ];
 }
