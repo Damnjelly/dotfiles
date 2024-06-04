@@ -30,6 +30,16 @@
             on = [ "<C-Down>" ];
             desc = "Seek down 5 units in the preview";
           }
+          {
+            exec = "seek -5";
+            on = [ "<C-k>" ];
+            desc = "Seek up 5 units in the preview";
+          }
+          {
+            exec = "seek 5";
+            on = [ "<C-j>" ];
+            desc = "Seek down 5 units in the preview";
+          }
         ];
       };
     };
@@ -55,8 +65,8 @@
 
       opener = {
         edit = [{
-          exec = ''nvim "$@"'';
-          desc = "nvim";
+          exec = ''$EDITOR "$@"'';
+          desc = "Text edit";
           block = true;
           for = "unix";
         }];
@@ -78,7 +88,7 @@
         }];
         play = [
           {
-            exec = ''mpv "$@"'';
+            exec = ''$MUSIC "$@"'';
             orphan = true;
             for = "unix";
           }
@@ -100,7 +110,7 @@
         rules = [
           {
             name = "*/";
-            use = [ "edit" "open" "reveal" ];
+            use = [ "edit" "open" "reveal" "play" ];
           }
           {
             mime = "text/*";
