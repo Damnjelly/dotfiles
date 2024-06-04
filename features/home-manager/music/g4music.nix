@@ -6,6 +6,7 @@
         allowOther = true;
       };
     };
+  sessionVariables = { MUSIC = "g4music"; };
   };
   programs.niri.settings.spawn-at-startup =
     lib.mkIf config.programs.niri.enable [{
