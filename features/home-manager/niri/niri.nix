@@ -9,11 +9,24 @@
         spawn-at-startup = [{ command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }];
 
         #TODO: fix
-        window-rules = [{
-          matches = [{ title = "Vesktop"; }];
-          open-on-output = "HDMI-A-1";
-          open-maximized = true;
-        }];
+        window-rules = [
+          {
+            draw-border-with-background = false;
+            geometry-corner-radius = let r = 4.0;
+            in {
+              top-left = r;
+              top-right = r;
+              bottom-left = r;
+              bottom-right = r;
+            };
+            clip-to-geometry = true;
+          }
+          {
+            matches = [{ app-id = "^vesktop$"; }];
+            open-on-output = "HDMI-A-1";
+            open-fullscreen = true;
+          }
+        ];
 
         binds = with config.lib.niri.actions;
           let sh = spawn "sh" "-c";
