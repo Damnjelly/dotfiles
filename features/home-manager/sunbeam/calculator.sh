@@ -32,12 +32,12 @@ if [ "$COMMAND" = "math" ]; then
         }'
         exit 0
     fi
-		awk "BEGIN {print "$QUERY"}"| jq 'split("\n") | if .[0]|startswith("awk: cmd. line:") == true then .[1]|ltrimstr("awk: cmd. line:1:              ") else .[0] end' | jq -R '{
-		title: "answer",
+		awk "BEGIN {print "$QUERY"}" | jq -R '{
+		title: .,
 		actions:
 		[
 			 {
-					 title: "Copy calculation",
+					 title: "Copy answer",
 					 type: "copy",
 					 exit: true,
 					 text: .
