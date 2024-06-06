@@ -2,7 +2,12 @@
   programs.nixvim.plugins.lsp = {
     enable = true;
     servers = {
-      nil_ls.enable = true;
+      nil_ls = {
+        enable = true;
+        settings = {
+          nix.flake.autoArchive = true;
+        };
+      };
       gdscript.enable = true;
       bashls.enable = true;
       rust-analyzer.enable = true;

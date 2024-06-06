@@ -2,10 +2,11 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./alpha.nix
-    #   ./barbar.nix
     ./cmp.nix
     ./conform.nix
+    ./dap.nix
     ./keymaps.nix
+    ./lint.nix
     ./lsp.nix
     ./neotree.nix
     ./nixvim.nix

@@ -2,6 +2,14 @@
   programs.nixvim.plugins.telescope = {
     enable = true;
     extensions.fzf-native.enable = true;
+    settings.defaults.mappings.i = {
+      "<esc>" = {
+        __raw = ''
+        function(...)
+        return require("telescope.actions").close(...)
+        end'';
+      };
+    };
   };
   programs.nixvim.keymaps = [
     {

@@ -2,14 +2,15 @@
   programs.nixvim.plugins = {
     autoclose.enable = true;
     barbecue.enable = true;
+    diffview.enable = true;
     gitsigns.enable = true;
+    lualine.enable = true;
+    nix.enable = true;
     noice.enable = true;
     nvim-colorizer.enable = true;
-    lualine.enable = true;
-    which-key.enable = true;
-    trouble.enable = true;
     spider.enable = true;
     surround.enable = true;
-    nix.enable = true;
+    trouble.enable = true;
+    which-key.enable = true;
   };
 }
