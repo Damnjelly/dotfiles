@@ -6,10 +6,8 @@
         allowOther = true;
       };
     };
-  sessionVariables = { MUSIC = "g4music"; };
+    sessionVariables = { MUSIC = "g4music"; };
   };
   programs.niri.settings.spawn-at-startup =
-    lib.mkIf config.programs.niri.enable [{
-      command = [ "clematis" ];
-    }];
+    lib.mkIf config.programs.niri.enable [{ command = [ "clematis" ]; }];
 }
