@@ -4,6 +4,6 @@
   kirsch = pkgs.callPackage ./kirsch { };
   sunbeam = pkgs.callPackage ./sunbeam { };
   retro = pkgs.callPackage ./retro { };
-  wayland-satellite = pkgs.callPackage ./wayland-satellite { };
+  xwayland-satellite = pkgs.callPackage ./xwayland-satellite { };
   #j4-dmenu-desktop = pkgs.callPackage ./j4-dmenu-desktop { };
 }
