@@ -6,13 +6,17 @@
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
-        spawn-at-startup = [{ command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }];
+        environment.DISPLAY = ":0.0";
+        spawn-at-startup = [
+          { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
+          { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
+        ];
 
         #TODO: fix
         window-rules = [
           {
             draw-border-with-background = false;
-            geometry-corner-radius = let r = 4.0;
+            geometry-corner-radius = let r = 0.0;
             in {
               top-left = r;
               top-right = r;
@@ -26,6 +30,35 @@
             open-on-output = "HDMI-A-1";
             open-fullscreen = true;
           }
+          (let
+            w = 1803;
+            h = 1006;
+          in {
+            matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
+            default-column-width.fixed = w;
+            min-width = w;
+            max-height = h;
+            min-height = h;
+          })
+          (let
+            w = 200;
+            h = 300;
+          in {
+            matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
+            default-column-width.fixed = w;
+            min-width = w;
+            max-height = h;
+            min-height = h;
+          })
+          (let
+            w = 35.0;
+            h = 800;
+          in {
+            matches = [{ title = "^Sunbeam$"; }];
+            default-column-width.proportion = w;
+            max-height = h;
+            min-height = h;
+          })
         ];
 
         binds = with config.lib.niri.actions;
@@ -103,7 +136,7 @@
               from = "#${base08}";
               to = "#${base07}";
             };
-            inactive.color = "#${base04}";
+            inactive.color = "#${base04}00";
           };
           struts = {
             left = 32;
