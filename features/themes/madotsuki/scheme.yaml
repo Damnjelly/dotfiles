@@ -6,7 +6,7 @@ base02: "3e2f42" # surface0
 base03: "554157" # surface1
 base04: "6d546d" # surface2
 base05: "b2c9dc" # text
-base06: "F7E7F1" # rosewater
+base06: "f7e2ec" # rosewater
 base07: "98a3dd" # lavender
 base08: "ce1270" # red
 base09: "ec687c" # peach
@@ -23,7 +23,7 @@ base0F: "f0a3d2" # flamingo
 #base03 #554157
 #base04 #6d546d
 #base05 #b2c9dc
-#base06 #F7E7F1
+#base06 #f7e2ec
 #base07 #98a3dd
 #base08 #ce1270
 #base09 #ec687c
