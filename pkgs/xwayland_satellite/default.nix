@@ -1,18 +1,18 @@
 { lib, rustPlatform, fetchFromGitHub, clang, llvmPackages, xcb-util-cursor, xorg
-, glibc, libclang, musl, xwayland, makeWrapper }:
+, musl, xwayland, makeWrapper }:
 
 rustPlatform.buildRustPackage rec {
   pname = "xwayland-satellite";
-  version = "601223d3ae277a876680ea06269555fae1b09131";
+  version = "5e7f2df05e0e0307e7b0fcebd24194a09f8d2567";
 
   src = fetchFromGitHub {
     owner = "Supreeeme";
     repo = "xwayland-satellite";
     rev = version;
-    sha256 = "sha256-0nvFpHzkho7ATwvceDNdlk3CULVRP4VgKJjEO/7SCi4=";
+    sha256 = "sha256-L5jOU34bPf/BqsuDZK1JzVgBWwgzFm0auPYkZ6RjB0k=";
   };
 
-  cargoSha256 = "sha256-I66n5dVcbJETBelebrKYystFYJEHh5V7a5L9cZACAPc=";
+  cargoSha256 = "sha256-631l9iV83sgnY+kkaXnTYOLeBShs4r73wEmPb73TCfM=";
 
   doCheck = false;
 
