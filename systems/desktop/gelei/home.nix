@@ -15,8 +15,9 @@
     ./../../../features/home-manager/nixvim
     ./../../../features/home-manager/shell
     ./../../../features/home-manager/sunbeam
-    ./../../../features/home-manager/work
+    ./../../../features/home-manager/productivity
   ];
+
   config = {
     theme = "madotsuki";
     optinpermanence.enable = true;
