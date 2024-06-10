@@ -1,4 +1,5 @@
 { config, ... }: {
+  imports = [ ./host.nix ];
   users.users.gelei = {
     initialPassword = "12345";
     hashedPasswordFile = config.sops.secrets."desktop/gelei/pcpassword".path;
@@ -20,6 +21,7 @@
         owner = "gelei";
         path = "/home/gelei/.ssh/id_ed25519";
       };
+      "desktop/tailscale" = {};
     };
   };
 }
