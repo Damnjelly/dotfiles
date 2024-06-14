@@ -64,9 +64,10 @@
 
       # systems
       nixosConfigurations = {
-        nixos = lib.nixosSystem {
+        # home desktop
+        nightglider = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./systems/desktop/configuration.nix ];
+          modules = [ ./systems/nightglider/configuration.nix ];
         };
         werklaptop = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
