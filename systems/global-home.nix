@@ -35,10 +35,14 @@
       };
     };
 
-    stylix.base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
-    stylix.image =
-      ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
-    stylix.cursor.size = 16;
+    stylix = {
+      enable = true;
+      autoEnable = true;
+      base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
+      image =
+        ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+      cursor.size = 16;
+    };
 
     programs.git.enable = true;
 

@@ -13,7 +13,7 @@
   };
   config = {
     stylix = {
-      image = ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+      enable = true;
       base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
 
       fonts = {
@@ -33,12 +33,48 @@
       };
 
       cursor = {
-        package = pkgs.hackneyed;
-        name = "Hackneyed";
+        package = pkgs.graphite-cursors;
+        name = "Graphite";
         size = 16;
       };
       autoEnable = true;
+      homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
+    };
+
+    programs.dconf.enable = true;
+
+    security.rtkit.enable = true;
+
+    services = {
+      xserver = {
+        xkb = {
+          layout = "us";
+          variant = "";
+        };
+        display = 1;
+      };
+      # Enable remote destop
+      xrdp = { enable = true; };
+
+      # Enable CUPS to print documents.
+      printing.enable = false;
+
+      # Enable sound with pipewire.
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        extraConfig.pipewire."92-low-latency" = {
+          context.properties = {
+            default.clock.rate = 48000;
+            default.clock.quantum = 32;
+            default.clock.min-quantum = 32;
+            default.clock.max-quantum = 32;
+          };
+        };
+      };
     };
 
     home-manager = {

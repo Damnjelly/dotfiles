@@ -1,6 +1,7 @@
 { lib, inputs, config, pkgs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
+    inputs.stylix.homeManagerModules.stylix
 
     ./../../global-home.nix
     ./../../../users/gelei.nix
@@ -46,13 +47,6 @@
         HDMI-A-1.path =
           "/home/${config.home.username}/.config/wpaperd/wallpapers/";
       };
-    };
-    home.persistence."/persist/home/${config.home.username}" = {
-      directories = [
-        ".config/valent"
-        ".cache/valent"
-      ];
-      allowOther = true;
     };
     home.stateVersion = lib.mkDefault "23.11";
   };

@@ -51,6 +51,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     # settings to get obs virtual camera working
+    kernelModules = [ "v4l2loopback" ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     extraModprobeConfig = ''
       options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
@@ -109,57 +110,32 @@
 
   programs.steam.enable = true;
 
-  services = {
-    xserver = {
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-      display = 1;
-    };
-    # Enable remote destop
-    xrdp = { enable = true; };
-
-    # Enable CUPS to print documents.
-    printing.enable = false;
-
-    # Enable sound with pipewire.
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
-  };
-  # Enable sound with pipewire.
-  sound.enable = true;
-
-  security.rtkit.enable = true;
-
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    configPackages = with pkgs; [
+      gnome.gnome-session
       gnome.gnome-keyring
     ];
   };
-  services.xserver.videoDrivers = ["nvidia"];
+# services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
+# hardware.nvidia = {
+#   modesetting.enable = true;
+#   powerManagement.enable = false;
+#   powerManagement.finegrained = false;
+#   open = false;
+#   nvidiaSettings = true;
+#   package = config.boot.kernelPackages.nvidiaPackages.latest;
+# };
 
 
   # open ports for Kde connect
   networking = {
-    hostName = "nixos";
+    hostName = "nightglider";
     firewall = {
       enable = true;
       allowedTCPPortRanges = [{
