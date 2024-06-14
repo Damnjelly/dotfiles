@@ -74,5 +74,14 @@
           modules = [ ./systems/werklaptop/configuration.nix ];
         };
       };
+      homeConfigurations = {
+        "gelei@nightglider" = lib.homeManagerConfiguration {
+          modules = [ ./systems/nightglider/gelei/home.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
+      };
     };
 }
