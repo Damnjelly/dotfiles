@@ -125,22 +125,25 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 24;
+          gaps = 6;
           default-column-width = { proportion = 0.5; };
           focus-ring.enable = false;
           border = {
             enable = true;
             width = 2;
-            active.gradient = {
-              angle = 45;
-              from = "#${base08}";
-              to = "#${base07}";
-            };
+            active.color = "#${base07}";
+          # active.gradient = {
+          #   angle = 45;
+          #   from = "#${base08}";
+          #   to = "#${base07}";
+          # };
             inactive.color = "#${base04}00";
           };
           struts = {
             left = 32;
             right = 32;
+            top = 02;
+            bottom = 26;
           };
         };
 

@@ -7,6 +7,7 @@
     valent
     gnome.adwaita-icon-theme
     xwayland-satellite
+    polkit_gnome
   ];
   stylix.targets = { gtk.enable = true; };
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];

@@ -25,9 +25,7 @@ in {
         "custom/tray-arrow-right"
       ];
       modules-center = [
-        "custom/polytiramisu-arrow-left"
         "custom/polytiramisu"
-        "custom/polytiramisu-arrow-right"
       ];
       modules-right = [
         "custom/disk-arrow-left"
@@ -100,18 +98,10 @@ in {
         format = "{}";
         exec = "${polytiramisu}";
       };
-      "custom/polytiramisu-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
-      "custom/polytiramisu-arrow-left" = {
-        format = "";
-        tooltip = false;
-      };
 
       "memory" = {
         interval = 5;
-        format = "Mem {}%";
+        format = " {}%";
       };
       "custom/memory-arrow-left" = {
         format = "";
@@ -120,7 +110,7 @@ in {
 
       "cpu" = {
         interval = 5;
-        format = "CPU {usage:2}%";
+        format = "{usage:2}%";
       };
       "custom/cpu-arrow-left" = {
         format = "";
@@ -128,9 +118,9 @@ in {
       };
 
       "network" = {
-        format = "{ifname} ";
-        format-wifi = "{essid} ({signalStrength}%)  ";
-        format-ethernet = "{ifname}  ";
+        format = "";
+        format-wifi = "({signalStrength}%)  ";
+        format-ethernet = "󰌗 ";
         format-disabled = " ";
         format-disconnected = "  ";
         tooltip-format = "{ifname}";
@@ -172,13 +162,17 @@ in {
          }
 
          window#waybar {
-             background-color: #${base03};
-             color: transparent;
+           background-color: transparent;
+         }
+
+         window#waybar > box {
+             background-color: #${base02};
+             margin: 0px 0px 20px 0px;
+             box-shadow: 0px 10px 6px 6px #${base01}77;
          }
          
          #workspaces button.focused {
              background-color: rgba(100, 100, 100, 0.07);
-             box-shadow: inset 0 -3px #${base0D};
              border-radius: 0;
          }
 
