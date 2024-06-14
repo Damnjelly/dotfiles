@@ -1,10 +1,10 @@
 { config, ... }: {
   programs.nixvim = {
-    plugins.cmp.settings.window.completion.border = "shadow";
+    plugins.cmp.settings.window.completion.border = "rounded";
     colorschemes.kanagawa = {
       enable = true;
       settings = {
-        colors = {
+        colors ={
           palette = with config.lib.stylix.colors; {
             # Bg Shades
             sumiInk0 = "#${base01}";
@@ -40,8 +40,8 @@
             fujiGray = "#634f59";
 
             oniViolet = "#${base0E}";
-            oniViolet2 = "#8286ba";
-            crystalBlue = "#86a2bc";
+            oniViolet2 = "#${base07}";
+            crystalBlue = "#${base05}";
             springViolet1 = "#281c2c";
             springViolet2 = "#${base08}";
             springBlue = "#b94562";

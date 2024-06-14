@@ -1,4 +1,5 @@
-{ ... }: {
+{ pkgs, ... }: {
+  home.packages = [ pkgs.statix ];
   programs.nixvim.plugins.lint = {
     enable = true;
     lintersByFt = {

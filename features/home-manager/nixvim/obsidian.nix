@@ -1,8 +1,8 @@
 { ... }: {
   programs.nixvim.plugins.obsidian = {
     enable = true;
-    dir = "~/Documents/obsidian";
     settings = {
+      dir = "~/Documents/obsidian";
       completion = {
         min_chars = 2;
         nvim_cmp = true;
