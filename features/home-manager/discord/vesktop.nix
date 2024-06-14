@@ -8,9 +8,7 @@
   config = with config.lib.stylix.colors; {
     programs.obs-studio.enable = true;
     home = {
-      packages = with pkgs; [
-        vesktop
-      ];
+      packages = with pkgs; [ vesktop ];
       persistence = lib.mkIf config.optinpermanence.enable {
         "/persist/home/${config.home.username}/vesktop" = {
           directories = [

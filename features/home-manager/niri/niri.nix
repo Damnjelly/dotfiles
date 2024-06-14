@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   config = {
     programs.niri = {
       enable = true;
@@ -16,58 +17,72 @@
         window-rules = [
           {
             draw-border-with-background = false;
-            geometry-corner-radius = let r = 0.0;
-            in {
-              top-left = r;
-              top-right = r;
-              bottom-left = r;
-              bottom-right = r;
-            };
+            geometry-corner-radius =
+              let
+                r = 0.0;
+              in
+              {
+                top-left = r;
+                top-right = r;
+                bottom-left = r;
+                bottom-right = r;
+              };
             clip-to-geometry = true;
           }
           {
-            matches = [{ app-id = "^vesktop$"; }];
+            matches = [ { app-id = "^vesktop$"; } ];
             open-on-output = "HDMI-A-1";
             open-fullscreen = true;
           }
-          (let
-            w = 1803;
-            h = 1006;
-          in {
-            matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
-            default-column-width.fixed = w;
-            min-width = w;
-            max-height = h;
-            min-height = h;
-          })
-          (let
-            w = 200;
-            h = 300;
-          in {
-            matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
-            default-column-width.fixed = w;
-            min-width = w;
-            max-height = h;
-            min-height = h;
-          })
-          (let
-            w = 35.0;
-            h = 800;
-          in {
-            matches = [{ title = "^Sunbeam$"; }];
-            default-column-width.proportion = w;
-            max-height = h;
-            min-height = h;
-          })
+          (
+            let
+              w = 1803;
+              h = 1006;
+            in
+            {
+              matches = [ { app-id = "^net-runelite-client-RuneLite$"; } ];
+              default-column-width.fixed = w;
+              min-width = w;
+              max-height = h;
+              min-height = h;
+            }
+          )
+          (
+            let
+              w = 200;
+              h = 300;
+            in
+            {
+              matches = [ { app-id = "^net-runelite-launcher-Launcher$"; } ];
+              default-column-width.fixed = w;
+              min-width = w;
+              max-height = h;
+              min-height = h;
+            }
+          )
+          (
+            let
+              w = 35.0;
+              h = 800;
+            in
+            {
+              matches = [ { title = "^Sunbeam$"; } ];
+              default-column-width.proportion = w;
+              max-height = h;
+              min-height = h;
+            }
+          )
         ];
 
-        binds = with config.lib.niri.actions;
-          let sh = spawn "sh" "-c";
-          in {
+        binds =
+          with config.lib.niri.actions;
+          let
+            sh = spawn "sh" "-c";
+          in
+          {
             # Open applications
             "Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
-            "Mod+Q".action =
-              sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
+            "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
 
             # Actions
             "Mod+C".action = close-window;
@@ -126,23 +141,25 @@
 
         layout = with config.lib.stylix.colors; {
           gaps = 6;
-          default-column-width = { proportion = 0.5; };
+          default-column-width = {
+            proportion = 0.5;
+          };
           focus-ring.enable = false;
           border = {
             enable = true;
             width = 2;
             active.color = "#${base07}";
-          # active.gradient = {
-          #   angle = 45;
-          #   from = "#${base08}";
-          #   to = "#${base07}";
-          # };
+            # active.gradient = {
+            #   angle = 45;
+            #   from = "#${base08}";
+            #   to = "#${base07}";
+            # };
             inactive.color = "#${base04}00";
           };
           struts = {
             left = 32;
             right = 32;
-            top = 02;
+            top = 2;
             bottom = 26;
           };
         };

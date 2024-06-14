@@ -1,9 +1,19 @@
-{ lib, buildGoModule, makeWrapper, pkg-config, alsa-lib, ffmpeg, yt-dlp
-, bash-completion, fetchFromGitHub }:
+{
+  lib,
+  buildGoModule,
+  makeWrapper,
+  pkg-config,
+  alsa-lib,
+  ffmpeg,
+  yt-dlp,
+  bash-completion,
+  fetchFromGitHub,
+}:
 let
   pname = "retro";
   version = "v0.0.30";
-in buildGoModule {
+in
+buildGoModule {
   name = pname;
   src = fetchFromGitHub {
     owner = "Malwarize";
@@ -13,7 +23,10 @@ in buildGoModule {
   };
   vendorHash = "sha256-ulMVoqVsOYLTzCJZV9Al5w56dQfwa4toaBZZsKC4stY=";
 
-  nativeBuildInputs = [ makeWrapper pkg-config ];
+  nativeBuildInputs = [
+    makeWrapper
+    pkg-config
+  ];
   buildInputs = [ alsa-lib.dev ];
   # propagatedBuildInputs = [ yt-dlp ffmpeg bash-completion ];
 
@@ -22,7 +35,13 @@ in buildGoModule {
     mv $out/bin/server $out/bin/retroPlayer
 
     wrapProgram $out/bin/retroPlayer \
-      --prefix PATH : ${lib.makeBinPath [ yt-dlp ffmpeg bash-completion ]}
+      --prefix PATH : ${
+        lib.makeBinPath [
+          yt-dlp
+          ffmpeg
+          bash-completion
+        ]
+      }
   '';
 
   meta = with lib; {

@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./hyprland.nix ];
   home.packages = with pkgs; [
     grim # create screenshot

@@ -1,164 +1,183 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  polytiramisu = pkgs.writeShellScript "polytiramisu.sh"
-    "${builtins.readFile ./waybar-polytiramisu.sh}";
-in {
-  programs.niri.settings.spawn-at-startup =
-    lib.mkIf config.programs.niri.enable [{
-      command = [ "${pkgs.waybar}/bin/waybar" ];
-    }];
-  home.packages = with pkgs; [ tiramisu killall ];
+  polytiramisu = pkgs.writeShellScript "polytiramisu.sh" "${builtins.readFile ./waybar-polytiramisu.sh}";
+in
+{
+  programs.niri.settings.spawn-at-startup = lib.mkIf config.programs.niri.enable [
+    { command = [ "${pkgs.waybar}/bin/waybar" ]; }
+  ];
+  home.packages = with pkgs; [
+    tiramisu
+    killall
+  ];
   stylix.targets.waybar.enable = false;
   programs.waybar = {
     enable = true;
-    settings = [{
-      layer = "top";
-      position = "top";
-      output = [ "DP-1" ];
+    settings = [
+      {
+        layer = "top";
+        position = "top";
+        output = [ "DP-1" ];
 
-      modules-left = [
-        "clock#1"
-        "custom/clock-arrow-right"
-        "pulseaudio"
-        "custom/pulseaudio-arrow-right"
-        "tray"
-        "custom/tray-arrow-right"
-      ];
-      modules-center = [
-        "custom/polytiramisu"
-      ];
-      modules-right = [
-        "custom/disk-arrow-left"
-        "disk"
-        "custom/memory-arrow-left"
-        "memory"
-        "custom/cpu-arrow-left"
-        "cpu"
-        "custom/network-arrow-left"
-        "network"
-      ];
+        modules-left = [
+          "clock#1"
+          "custom/clock-arrow-right"
+          "pulseaudio"
+          "custom/pulseaudio-arrow-right"
+          "tray"
+          "custom/tray-arrow-right"
+        ];
+        modules-center = [ "custom/polytiramisu" ];
+        modules-right = [
+          "custom/disk-arrow-left"
+          "disk"
+          "custom/memory-arrow-left"
+          "memory"
+          "custom/cpu-arrow-left"
+          "cpu"
+          "custom/network-arrow-left"
+          "network"
+        ];
 
-      "clock#1" = {
-        format = " {:%a %H:%M %d-%m} ";
-        tooltip = false;
-      };
-      "custom/clock-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
-
-      "pulseaudio" = {
-        format = "{icon} {volume:2}%";
-        format-bluetooth = "{icon} {volume}%";
-        format-muted = "MUTE";
-        format-icons = {
-          headphones = "";
-          headset = "";
-          hands-free = "";
-          phone = "";
-          portable = "";
-          car = "";
-          default = [ "" "" ];
+        "clock#1" = {
+          format = " {:%a %H:%M %d-%m} ";
+          tooltip = false;
         };
-        scroll-step = 5;
-        on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-      };
-      "custom/pulseaudio-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
-
-      "disk" = { format = " {percentage_used}%"; };
-      "custom/disk-arrow-left" = {
-        format = "";
-        tooltip = false;
-      };
-
-      "battery" = {
-        states = {
-          good = 95;
-          warning = 30;
-          critical = 15;
-          death = 10;
+        "custom/clock-arrow-right" = {
+          format = "";
+          tooltip = false;
         };
-        bat = "BAT0";
-        adapter = "AC0";
-        format = "{icon} {capacity}%";
-        format-time = "{H} hrs {M} mins";
-        format-charging = " {icon} {capacity}%";
-        full-at = "99";
-        format-icons = [ "" "" "" "" "" ];
-      };
-      "custom/battery-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
 
-      "custom/polytiramisu" = {
-        format = "{}";
-        exec = "${polytiramisu}";
-      };
+        "pulseaudio" = {
+          format = "{icon} {volume:2}%";
+          format-bluetooth = "{icon} {volume}%";
+          format-muted = "MUTE";
+          format-icons = {
+            headphones = "";
+            headset = "";
+            hands-free = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [
+              ""
+              ""
+            ];
+          };
+          scroll-step = 5;
+          on-click = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        };
+        "custom/pulseaudio-arrow-right" = {
+          format = "";
+          tooltip = false;
+        };
 
-      "memory" = {
-        interval = 5;
-        format = " {}%";
-      };
-      "custom/memory-arrow-left" = {
-        format = "";
-        tooltip = false;
-      };
+        "disk" = {
+          format = " {percentage_used}%";
+        };
+        "custom/disk-arrow-left" = {
+          format = "";
+          tooltip = false;
+        };
 
-      "cpu" = {
-        interval = 5;
-        format = "{usage:2}%";
-      };
-      "custom/cpu-arrow-left" = {
-        format = "";
-        tooltip = false;
-      };
+        "battery" = {
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 15;
+            death = 10;
+          };
+          bat = "BAT0";
+          adapter = "AC0";
+          format = "{icon} {capacity}%";
+          format-time = "{H} hrs {M} mins";
+          format-charging = " {icon} {capacity}%";
+          full-at = "99";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
+        "custom/battery-arrow-right" = {
+          format = "";
+          tooltip = false;
+        };
 
-      "network" = {
-        format = "";
-        format-wifi = "({signalStrength}%)  ";
-        format-ethernet = "󰌗 ";
-        format-disabled = " ";
-        format-disconnected = "  ";
-        tooltip-format = "{ifname}";
-        tooltip-format-wifi = "{essid} {signalStrength}%  ";
-        tooltip-format-ethernet = "{ifname}  ";
-        tooltip-format-disconnected = "Disconnected ";
-        on-click =
-          "foot --title='Connect to Network' sh -c 'killall nmtui; nmtui'";
-        max-length = 50;
-      };
-      "custom/network-arrow-left" = {
-        format = "";
-        tooltip = false;
-      };
+        "custom/polytiramisu" = {
+          format = "{}";
+          exec = "${polytiramisu}";
+        };
 
-      "tray" = { "icon-size" = 20; };
-      "custom/tray-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
+        "memory" = {
+          interval = 5;
+          format = " {}%";
+        };
+        "custom/memory-arrow-left" = {
+          format = "";
+          tooltip = false;
+        };
 
-      "temperature" = {
-        critical-threshold = 80;
-        format-critical = "{temperatureC}°C ";
-        format = "{temperatureC}°C ";
-      };
-      "custom/temperature-arrow-right" = {
-        format = "";
-        tooltip = false;
-      };
-    }];
-    style = with config.lib.stylix.colors;
-      with config.stylix; ''
+        "cpu" = {
+          interval = 5;
+          format = "{usage:2}%";
+        };
+        "custom/cpu-arrow-left" = {
+          format = "";
+          tooltip = false;
+        };
+
+        "network" = {
+          format = "";
+          format-wifi = "({signalStrength}%)  ";
+          format-ethernet = "󰌗 ";
+          format-disabled = " ";
+          format-disconnected = "  ";
+          tooltip-format = "{ifname}";
+          tooltip-format-wifi = "{essid} {signalStrength}%  ";
+          tooltip-format-ethernet = "{ifname}  ";
+          tooltip-format-disconnected = "Disconnected ";
+          on-click = "foot --title='Connect to Network' sh -c 'killall nmtui; nmtui'";
+          max-length = 50;
+        };
+        "custom/network-arrow-left" = {
+          format = "";
+          tooltip = false;
+        };
+
+        "tray" = {
+          "icon-size" = 20;
+        };
+        "custom/tray-arrow-right" = {
+          format = "";
+          tooltip = false;
+        };
+
+        "temperature" = {
+          critical-threshold = 80;
+          format-critical = "{temperatureC}°C ";
+          format = "{temperatureC}°C ";
+        };
+        "custom/temperature-arrow-right" = {
+          format = "";
+          tooltip = false;
+        };
+      }
+    ];
+    style =
+      with config.lib.stylix.colors;
+      with config.stylix;
+      ''
         * {
              font-family: "${config.stylix.fonts.monospace.name}";
-             font-size: ${
-               builtins.toString (config.stylix.fonts.sizes.terminal + 4)
-             }px;
+             font-size: ${builtins.toString (config.stylix.fonts.sizes.terminal + 4)}px;
          }
 
          window#waybar {

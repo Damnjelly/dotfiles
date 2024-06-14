@@ -2,11 +2,11 @@
 let
   pname = "kirsch";
   version = "v0.0.6";
-in fetchzip {
+in
+fetchzip {
   name = "${pname}-${version}";
 
-  url =
-    "https://github.com/molarmanful/kirsch/releases/download/${version}/kirsch_${version}.zip";
+  url = "https://github.com/molarmanful/kirsch/releases/download/${version}/kirsch_${version}.zip";
   sha256 = "sha256-BSfETygEniHJ4UGZJf+Kx+2QRPCvyOQBDOPIHlxBiwA=";
 
   postFetch = ''
@@ -24,8 +24,7 @@ in fetchzip {
 
   meta = with lib; {
     homepage = "https://github.com/molarmanful/kirsch";
-    description =
-      "A monospace bitmap font that draws from a variety of letterforms and motifs to create a distinct humanist feel at a compact size";
+    description = "A monospace bitmap font that draws from a variety of letterforms and motifs to create a distinct humanist feel at a compact size";
     license = licenses.ofl;
     platforms = platforms.all;
     #maintainers = with maintainers; [ Gelei ];

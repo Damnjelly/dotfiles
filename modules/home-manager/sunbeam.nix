@@ -1,11 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 
 let
   cfg = config.programs.sunbeam;
   jsonFormat = pkgs.formats.json { };
-in {
+in
+{
   options = {
     programs.sunbeam = {
       enable = mkEnableOption "sunbeam";

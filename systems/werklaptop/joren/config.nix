@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   wsl.defaultUser = "joren";
   home-manager.users.joren = import ./home.nix;
 

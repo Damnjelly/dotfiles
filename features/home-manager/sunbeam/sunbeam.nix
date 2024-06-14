@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   xdg = with config.lib.stylix.colors; {
     configFile."sunbeam/HMInit/volumemixer.sh" = {
       text = "${builtins.readFile ./volumemixer.sh}";

@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.disko.nixosModules.default
@@ -121,35 +128,37 @@
       gnome.gnome-keyring
     ];
   };
-# services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.videoDrivers = ["nvidia"];
 
-# hardware.nvidia = {
-#   modesetting.enable = true;
-#   powerManagement.enable = false;
-#   powerManagement.finegrained = false;
-#   open = false;
-#   nvidiaSettings = true;
-#   package = config.boot.kernelPackages.nvidiaPackages.latest;
-# };
-
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.latest;
+  # };
 
   # open ports for Kde connect
   networking = {
     hostName = "nightglider";
     firewall = {
       enable = true;
-      allowedTCPPortRanges = [{
-        from = 1714;
-        to = 1764;
-      }]; # KDE Connect
-      allowedUDPPortRanges = [{
-        from = 1714;
-        to = 1764;
-      }]; # KDE Connect
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ]; # KDE Connect
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ]; # KDE Connect
     };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
-

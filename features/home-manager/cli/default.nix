@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./btop.nix
     ./fastfetch/fastfetch.nix

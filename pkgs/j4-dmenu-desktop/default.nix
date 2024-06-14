@@ -1,5 +1,13 @@
-{ lib, stdenv, fetchFromGitHub, meson, cmake, dmenu, pkg-config
-, python312Packages }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  cmake,
+  dmenu,
+  pkg-config,
+  python312Packages,
+}:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "j4-dmenu-desktop";
@@ -17,14 +25,21 @@ stdenv.mkDerivation (finalAttrs: {
         --replace "dmenu -i" "${lib.getExe dmenu} -i"
   '';
 
-  nativeBuildInputs = [ meson cmake pkg-config ];
+  nativeBuildInputs = [
+    meson
+    cmake
+    pkg-config
+  ];
   buildInputs = with python312Packages; [ loguru ];
   mesonBuildType = "release";
-  mesonFlags = [ "-Db_lto=true" "--unity on" "--unity-size 9999" ];
+  mesonFlags = [
+    "-Db_lto=true"
+    "--unity on"
+    "--unity-size 9999"
+  ];
 
   meta = with lib; {
-    changelog =
-      "https://github.com/enkore/j4-dmenu-desktop/blob/${finalAttrs.src.rev}/CHANGELOG";
+    changelog = "https://github.com/enkore/j4-dmenu-desktop/blob/${finalAttrs.src.rev}/CHANGELOG";
     description = "A wrapper for dmenu that recognizes .desktop files";
     homepage = "https://github.com/enkore/j4-dmenu-desktop";
     license = licenses.gpl3Only;

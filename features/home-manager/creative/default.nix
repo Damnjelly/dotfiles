@@ -1,1 +1,7 @@
-{ pkgs, ... }: { home.packages = with pkgs; [ godot_4 blender ]; }
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    godot_4
+    blender
+  ];
+}

@@ -1,4 +1,10 @@
-{ lib, outputs, config, ... }: {
+{
+  lib,
+  outputs,
+  config,
+  ...
+}:
+{
   options = with lib; {
     theme = mkOption {
       type = types.str;
@@ -24,7 +30,13 @@
     home = {
       persistence = lib.mkIf config.optinpermanence.enable {
         "/persist/home/${config.home.username}" = {
-          directories = [ "Downloads" "Music" "Pictures" "Documents" "Videos" ];
+          directories = [
+            "Downloads"
+            "Music"
+            "Pictures"
+            "Documents"
+            "Videos"
+          ];
           allowOther = true;
         };
       };
@@ -39,8 +51,7 @@
       enable = true;
       autoEnable = true;
       base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
-      image =
-        ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+      image = ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
       cursor.size = 16;
     };
 

@@ -1,4 +1,12 @@
-{ config, pkgs, inputs, outputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  ...
+}:
+{
   options = with lib; {
     theme = mkOption {
       type = types.str;
@@ -29,7 +37,9 @@
 
         sansSerif = config.stylix.fonts.serif;
         emoji = config.stylix.fonts.monospace;
-        sizes = { terminal = 14; };
+        sizes = {
+          terminal = 14;
+        };
       };
 
       cursor = {
@@ -55,7 +65,9 @@
         display = 1;
       };
       # Enable remote destop
-      xrdp = { enable = true; };
+      xrdp = {
+        enable = true;
+      };
 
       # Enable CUPS to print documents.
       printing.enable = false;
@@ -78,7 +90,9 @@
     };
 
     home-manager = {
-      extraSpecialArgs = { inherit inputs outputs; };
+      extraSpecialArgs = {
+        inherit inputs outputs;
+      };
       backupFileExtension = "backup";
     };
 
@@ -94,7 +108,9 @@
       config = {
         # Disable if you don't want unfree packages
         allowUnfree = true;
-        console = { earlySetup = true; };
+        console = {
+          earlySetup = true;
+        };
       };
     };
 

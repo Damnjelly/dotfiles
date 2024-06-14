@@ -1,4 +1,5 @@
-{ lib, inputs, ... }: {
+{ lib, inputs, ... }:
+{
   imports = [
     inputs.sops-nix.nixosModules.sops
     inputs.home-manager.nixosModules.home-manager
@@ -20,7 +21,9 @@
     wslConf.network.hostname = "werklaptop";
   };
 
-  environment.sessionVariables = { FLAKE = "/etc/nixos/"; };
+  environment.sessionVariables = {
+    FLAKE = "/etc/nixos/";
+  };
 
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -32,4 +35,3 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
-

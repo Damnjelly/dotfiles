@@ -1,10 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
-    file.".config/yazi/plugins/smart-enter.yazi/init.lua".text =
-      "${builtins.readFile ./yazi-smart-enter-init.lua}";
+    file.".config/yazi/plugins/smart-enter.yazi/init.lua".text = "${builtins.readFile ./yazi-smart-enter-init.lua}";
     file.".config/yazi/init.lua".text = "${builtins.readFile ./yazi-init.lua}";
-    file.".config/yazi/plugins/starship.yazi/init.lua".text =
-      "${builtins.readFile ./yazi-starship-init.lua}";
+    file.".config/yazi/plugins/starship.yazi/init.lua".text = "${builtins.readFile ./yazi-starship-init.lua}";
   };
   stylix.targets.yazi.enable = true;
   programs.yazi = {
@@ -47,7 +46,11 @@
     settings = {
       headsup.disable_exec_warn = true;
       manager = {
-        ratio = [ 1 4 6 ];
+        ratio = [
+          1
+          4
+          6
+        ];
         sort_by = "extension";
       };
 
@@ -60,32 +63,45 @@
         image_quality = 75;
         sixel_fraction = 15;
         ueberzug_scale = 2;
-        ueberzug_offset = [ 0 0 0 0 ];
+        ueberzug_offset = [
+          0
+          0
+          0
+          0
+        ];
       };
 
       opener = {
-        edit = [{
-          exec = ''$EDITOR "$@"'';
-          desc = "Text edit";
-          block = true;
-          for = "unix";
-        }];
-        open = [{
-          exec = ''xdg-open "$@"'';
-          desc = "Open";
-          for = "linux";
-        }];
-        reveal = [{
-          exec = ''exiftool "$1"; echo "Press enter to exit"; read _'';
-          block = true;
-          desc = "Show EXIF";
-          for = "unix";
-        }];
-        extract = [{
-          exec = ''unar "$1"'';
-          desc = "Extract here";
-          for = "unix";
-        }];
+        edit = [
+          {
+            exec = ''$EDITOR "$@"'';
+            desc = "Text edit";
+            block = true;
+            for = "unix";
+          }
+        ];
+        open = [
+          {
+            exec = ''xdg-open "$@"'';
+            desc = "Open";
+            for = "linux";
+          }
+        ];
+        reveal = [
+          {
+            exec = ''exiftool "$1"; echo "Press enter to exit"; read _'';
+            block = true;
+            desc = "Show EXIF";
+            for = "unix";
+          }
+        ];
+        extract = [
+          {
+            exec = ''unar "$1"'';
+            desc = "Extract here";
+            for = "unix";
+          }
+        ];
         play = [
           {
             exec = ''$MUSIC "$@"'';
@@ -99,46 +115,74 @@
             for = "unix";
           }
         ];
-        viewPdf = [{
-          exec = ''zathura "$@"'';
-          desc = "View with pdf viewer";
-          for = "unix";
-        }];
+        viewPdf = [
+          {
+            exec = ''zathura "$@"'';
+            desc = "View with pdf viewer";
+            for = "unix";
+          }
+        ];
       };
 
       open = {
         rules = [
           {
             name = "*/";
-            use = [ "edit" "open" "reveal" "play" ];
+            use = [
+              "edit"
+              "open"
+              "reveal"
+              "play"
+            ];
           }
           {
             mime = "text/*";
-            use = [ "edit" "reveal" ];
+            use = [
+              "edit"
+              "reveal"
+            ];
           }
           {
             mime = "image/*";
-            use = [ "open" "reveal" ];
+            use = [
+              "open"
+              "reveal"
+            ];
           }
           {
             mime = "video/*";
-            use = [ "play" "reveal" ];
+            use = [
+              "play"
+              "reveal"
+            ];
           }
           {
             mime = "audio/*";
-            use = [ "play" "reveal" ];
+            use = [
+              "play"
+              "reveal"
+            ];
           }
           {
             mime = "inode/x-empty";
-            use = [ "edit" "reveal" ];
+            use = [
+              "edit"
+              "reveal"
+            ];
           }
           {
             mime = "application/json";
-            use = [ "edit" "reveal" ];
+            use = [
+              "edit"
+              "reveal"
+            ];
           }
           {
             mime = "*/javascript";
-            use = [ "edit" "reveal" ];
+            use = [
+              "edit"
+              "reveal"
+            ];
           }
           {
             mime = "application/pdf";
@@ -148,40 +192,67 @@
           # Archives
           {
             mime = "application/zip";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/gzip";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/x-tar";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/x-bzip";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/x-bzip2";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/x-7z-compressed";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/x-rar";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           {
             mime = "application/xz";
-            use = [ "extract" "reveal" ];
+            use = [
+              "extract"
+              "reveal"
+            ];
           }
           # Other
           {
             mime = "*";
-            use = [ "open" "reveal" ];
+            use = [
+              "open"
+              "reveal"
+            ];
           }
         ];
       };

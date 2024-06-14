@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.nixvim.plugins.neo-tree = {
     enable = true;
     enableDiagnostics = true;
@@ -16,10 +17,11 @@
       autoExpandWidth = false;
     };
   };
-  programs.nixvim.keymaps = [{
-    key = "<leader>n";
-    action = ":Neotree action=focus reveal toggle<CR>";
-    options.silent = true;
-  }];
+  programs.nixvim.keymaps = [
+    {
+      key = "<leader>n";
+      action = ":Neotree action=focus reveal toggle<CR>";
+      options.silent = true;
+    }
+  ];
 }
-

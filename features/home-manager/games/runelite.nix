@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   home = {
     packages = with pkgs; [ runelite ];
     file.".local/share/applications/runelitewayland.desktop".text = ''

@@ -1,11 +1,21 @@
-{ pkgs, lib, inputs, config, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
+{
   config = {
     programs.firefox = with config.lib.stylix.colors; {
       enable = true;
       profiles.${config.home.username} = {
         search = {
           default = "Startpage";
-          order = [ "Startpage" "Google" ];
+          order = [
+            "Startpage"
+            "Google"
+          ];
           engines = {
             "Bing".metaData.hidden = true;
             "Google".metaData.hidden = true;
@@ -16,26 +26,33 @@
             "Wikipedia (en)".metaData.alias = "@w";
 
             "myNixos" = {
-              urls = [{
-                template = "https://mynixos.com/search?";
-                params = [{
-                  name = "q";
-                  value = "{searchTerms}";
-                }];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              urls = [
+                {
+                  template = "https://mynixos.com/search?";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@nm" ];
             };
 
             "GitHub" = {
-              urls = [{
-                template = "https://github.com/search";
-                params = [{
-                  name = "q";
-                  value = "{searchTerms}";
-                }];
-              }];
+              urls = [
+                {
+                  template = "https://github.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
               icon = "${pkgs.fetchurl {
                 url = "https://github.githubassets.com/favicons/favicon.svg";
                 sha256 = "sha256-apV3zU9/prdb3hAlr4W5ROndE4g3O1XMum6fgKwurmA=";
@@ -44,61 +61,71 @@
             };
 
             "Nix Packages" = {
-              urls = [{
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "channel";
-                    value = "unstable";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "channel";
+                      value = "unstable";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@np" ];
             };
 
             "NixOS Wiki" = {
-              urls = [{
-                template = "https://nixos.wiki/index.php";
-                params = [{
-                  name = "search";
-                  value = "{searchTerms}";
-                }];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              urls = [
+                {
+                  template = "https://nixos.wiki/index.php";
+                  params = [
+                    {
+                      name = "search";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@nw" ];
             };
 
             "Nixpkgs Issues" = {
-              urls = [{
-                template = "https://github.com/NixOS/nixpkgs/issues";
-                params = [{
-                  name = "q";
-                  value = "{searchTerms}";
-                }];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              urls = [
+                {
+                  template = "https://github.com/NixOS/nixpkgs/issues";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@ni" ];
             };
 
             "Youtube" = {
-              urls = [{
-                template = "https://www.youtube.com/results";
-                params = [{
-                  name = "search_query";
-                  value = "{searchTerms}";
-                }];
-              }];
+              urls = [
+                {
+                  template = "https://www.youtube.com/results";
+                  params = [
+                    {
+                      name = "search_query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
               icon = "${pkgs.fetchurl {
-                url =
-                  "www.youtube.com/s/desktop/8498231a/img/favicon_144x144.png";
+                url = "www.youtube.com/s/desktop/8498231a/img/favicon_144x144.png";
                 sha256 = "sha256-lQ5gbLyoWCH7cgoYcy+WlFDjHGbxwB8Xz0G7AZnr9vI=";
               }}";
               definedAliases = [ "@y" ];

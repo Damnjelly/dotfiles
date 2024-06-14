@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
@@ -11,8 +12,12 @@
         enable = true;
         clearOnCursorMove = true;
       };
-      smartRename = { enable = true; };
-      navigation = { enable = true; };
+      smartRename = {
+        enable = true;
+      };
+      navigation = {
+        enable = true;
+      };
     };
   };
   programs.nixvim.keymaps = [ ];

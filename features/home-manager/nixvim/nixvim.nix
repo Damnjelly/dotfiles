@@ -1,5 +1,8 @@
-{ ... }: {
-  home.sessionVariables = { EDITOR = "nvim"; };
+{ ... }:
+{
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
   programs.nixvim = {
     enable = true;
     opts = {

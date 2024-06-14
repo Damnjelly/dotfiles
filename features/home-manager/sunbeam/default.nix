@@ -1,5 +1,9 @@
-{ pkgs, outputs, ... }: {
-  imports = [ outputs.homeManagerModules.sunbeam ./sunbeam.nix ];
+{ pkgs, outputs, ... }:
+{
+  imports = [
+    outputs.homeManagerModules.sunbeam
+    ./sunbeam.nix
+  ];
   home.packages = with pkgs; [
     deno
     bluetuith

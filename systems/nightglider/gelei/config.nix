@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [ ./host.nix ];
   users.users.gelei = {
     hashedPasswordFile = config.sops.secrets."nightglider/gelei/pcpassword".path;
@@ -6,7 +7,10 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZmrHtTrK7xz3DGGgZH9vaC0ZKpWKo4UqD3I2nmudaC joren122@hotmail.com"
     ];
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
   home-manager.users.gelei = import ./home.nix;
 
@@ -20,7 +24,7 @@
         owner = "gelei";
         path = "/home/gelei/.ssh/id_ed25519";
       };
-      "nightglider/tailscale" = {};
+      "nightglider/tailscale" = { };
     };
   };
 }

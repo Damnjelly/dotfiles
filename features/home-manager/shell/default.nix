@@ -1,1 +1,7 @@
-{ ... }: { imports = [ ./bash.nix ./scripts.nix ]; }
+{ ... }:
+{
+  imports = [
+    ./bash.nix
+    ./scripts.nix
+  ];
+}

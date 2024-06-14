@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./alpha.nix
@@ -16,5 +17,10 @@
     ./theme.nix
     ./treestitter.nix
   ];
-  home.packages = with pkgs; [ nixfmt-rfc-style obsidian lazygit gdb ];
+  home.packages = with pkgs; [
+    nixfmt-rfc-style
+    obsidian
+    lazygit
+    gdb
+  ];
 }

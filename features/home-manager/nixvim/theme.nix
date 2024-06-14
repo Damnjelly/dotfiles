@@ -1,10 +1,11 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.nixvim = {
     plugins.cmp.settings.window.completion.border = "rounded";
     colorschemes.kanagawa = {
       enable = true;
       settings = {
-        colors ={
+        colors = {
           palette = with config.lib.stylix.colors; {
             # Bg Shades
             sumiInk0 = "#${base01}";

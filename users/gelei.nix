@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   home = {
     homeDirectory = lib.mkDefault "/home/gelei";
     username = lib.mkDefault "gelei";

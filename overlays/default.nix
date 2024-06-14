@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
 
@@ -20,13 +21,21 @@
         (final.makeDesktopItem {
           name = "vesktop";
           desktopName = "Vesktop";
-          exec =
-            "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
+          exec = "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
           icon = "vesktop";
           startupWMClass = "Vesktop";
           genericName = "Internet Messenger";
-          keywords = [ "discord" "vencord" "electron" "chat" ];
-          categories = [ "Network" "InstantMessaging" "Chat" ];
+          keywords = [
+            "discord"
+            "vencord"
+            "electron"
+            "chat"
+          ];
+          categories = [
+            "Network"
+            "InstantMessaging"
+            "Chat"
+          ];
         })
       ];
     });
@@ -58,7 +67,5 @@
       config.allowUnfree = true;
     };
   };
-  mons-package = final: prev: {
-    monspkgs = import inputs.nixpkgs-mons { system = final.system; };
-  };
+  mons-package = final: prev: { monspkgs = import inputs.nixpkgs-mons { system = final.system; }; };
 }

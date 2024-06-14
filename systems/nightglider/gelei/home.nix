@@ -1,4 +1,11 @@
-{ lib, inputs, config, pkgs, ... }: {
+{
+  lib,
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.stylix.homeManagerModules.stylix
@@ -44,8 +51,7 @@
       settings = {
         DP-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
         DP-2.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
-        HDMI-A-1.path =
-          "/home/${config.home.username}/.config/wpaperd/wallpapers/";
+        HDMI-A-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
       };
     };
     home.stateVersion = lib.mkDefault "23.11";

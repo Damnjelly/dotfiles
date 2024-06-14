@@ -1,11 +1,18 @@
-{ pkgs, config, lib, inputs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   # Startup script
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.swww}/bin/swww init &
     ${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl
   '';
-in {
+in
+{
   stylix.targets.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
@@ -19,8 +26,7 @@ in {
       ];
 
       # Set programs that you use
-      "$terminal" =
-        "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
+      "$terminal" = "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l ~/.config/zellij/quickstart.kdl";
       "$fileManager" = "${pkgs.yazi}/bin/yazi";
       "$menu" = "~/Documents/popup-opener.sh sunbeam";
 
@@ -38,7 +44,9 @@ in {
         kb_rules = "";
 
         follow_mouse = 1;
-        touchpad = { natural_scroll = "no"; };
+        touchpad = {
+          natural_scroll = "no";
+        };
         sensitivity = 0; # -1.0 to 1.0, 0 means no modification.
       };
 
@@ -62,7 +70,9 @@ in {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         inactive_opacity = 1;
         rounding = 0;
-        blur = { enabled = false; };
+        blur = {
+          enabled = false;
+        };
         drop_shadow = false;
       };
 
@@ -86,8 +96,7 @@ in {
 
       dwindle = {
         # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile =
-          "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = "yes"; # you probably want this
       };
 
@@ -103,8 +112,7 @@ in {
 
       misc = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        force_default_wallpaper =
-          -1; # Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
       };
 
       # Example per-device config
@@ -172,13 +180,14 @@ in {
         "$mainMod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a"
 
         # Rectangle screenshot
-        ''
-          ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
+        ''ALT SHIFT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp -w 0)" $IMG && wl-copy < $IMG''
         # Screenshot active window
         "CTRL ALT, S, exec, IMG=~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png && MONITOR=$(hyprctl activeworkspace -j | jq .monitor -r) && grim -o $MONITOR $IMG && wl-copy < $IMG"
       ];
-      bindm =
-        [ "$mainMod, mouse:272, movewindow" "ALT, mouse:272, resizewindow" ];
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "ALT, mouse:272, resizewindow"
+      ];
     };
   };
 }

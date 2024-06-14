@@ -44,19 +44,32 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, stylix, disko, sops-nix
-    , nixos-wsl, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixvim,
+      stylix,
+      disko,
+      sops-nix,
+      nixos-wsl,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
       systems = [ "x86_64-linux" ];
       forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs systems (system:
+      pkgsFor = lib.genAttrs systems (
+        system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-        });
-    in {
+        }
+      );
+    in
+    {
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
       overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
@@ -66,11 +79,15 @@
       nixosConfigurations = {
         # home desktop
         nightglider = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./systems/nightglider/configuration.nix ];
         };
         werklaptop = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./systems/werklaptop/configuration.nix ];
         };
       };
