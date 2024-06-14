@@ -7,8 +7,8 @@ in buildGoModule {
   src = fetchFromGitHub {
     owner = "pomdtr";
     repo = pname;
-    rev = version;
-    hash = "sha256-X5LPRrI5VVCLnZLrjLyocexmReS5RdmQyJbbAvwFxs0=";
+    rev = "9d0a8f0930d5512438270ef11f0900c332f383cd";
+    hash = "sha256-LJWQESmsM+VzO4cRjTB8/Hiv4v7cbEMjZvltVLwGif0=";
   };
   vendorHash = "sha256-V3dpE2V08PBp4nJuSuOH8VeTqqnC34kGT/ZdrxtV0W4=";
 
