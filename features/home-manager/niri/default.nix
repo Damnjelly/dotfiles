@@ -9,7 +9,6 @@
     xwayland
     wl-clipboard # copy to clipboard
     g4music
-    valent
     gnome.adwaita-icon-theme
     xwayland-satellite
     polkit_gnome
