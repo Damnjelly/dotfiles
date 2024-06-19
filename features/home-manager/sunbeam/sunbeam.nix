@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   xdg = with config.lib.stylix.colors; {
     configFile."sunbeam/HMInit/volumemixer.sh" = {
@@ -142,6 +142,10 @@
       extensions = {
         volumemixer = {
           origin = "${config.xdg.configHome}/sunbeam/volumemixer.sh";
+        };
+        bitwarden = {
+          origin = "https://raw.githubusercontent.com/Damnjelly/sunbeam/main/extensions/bitwarden.sh";
+          preferences.sessionPath = "${config.sops.secrets."nightglider/gelei/bitwardensession".path}";
         };
         nixos-search = {
           origin = "${config.xdg.configHome}/sunbeam/nixos-search.sh";
