@@ -26,6 +26,12 @@
         allowUnfreePredicate = _: true;
       };
     };
+    sops = {
+      age.keyFile = "/persist/sops/ags/keys.txt";
+      defaultSopsFile = ./../secrets/secrets.yaml;
+      defaultSopsFormat = "yaml";
+    };
+    systemd.user.services.mbsync.Unit.After = [ "sops-nix.service" ];
 
     home = {
       persistence = lib.mkIf config.optinpermanence.enable {

@@ -56,6 +56,11 @@
 
     security.rtkit.enable = true;
 
+    sops = {
+      defaultSopsFile = ./../secrets/secrets.yaml;
+      defaultSopsFormat = "yaml";
+    };
+
     services = {
       xserver = {
         xkb = {
@@ -112,6 +117,20 @@
           earlySetup = true;
         };
       };
+    };
+    
+    # Enable bluetooth
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    services.blueman.enable = true;
+
+    nix.settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Deduplicate and optimize nix store
+      auto-optimise-store = true;
     };
 
     # Set your time zone.

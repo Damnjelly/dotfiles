@@ -8,9 +8,7 @@
 
     ./joren/config.nix
     ./../global-config.nix
-
     ./../../features/nixos/system-packages.nix
-    ./../../features/nixos/sops.nix
   ];
 
   theme = "madotsuki";

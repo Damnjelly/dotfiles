@@ -9,6 +9,7 @@
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.stylix.homeManagerModules.stylix
+    inputs.sops-nix.homeManagerModules.sops
 
     ./../../global-home.nix
     ./../../../users/gelei.nix
@@ -17,9 +18,9 @@
     ./../../../features/home-manager/music
     ./../../../features/home-manager/creative
     ./../../../features/home-manager/discord/vesktop.nix
-    ./../../../features/home-manager/firefox/firefox.nix
     ./../../../features/home-manager/games
     ./../../../features/home-manager/niri
+    ./../../../features/home-manager/qutebrowser
     ./../../../features/home-manager/nixvim
     ./../../../features/home-manager/shell
     ./../../../features/home-manager/sunbeam
@@ -54,6 +55,14 @@
         HDMI-A-1.path = "/home/${config.home.username}/.config/wpaperd/wallpapers/";
       };
     };
+
+    sops = {
+      secrets = {
+        "nightglider/gelei/bitwardensession" = {
+        };
+      };
+    };
+
     home.stateVersion = lib.mkDefault "23.11";
   };
 }

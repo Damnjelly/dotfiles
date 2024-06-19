@@ -20,12 +20,25 @@
 
     ./../../features/nixos/boot/default.nix
     ./../../features/nixos/system-packages.nix
-    ./../../features/nixos/sops.nix
+    ./../../features/nixos/ssh.nix
   ];
+
+  # system name
+  networking.hostName = "nightglider";
 
   theme = "madotsuki";
   optinpermanence.enable = true;
 
+#   services.xserver.videoDrivers = ["nvidia"];
+
+#   hardware.nvidia = {
+#     modesetting.enable = true;
+#     powerManagement.enable = false;
+#     powerManagement.finegrained = false;
+#     open = false;
+#     nvidiaSettings = true;
+#     package = config.boot.kernelPackages.nvidiaPackages.latest;
+#   };
   programs.fuse.userAllowOther = true;
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist/system" = {
@@ -38,6 +51,7 @@
       "/var/lib/systemd/coredump"
       "/var/lib/alsa"
       "/etc/NetworkManager/system-connections"
+      "/var/lib/tailscale"
     ];
     files = [ "/etc/machine-id" ];
   };
@@ -95,25 +109,11 @@
     '';
   };
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
-
   hardware = {
     # Enable opentabletdriver
     opentabletdriver.enable = true;
     opentabletdriver.daemon.enable = true;
   };
-
-  # Enable bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-  services.blueman.enable = true;
 
   programs.steam.enable = true;
 
@@ -128,36 +128,16 @@
       gnome.gnome-keyring
     ];
   };
-  # services.xserver.videoDrivers = ["nvidia"];
+#   services.xserver.videoDrivers = ["nvidia"];
 
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   powerManagement.enable = false;
-  #   powerManagement.finegrained = false;
-  #   open = false;
-  #   nvidiaSettings = true;
-  #   package = config.boot.kernelPackages.nvidiaPackages.latest;
-  # };
-
-  # open ports for Kde connect
-  networking = {
-    hostName = "nightglider";
-    firewall = {
-      enable = true;
-      allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-      ]; # KDE Connect
-      allowedUDPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-      ]; # KDE Connect
-    };
-  };
+#   hardware.nvidia = {
+#     modesetting.enable = true;
+#     powerManagement.enable = false;
+#     powerManagement.finegrained = false;
+#     open = false;
+#     nvidiaSettings = true;
+#     package = config.boot.kernelPackages.nvidiaPackages.latest;
+#   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
