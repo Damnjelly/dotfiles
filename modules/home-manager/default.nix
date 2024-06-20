@@ -3,4 +3,6 @@
 {
   # List your module files here
   sunbeam = import ./sunbeam.nix;
+  superfile = import ./superfile.nix;
+  blesh = import ./blesh.nix;
 }

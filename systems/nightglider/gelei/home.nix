@@ -20,6 +20,7 @@
     ./../../../features/home-manager/discord/vesktop.nix
     ./../../../features/home-manager/games
     ./../../../features/home-manager/niri
+    ./../../../features/home-manager/superfile
     ./../../../features/home-manager/qutebrowser
     ./../../../features/home-manager/nixvim
     ./../../../features/home-manager/shell
