@@ -13,7 +13,7 @@ layout {
 		pane command="lazygit" borderless=true
 	}
 	tab name="files" {
-		pane command="yazi" borderless=true
+		pane command="superfile" borderless=true
 	}
 	tab name="notes" { 
 		pane command="nvim" args="-c 'Neotree filesystem reveal'" borderless=true cwd="~/Documents/obsidian"
