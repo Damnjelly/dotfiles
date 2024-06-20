@@ -15,7 +15,7 @@
   };
   home.persistence = lib.mkIf config.optinpermanence.enable {
     "/persist/home/${config.home.username}/Qutebrowser" = {
-      directories = [ ".cache/qutebrowser" ];
+      directories = [ ".cache/qutebrowser" ".local/share/qutebrowser" ];
       allowOther = true;
     };
   };
