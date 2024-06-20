@@ -41,7 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "git+file:/home/gelei/Documents/stylix";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -79,6 +79,7 @@
       overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
+      stylix = import ./modules/stylix;
 
       # systems
       nixosConfigurations = {
