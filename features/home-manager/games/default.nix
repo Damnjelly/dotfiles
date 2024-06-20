@@ -4,6 +4,7 @@
     ./osu.nix
     ./steam.nix
     ./runelite.nix
+    ./openrct2.nix
   ];
   home.packages = with pkgs; [
     monspkgs.everest-mons
