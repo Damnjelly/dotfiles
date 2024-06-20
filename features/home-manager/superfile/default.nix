@@ -1,4 +1,4 @@
-{ outputs, pkgs, ... }:
+{ outputs, pkgs, lib, config, ... }:
 {
   imports = [ outputs.homeManagerModules.superfile ];
   #stylix.targets.superfile.enable = true;
@@ -65,4 +65,10 @@
       file_panel_select_all_item = [ "A" "" ];
     };
   };
+    home.persistence = lib.mkIf config.optinpermanence.enable {
+      "/persist/home/${config.home.username}/Superfile" = {
+        directories = [ ".local/share/superfile" ];
+        allowOther = true;
+      };
+    };
 }
