@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs,  ... }:
 {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs { pkgs = final; };
@@ -7,38 +7,6 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    j4-dmenu-desktop = prev.j4-dmenu-desktop.overrideAttrs (old: {
-      version = "develop feb 2024";
-      src = final.fetchFromGitHub {
-        owner = "enkore";
-        repo = "j4-dmenu-desktop";
-        rev = "bc58c2a3740817a9283b646c6374ebadbd27bf5e";
-        hash = "sha256-lm6QAOL1dm7aXxS2faK7od7vK15blidHc8u5C5rCDqw=";
-      };
-    });
-    vesktop = prev.vesktop.overrideAttrs (old: {
-      desktopItems = [
-        (final.makeDesktopItem {
-          name = "vesktop";
-          desktopName = "Vesktop";
-          exec = "niri msg action spawn -- vesktop %U --enable-features=UseOzonePlatform --ozone-platform=wayland";
-          icon = "vesktop";
-          startupWMClass = "Vesktop";
-          genericName = "Internet Messenger";
-          keywords = [
-            "discord"
-            "vencord"
-            "electron"
-            "chat"
-          ];
-          categories = [
-            "Network"
-            "InstantMessaging"
-            "Chat"
-          ];
-        })
-      ];
-    });
     obsidian = prev.obsidian.overrideAttrs (old: {
       desktopItem = final.makeDesktopItem {
         name = "obsidian";
