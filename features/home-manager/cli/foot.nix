@@ -3,7 +3,8 @@
   programs.foot = {
     enable = true;
     settings.main = {
-      pad = "6x6center";
+      pad = "16x11center";
+
     };
   };
 }
