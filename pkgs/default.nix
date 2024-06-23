@@ -8,4 +8,5 @@ rec {
   sunbeam = pkgs.callPackage ./sunbeam { };
   geleisuperfile = pkgs.callPackage ./superfile { };
   xwayland-satellite = pkgs.callPackage ./xwayland_satellite { };
+  geleiopenrct2 = pkgs.callPackage ./openrct2 { };
 }
