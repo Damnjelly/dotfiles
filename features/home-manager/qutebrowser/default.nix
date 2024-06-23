@@ -9,9 +9,22 @@
       np = "https://search.nixos.org/packages?channel=unstable&size=50&sort=relevance&type=packages&query={}";
     };
     settings = {
-      url.default_page = "https://www.startpage.com";
+      tabs ={
+        show = "multiple";
+        position = "right";
+        indicator.width = 0;
+      };
+      colors.webpage.preferred_color_scheme = "dark";
+      fileselect = {
+        handler = "external";
+        single_file.command = [ "foot" "yazi" "--chooser-file" "{}"];
+        multiple_files.command = [ "foot" "yazi" "--chooser-file" "{}"];
+        folder.command = [ "foot" "yazi" "--chooser-file" "{}"];
+      };
     };
-    greasemonkey = [ ];
+    extraConfig = ''
+    c.url.start_pages = [ "http://galaxy:7575" ]
+    '';
   };
   home.persistence = lib.mkIf config.optinpermanence.enable {
     "/persist/home/${config.home.username}/Qutebrowser" = {
