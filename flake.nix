@@ -41,7 +41,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "git+file:/home/gelei/Documents/stylix";
+    #stylix.url = "git+file:/home/gelei/Documents/stylix";
+    stylix.url = "github:danth/stylix";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
