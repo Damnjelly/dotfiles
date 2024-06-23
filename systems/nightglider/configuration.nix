@@ -52,6 +52,8 @@
       "/var/lib/alsa"
       "/etc/NetworkManager/system-connections"
       "/var/lib/tailscale"
+      "/usr/local" #TODO: find a declarative way of putting these bin files here
+
     ];
     files = [ "/etc/machine-id" ];
   };
@@ -65,7 +67,7 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
-  };
+  }; 
 
   security.polkit.enable = true;
   boot = {
