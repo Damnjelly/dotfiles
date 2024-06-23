@@ -7,7 +7,10 @@
       settings = {
         setup = "-l welcome";
         keybinds = {
-          unbind = "Ctrl q";
+          unbind =  [
+            "Ctrl q"
+            "Ctrl h"
+          ];
         };
       };
     };
