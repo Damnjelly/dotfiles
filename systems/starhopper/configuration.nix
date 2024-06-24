@@ -16,7 +16,7 @@
 
   wsl = {
     enable = true;
-    wslConf.network.hostname = "werklaptop";
+    wslConf.network.hostname = "starhopper";
   };
 
   environment.sessionVariables = {

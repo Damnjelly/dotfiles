@@ -91,11 +91,9 @@
           };
           modules = [ ./systems/nightglider/configuration.nix ];
         };
-        werklaptop = lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          modules = [ ./systems/werklaptop/configuration.nix ];
+        starhopper = lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./systems/starhopper/configuration.nix ];
         };
       };
       homeConfigurations = {
