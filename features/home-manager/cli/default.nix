@@ -5,7 +5,7 @@
     ./fastfetch/fastfetch.nix
     ./starship.nix
     ./zellij/zellij.nix
-    ./yazi/yazi.nix
+    ./yazi
     ./foot.nix
     ./fzf.nix
   ];

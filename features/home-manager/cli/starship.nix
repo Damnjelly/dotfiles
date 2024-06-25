@@ -5,7 +5,7 @@
     package = pkgs.starship;
     settings = {
       username = {
-        style_user = "#${base0D} bold";
+        style_user = "#${base07} bold";
         style_root = "#${base08} bold";
         format = "[$user]($style) ";
         disabled = false;

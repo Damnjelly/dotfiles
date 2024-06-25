@@ -1,14 +1,11 @@
-{ pkgs, ... }:
+{ lib, config, ... }:
 {
-  home = {
-    file.".config/yazi/plugins/smart-enter.yazi/init.lua".text = "${builtins.readFile ./yazi-smart-enter-init.lua}";
-    file.".config/yazi/init.lua".text = "${builtins.readFile ./yazi-init.lua}";
-    file.".config/yazi/plugins/starship.yazi/init.lua".text = "${builtins.readFile ./yazi-starship-init.lua}";
-  };
+  xdg.configFile."init.lua".text =
+    lib.mkIf config.programs.yazi.enable # lua
+      '''';
   stylix.targets.yazi.enable = true;
   programs.yazi = {
     enable = true;
-    package = pkgs.yazi;
     enableBashIntegration = true;
 
     keymap = {
