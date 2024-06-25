@@ -1,6 +1,6 @@
 { lib, config, ... }:
 {
-  xdg.configFile."init.lua".text =
+  xdg.configFile."yazi/init.lua".text =
     lib.mkIf config.programs.yazi.enable # lua
       '''';
   stylix.targets.yazi.enable = true;
@@ -11,11 +11,6 @@
     keymap = {
       manager = {
         prepend_keymap = [
-          {
-            exec = "plugin --sync smart-enter";
-            on = [ "<Enter>" ];
-            desc = "Enter the child directory, or open the file";
-          }
           {
             exec = "seek -5";
             on = [ "<C-Up>" ];
