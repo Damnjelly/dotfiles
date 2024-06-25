@@ -22,12 +22,12 @@
 
             # Diff and Git
             winterGreen = "#2f4240";
-            winterYellow = "#0b360b";
-            winterRed = "#3e111c";
-            winterBlue = "#42445e";
-            autumnGreen = "#56742c";
-            autumnRed = "#C34043";
-            autumnYellow = "#ae9763";
+            winterYellow = "#${base0C}";
+            winterRed = "#${base08}";
+            winterBlue = "#${base07}";
+            autumnGreen = "#${base0B}";
+            autumnRed = "#${base09}";
+            autumnYellow = "#${base0A}";
 
             # Diag
             samuraiRed = "#e81623";
