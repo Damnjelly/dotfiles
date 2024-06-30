@@ -29,16 +29,13 @@
   theme = "madotsuki";
   optinpermanence.enable = true;
 
-#   services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.enable = true;
+  hardware.opengl.driSupport32Bit = true; # For 32 bit applications
+  hardware.opengl.extraPackages = with pkgs; [ amdvlk rocmPackages.clr.icd ];
+  # For 32 bit applications 
+  hardware.opengl.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
 
-#   hardware.nvidia = {
-#     modesetting.enable = true;
-#     powerManagement.enable = false;
-#     powerManagement.finegrained = false;
-#     open = false;
-#     nvidiaSettings = true;
-#     package = config.boot.kernelPackages.nvidiaPackages.latest;
-#   };
   programs.fuse.userAllowOther = true;
   fileSystems."/persist".neededForBoot = true;
   environment.persistence."/persist/system" = {
@@ -52,22 +49,21 @@
       "/var/lib/alsa"
       "/etc/NetworkManager/system-connections"
       "/var/lib/tailscale"
-      "/usr/local" #TODO: find a declarative way of putting these bin files here
 
     ];
     files = [ "/etc/machine-id" ];
   };
 
   systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     "d /persist/home/ 0777 root root-"
     "d /persist/home/gelei/ 0700 gelei users-"
   ];
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     FLAKE = "/etc/nixos/";
-  }; 
+  };
 
   security.polkit.enable = true;
   boot = {
@@ -85,30 +81,33 @@
       efi.canTouchEfiVariables = true;
     };
 
-    initrd.postDeviceCommands = lib.mkAfter ''
-      mkdir /btrfs_tmp
-      mount /dev/root_vg/root /btrfs_tmp
-      if [[ -e /btrfs_tmp/root ]]; then
-      mkdir -p /btrfs_tmp/old_roots
-      timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-      mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-      fi
+    initrd = {
+      kernelModules = [ "amdgpu" ];
+      postDeviceCommands = lib.mkAfter ''
+        mkdir /btrfs_tmp
+        mount /dev/root_vg/root /btrfs_tmp
+        if [[ -e /btrfs_tmp/root ]]; then
+        mkdir -p /btrfs_tmp/old_roots
+        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+        fi
 
-      delete_subvolume_recursively() {
-        IFS=$'\n'
-        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-        delete_subvolume_recursively "/btrfs_tmp/$i"
+        delete_subvolume_recursively() {
+          IFS=$'\n'
+          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+          delete_subvolume_recursively "/btrfs_tmp/$i"
+          done
+          btrfs subvolume delete "$1"
+        }
+
+        for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+        delete_subvolume_recursively "$i"
         done
-        btrfs subvolume delete "$1"
-      }
 
-      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-      delete_subvolume_recursively "$i"
-      done
-
-      btrfs subvolume create /btrfs_tmp/root
-      umount /btrfs_tmp
-    '';
+        btrfs subvolume create /btrfs_tmp/root
+        umount /btrfs_tmp
+      '';
+    };
   };
 
   hardware = {
@@ -130,16 +129,6 @@
       gnome.gnome-keyring
     ];
   };
-#   services.xserver.videoDrivers = ["nvidia"];
-
-#   hardware.nvidia = {
-#     modesetting.enable = true;
-#     powerManagement.enable = false;
-#     powerManagement.finegrained = false;
-#     open = false;
-#     nvidiaSettings = true;
-#     package = config.boot.kernelPackages.nvidiaPackages.latest;
-#   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
