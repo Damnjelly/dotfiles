@@ -9,4 +9,5 @@ rec {
   geleisuperfile = pkgs.callPackage ./superfile { };
   xwayland-satellite = pkgs.callPackage ./xwayland_satellite { };
   geleiopenrct2 = pkgs.callPackage ./openrct2 { };
+  bolt-launcher = pkgs.callPackage ./bolt-launcher { };
 }
