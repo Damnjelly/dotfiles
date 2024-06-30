@@ -145,7 +145,7 @@
         };
         bitwarden = {
           origin = "https://raw.githubusercontent.com/Damnjelly/sunbeam/main/extensions/bitwarden.sh";
-          preferences.sessionPath = "${config.sops.secrets."nightglider/gelei/bitwardensession".path}";
+          preferences.session = "";
         };
         nixos-search = {
           origin = "${config.xdg.configHome}/sunbeam/nixos-search.sh";
