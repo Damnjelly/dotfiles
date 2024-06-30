@@ -7,13 +7,12 @@
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
-        environment.DISPLAY = ":0.0";
+        environment.DISPLAY = ":0";
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
           { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
         ];
 
-        #TODO: fix
         window-rules = [
           {
             draw-border-with-background = false;
@@ -97,14 +96,14 @@
             "Mod+Y".action = sh "systemctl suspend";
 
             # Movement
-            "Mod+Left".action = focus-column-left;
+            "Mod+Left".action = focus-column-or-monitor-left;
             "Mod+Down".action = focus-window-down;
             "Mod+Up".action = focus-window-up;
-            "Mod+Right".action = focus-column-right;
-            "Mod+H".action = focus-column-left;
+            "Mod+Right".action = focus-column-or-monitor-right;
+            "Mod+H".action = focus-column-or-monitor-left;
             "Mod+J".action = focus-window-down;
             "Mod+K".action = focus-window-up;
-            "Mod+L".action = focus-column-right;
+            "Mod+L".action = focus-column-or-monitor-right;
 
             "Mod+Shift+Left".action = focus-monitor-left;
             "Mod+Shift+Down".action = focus-monitor-down;
@@ -140,7 +139,7 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 6;
+          gaps = 32;
           default-column-width = {
             proportion = 0.5;
           };
@@ -159,7 +158,7 @@
           struts = {
             left = 32;
             right = 32;
-            top = 2;
+            top = 0;
             bottom = 26;
           };
         };
