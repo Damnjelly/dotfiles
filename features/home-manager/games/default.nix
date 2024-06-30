@@ -5,6 +5,7 @@
     ./steam.nix
     ./runelite.nix
     ./openrct2.nix
+    ./prismlauncher.nix
   ];
   home.packages = with pkgs; [
     monspkgs.everest-mons
@@ -12,7 +13,7 @@
     osu-lazer-bin
     #inputs.nix-gaming.packages.${pkgs.system}.osu-stable
     r2modman
-    prismlauncher
     wl-gammactl
+    #bolt-launcher
   ];
 }
