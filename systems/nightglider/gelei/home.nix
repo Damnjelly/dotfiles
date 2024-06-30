@@ -59,13 +59,6 @@
       };
     };
 
-    sops = {
-      secrets = {
-        "nightglider/gelei/bitwardensession" = {
-        };
-      };
-    };
-
     home.stateVersion = lib.mkDefault "23.11";
   };
 }
