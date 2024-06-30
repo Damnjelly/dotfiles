@@ -1,5 +1,6 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
+  home.packages = with pkgs; [ python312Packages.adblock ];
   programs.qutebrowser = {
     enable = true;
     searchEngines = {
