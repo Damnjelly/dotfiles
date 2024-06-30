@@ -16,7 +16,7 @@ layout {
 		pane command="yazi" borderless=true
 	}
 	tab name="notes" { 
-		pane command="nvim" args="-c 'Neotree filesystem reveal'" borderless=true cwd="~/Documents/obsidian"
+		pane command="nvim" args="-c 'Neotree filesystem reveal'" borderless=true cwd="/smb/galaxy/Obsidian"
 	}
 	tab name="terminal" {
 		pane borderless=true

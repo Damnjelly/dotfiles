@@ -25,6 +25,7 @@
         path = "/home/gelei/.ssh/id_ed25519";
       };
       "nightglider/tailscale" = { };
+      "nightglider/gelei/galaxy/smb" = { };
     };
   };
 }

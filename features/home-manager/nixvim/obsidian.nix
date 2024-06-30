@@ -2,7 +2,7 @@
   programs.nixvim.plugins.obsidian = {
     enable = true;
     settings = {
-      dir = "~/Documents/obsidian";
+      dir = "/smb/galaxy/Obsidian";
       completion = {
         min_chars = 2;
         nvim_cmp = true;
