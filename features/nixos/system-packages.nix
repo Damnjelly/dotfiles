@@ -4,10 +4,5 @@
     git
     nh
     sops
-    spotify
-  ];
-  fonts.packages = with pkgs; [
-    kirsch
-    cozette
   ];
 }

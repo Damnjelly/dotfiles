@@ -18,9 +18,9 @@
     ./../global-config.nix
     (import ./disko.nix { device = "/dev/nvme0n1"; })
 
-    ./../../features/nixos/boot/default.nix
-    ./../../features/nixos/system-packages.nix
+    ./../../features/nixos/greetd.nix
     ./../../features/nixos/ssh.nix
+    ./../../features/nixos/system-packages.nix
   ];
 
   # system name
@@ -28,6 +28,8 @@
 
   theme = "madotsuki";
   optinpermanence.enable = true;
+
+  services.tailscale.authKeyFile = config.sops.secrets."nightglider/tailscale".path;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.enable = true;
