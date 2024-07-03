@@ -20,6 +20,7 @@
 
     ./../../features/nixos/greetd.nix
     ./../../features/nixos/ssh.nix
+    ./../../features/nixos/stylix.nix
     ./../../features/nixos/system-packages.nix
   ];
 

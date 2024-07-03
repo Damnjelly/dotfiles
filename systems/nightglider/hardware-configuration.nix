@@ -39,7 +39,7 @@
         automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
       in
-      [ "${automount_opts},credentials=${config.sops.secrets."nightglider/gelei/galaxy/smb".path},uid=1000,gid=100" ];
+      [ "${automount_opts},credentials=${config.sops.secrets."galaxy/gelei/smb".path},uid=1000,gid=100" ];
   };
 
   fileSystems."/smb/galaxy/Shared" = {
@@ -51,7 +51,7 @@
         automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
       in
-      [ "${automount_opts},credentials=${config.sops.secrets."nightglider/gelei/galaxy/smb".path},uid=1000,gid=100" ];
+      [ "${automount_opts},credentials=${config.sops.secrets."galaxy/gelei/smb".path},uid=1000,gid=100" ];
   };
 
 
@@ -64,7 +64,7 @@
         automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
       in
-      [ "${automount_opts},credentials=${config.sops.secrets."nightglider/gelei/galaxy/smb".path},uid=1000,gid=100" ];
+      [ "${automount_opts},credentials=${config.sops.secrets."galaxy/gelei/smb".path},uid=1000,gid=100" ];
   };
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

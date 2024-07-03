@@ -11,7 +11,7 @@
 
     ./../../features/nixos/ssh.nix
     ./../../features/nixos/system-packages.nix
-    ./../../features/nixos/tailscale.nix.nix
+    ./../../features/nixos/tailscale.nix
   ];
 
   # system name
@@ -29,8 +29,15 @@
     };
   };
 
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  networking.networkmanager.enable = true;
+
   sops.secrets."moondancer/tailscale" = { };
-  tailscale.services.authKeyFile = config.sops.secrets."moondancer/tailscale".path;
+  services.tailscale.authKeyFile = config.sops.secrets."moondancer/tailscale".path;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
