@@ -83,7 +83,7 @@
             "NixOS Wiki" = {
               urls = [
                 {
-                  template = "https://nixos.wiki/index.php";
+                  template = "https://wiki.nixos.org/index.php";
                   params = [
                     {
                       name = "search";
