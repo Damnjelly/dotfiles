@@ -5,7 +5,6 @@
     inputs.disko.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
 
-    ./host.nix
     ./hardware-configuration.nix
     ./gelei/config.nix
     ./../global-config.nix
