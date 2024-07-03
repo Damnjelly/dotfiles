@@ -91,14 +91,32 @@
           };
           modules = [ ./systems/nightglider/configuration.nix ];
         };
+
+        # work laptop (wsl)
         starhopper = lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./systems/starhopper/configuration.nix ];
         };
+
+        # homelab
+        moondancer = lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./systems/moondancer/configuration.nix ];
+        };
       };
+
       homeConfigurations = {
         "gelei@nightglider" = lib.homeManagerConfiguration {
           modules = [ ./systems/nightglider/gelei/home.nix ];
+          pkgs = pkgsFor.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
+      };
+      homeConfigurations = {
+        "gelei@moondancer" = lib.homeManagerConfiguration {
+          modules = [ ./systems/moondancer/gelei/home.nix ];
           pkgs = pkgsFor.x86_64-linux;
           extraSpecialArgs = {
             inherit inputs outputs;
