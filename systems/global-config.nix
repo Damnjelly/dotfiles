@@ -85,7 +85,12 @@
       enable = true;
       powerOnBoot = true;
     };
-    services.blueman.enable = true;
+    services = {
+      devmon.enable = true;
+      gvfs.enable = true;
+      udisks2.enable = true;
+      blueman.enable = true;
+    };
 
     nix.settings = {
       # Enable flakes and new 'nix' command
