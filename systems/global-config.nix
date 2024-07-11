@@ -85,10 +85,14 @@
       enable = true;
       powerOnBoot = true;
     };
+    programs.gnome-disks.enable = true;
     services = {
       devmon.enable = true;
       gvfs.enable = true;
-      udisks2.enable = true;
+      udisks2 = {
+        mountOnMedia = true;
+        enable = true;
+      };
       blueman.enable = true;
     };
 

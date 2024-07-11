@@ -15,6 +15,7 @@
     ./../../../users/gelei.nix
 
     ./../../../features/home-manager/cli
+    ./../../../features/home-manager/ags
     ./../../../features/home-manager/creative
     ./../../../features/home-manager/discord/vesktop.nix
     ./../../../features/home-manager/games
@@ -25,6 +26,7 @@
     ./../../../features/home-manager/nixvim
     ./../../../features/home-manager/productivity
     ./../../../features/home-manager/qutebrowser
+    ./../../../features/home-manager/firefox/firefox.nix
     ./../../../features/home-manager/shell
     ./../../../features/home-manager/sunbeam
     ./../../../features/home-manager/superfile

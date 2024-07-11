@@ -19,9 +19,11 @@
     (import ./disko.nix { device = "/dev/nvme0n1"; })
 
     ./../../features/nixos/greetd.nix
+    ./../../features/nixos/shares.nix
     ./../../features/nixos/ssh.nix
     ./../../features/nixos/stylix.nix
     ./../../features/nixos/system-packages.nix
+    ./../../features/nixos/tailscale.nix
   ];
 
   # system name
@@ -31,7 +33,7 @@
   optinpermanence.enable = true;
 
   services.tailscale.authKeyFile = config.sops.secrets."nightglider/tailscale".path;
-
+ 
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.enable = true;
   hardware.opengl.driSupport32Bit = true; # For 32 bit applications
