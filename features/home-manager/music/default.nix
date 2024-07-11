@@ -5,18 +5,20 @@
   ];
   home = {
     packages = with pkgs; [
-      aberol
+      amberol
       tagger
       gnome.adwaita-icon-theme
+      downonspot
+      spotify
     ];
     persistence = lib.mkIf config.optinpermanence.enable {
       "/persist/home/${config.home.username}/music" = {
-        directories = [ ".cache/aberol" ];
+        directories = [ ".cache/amberol" ];
         allowOther = true;
       };
     };
     sessionVariables = {
-      MUSIC = "aberol";
+      MUSIC = "amberol";
     };
   };
   # programs.nyaa = {
