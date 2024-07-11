@@ -2,6 +2,13 @@
   description = "Nixos config flake";
 
   inputs = {
+    ags.url = "github:Aylur/ags";
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,8 +34,6 @@
     impermanence.url = "github:nix-community/impermanence";
 
     niri.url = "github:sodiboo/niri-flake";
-
-    nix-gaming.url = "github:fufexan/nix-gaming";
 
     nixpkgs-mons.url = "github:UlyssesZh/nixpkgs/everest-mons";
 
@@ -60,6 +65,7 @@
       disko,
       sops-nix,
       nixos-wsl,
+      lix-module,
       ...
     }@inputs:
     let
@@ -89,18 +95,25 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./systems/nightglider/configuration.nix ];
+          modules = [
+            ./systems/nightglider/configuration.nix
+            lix-module.nixosModules.default
+          ];
         };
 
         # work laptop (wsl)
         starhopper = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./systems/starhopper/configuration.nix ];
         };
 
         # homelab
         moondancer = lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
           modules = [ ./systems/moondancer/configuration.nix ];
         };
       };
