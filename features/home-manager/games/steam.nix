@@ -21,6 +21,7 @@
           ".local/share/applications"
           ".config/r2modman"
           ".config/r2modmanPlus-local"
+          ".config/unity3d"
         ];
         allowOther = true;
       };
