@@ -7,16 +7,8 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    obsidian = prev.obsidian.overrideAttrs (old: {
-      desktopItem = final.makeDesktopItem {
-        name = "obsidian";
-        desktopName = "Obsidian";
-        comment = "Knowledge base";
-        icon = "obsidian";
-        exec = "obsidian --disable-gpu";
-        categories = [ "Office" ];
-        mimeTypes = [ "x-scheme-handler/obsidian" ];
-      };
+    qutebrowser = prev.qutebrowser.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs ++ [ prev.python3.pkgs.distlib ];
     });
     #   niri-unstable = prev.niri-unstable.overrideAttrs (old: {
     #     src = final.fetchFromGitHub {
