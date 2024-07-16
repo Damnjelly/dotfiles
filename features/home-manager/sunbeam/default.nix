@@ -8,7 +8,7 @@
     deno
     bluetuith
     nix-search-cli
-    stable.j4-dmenu-desktop
+    j4-dmenu-desktop
     pulseaudio
     bkt
     bitwarden-cli
