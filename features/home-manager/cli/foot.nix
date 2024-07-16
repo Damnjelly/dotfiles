@@ -1,4 +1,6 @@
+{ pkgs, ... }:
 {
+  xdg.configFile."xdg-terminals.list".text = "${pkgs.foot}/bin/foot";
   stylix.targets.foot.enable = true;
   programs.foot = {
     enable = true;
