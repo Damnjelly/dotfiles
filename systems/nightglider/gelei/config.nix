@@ -4,8 +4,8 @@
     hashedPasswordFile = config.sops.secrets."nightglider/gelei/pcpassword".path;
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZmrHtTrK7xz3DGGgZH9vaC0ZKpWKo4UqD3I2nmudaC joren122@hotmail.com"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHJoxkGYT0jRB0apuYSPZx9JmRiK0u1d+4qy4NuVnP9 gelei@nightglider"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP3oaeGTbuDpOp3ebDPmUxjV1W1sI1EzXkqxJOJCNknf juinen@proton.me
+"
     ];
     extraGroups = [
       "networkmanager"
@@ -20,13 +20,9 @@
     age.keyFile = /persist/sops/ags/keys.txt;
     secrets = {
       "nightglider/gelei/pcpassword".neededForUsers = true;
-      "nightglider/gelei/githubprivatessh" = {
+      "nightglider/gelei/sshjuinened22519" = {
         owner = "gelei";
         path = "/home/gelei/.ssh/id_ed25519";
-      };
-      "nightglider/gelei/galaxyprivatessh" = {
-        owner = "gelei";
-        path = "/home/gelei/.ssh/galaxy";
       };
       "nightglider/tailscale" = { };
     };

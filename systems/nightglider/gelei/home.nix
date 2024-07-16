@@ -26,7 +26,7 @@
     ./../../../features/home-manager/nixvim
     ./../../../features/home-manager/productivity
     ./../../../features/home-manager/qutebrowser
-    ./../../../features/home-manager/firefox/firefox.nix
+
     ./../../../features/home-manager/shell
     ./../../../features/home-manager/sunbeam
     ./../../../features/home-manager/superfile

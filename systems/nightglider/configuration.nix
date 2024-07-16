@@ -131,7 +131,6 @@
     ];
     configPackages = with pkgs; [
       gnome.gnome-session
-      gnome.gnome-keyring
     ];
   };
 

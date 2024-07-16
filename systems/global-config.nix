@@ -67,7 +67,6 @@
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications
-        outputs.overlays.stable-packages
         outputs.overlays.mons-package
       ];
       # Configure your nixpkgs instance
