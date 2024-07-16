@@ -8,6 +8,6 @@
 
   programs.git = {
     userName = "Damnjelly";
-    userEmail = "joren122@hotmail.com";
+    userEmail = "juinen@proton.me";
   };
 }
