@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   home.packages = with pkgs; [ python312Packages.adblock ];
   programs.qutebrowser = {
@@ -10,7 +15,7 @@
       np = "https://search.nixos.org/packages?channel=unstable&size=50&sort=relevance&type=packages&query={}";
     };
     settings = {
-      tabs ={
+      tabs = {
         show = "multiple";
         position = "right";
         indicator.width = 0;
@@ -18,18 +23,41 @@
       colors.webpage.preferred_color_scheme = "dark";
       fileselect = {
         handler = "external";
-        single_file.command = [ "foot" "yazi" "--chooser-file" "{}"];
-        multiple_files.command = [ "foot" "yazi" "--chooser-file" "{}"];
-        folder.command = [ "foot" "yazi" "--chooser-file" "{}"];
+        single_file.command = [
+          "foot"
+          "yazi"
+          "--chooser-file"
+          "{}"
+        ];
+        multiple_files.command = [
+          "foot"
+          "yazi"
+          "--chooser-file"
+          "{}"
+        ];
+        folder.command = [
+          "foot"
+          "yazi"
+          "--chooser-file"
+          "{}"
+        ];
+      };
+      content = {
+        blocking.enabled = true;
+        javascript.clipboard = "access-paste";
       };
     };
     extraConfig = ''
-    c.url.start_pages = [ "http://galaxy:7575" ]
+      c.url.start_pages = [ "http://galaxy:7575" ]
+      c.tabs.padding = {"bottom": 4, "left": 4, "right": 4, "top": 4}
     '';
   };
   home.persistence = lib.mkIf config.optinpermanence.enable {
     "/persist/home/${config.home.username}/Qutebrowser" = {
-      directories = [ ".cache/qutebrowser" ".local/share/qutebrowser" ];
+      directories = [
+        ".cache/qutebrowser"
+        ".local/share/qutebrowser"
+      ];
       allowOther = true;
     };
   };
