@@ -10,6 +10,7 @@
         environment.DISPLAY = ":0";
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
+          { command = [ "${pkgs.ulauncher}/bin/ulauncher" ]; }
           { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
         ];
 
@@ -18,7 +19,7 @@
             draw-border-with-background = false;
             geometry-corner-radius =
               let
-                r = 0.0;
+                r = 12.0;
               in
               {
                 top-left = r;
@@ -32,6 +33,11 @@
             matches = [ { app-id = "^vesktop$"; } ];
             open-on-output = "HDMI-A-1";
             open-fullscreen = true;
+          }
+          {
+            matches = [ { app-id = "^ulauncher$"; } ];
+            open-on-output = "DP-1";
+            border.width = 0;
           }
           (
             let
@@ -80,11 +86,21 @@
           in
           {
             # Open applications
-            "Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
+            #"Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
+            "Mod+W".action = sh "${pkgs.ulauncher}/bin/ulauncher-toggle";
             "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
 
             # Actions
-            "Mod+C".action = close-window;
+            "Mod+C".action = sh "${pkgs.writers.writeBashBin "niri-closer" { } # bash
+              ''
+                CURWINDOW=$(niri msg -j focused-window | jq -r .app_id)
+                if [ $CURWINDOW != "ulauncher" ]; then
+                  niri msg action close-window
+                else
+                  ${pkgs.ulauncher}/bin/ulauncher-toggle
+                fi
+              ''
+            }/bin/niri-closer";
             "Mod+D".action = center-column;
             "Mod+S".action = maximize-column;
             "Mod+A".action = fullscreen-window;
@@ -139,7 +155,7 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 32;
+          gaps = 12;
           default-column-width = {
             proportion = 0.5;
           };
@@ -156,10 +172,10 @@
             inactive.color = "#${base04}00";
           };
           struts = {
-            left = 32;
-            right = 32;
-            top = 0;
-            bottom = 26;
+            left = 48;
+            right = 48;
+            top = 24;
+            bottom = 24;
           };
         };
 
