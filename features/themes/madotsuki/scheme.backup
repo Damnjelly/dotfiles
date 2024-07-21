@@ -1,0 +1,35 @@
+scheme: "#Madotsuki"
+author: "#Gelei (https://github.com/JorenBergsma)"
+base00: "281c2c" # base
+base01: "21121f" # mantle
+base02: "3e2f42" # surface0
+base03: "554157" # surface1
+base04: "6d546d" # surface2
+base05: "f7e2ec" # text
+base06: "b2c9dc" # rosewater
+base07: "98a3dd" # lavender
+base08: "ce1270" # red
+base09: "ec687c" # peach
+base0A: "e0c56c" # yellow
+base0B: "9dad6b" # green
+base0C: "81b3a5" # teal
+base0D: "ffffff" # blue
+base0E: "dba3e6" # mauve
+base0F: "f0a3d2" # flamingo
+
+#base00 #281c2c
+#base01 #21121f
+#base02 #3e2f42
+#base03 #554157
+#base04 #6d546d
+#base05 #f7e2ec
+#base06 #b2c9dc
+#base07 #98a3dd
+#base08 #ce1270
+#base09 #ec687c
+#base0A #e0c56c
+#base0B #9dad6b
+#base0C #81b3a5
+#base0D #ffffff
+#base0E #dba3e6
+#base0F #f0a3d2
