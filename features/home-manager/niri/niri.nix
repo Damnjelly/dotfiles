@@ -10,7 +10,6 @@
         environment.DISPLAY = ":0";
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
-          { command = [ "${pkgs.ulauncher}/bin/ulauncher" ]; }
           { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
         ];
 
@@ -19,7 +18,7 @@
             draw-border-with-background = false;
             geometry-corner-radius =
               let
-                r = 12.0;
+                r = 0.0;
               in
               {
                 top-left = r;
@@ -33,11 +32,6 @@
             matches = [ { app-id = "^vesktop$"; } ];
             open-on-output = "HDMI-A-1";
             open-fullscreen = true;
-          }
-          {
-            matches = [ { app-id = "^ulauncher$"; } ];
-            open-on-output = "DP-1";
-            border.width = 0;
           }
           (
             let
@@ -87,28 +81,30 @@
           {
             # Open applications
             #"Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
-            "Mod+W".action = sh "${pkgs.ulauncher}/bin/ulauncher-toggle";
+            "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
+            "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
             "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
 
             # Actions
-            "Mod+C".action = sh "${pkgs.writers.writeBashBin "niri-closer" { } # bash
-              ''
-                CURWINDOW=$(niri msg -j focused-window | jq -r .app_id)
-                if [ $CURWINDOW != "ulauncher" ]; then
-                  niri msg action close-window
-                else
-                  ${pkgs.ulauncher}/bin/ulauncher-toggle
-                fi
-              ''
-            }/bin/niri-closer";
+            "Mod+C".action = close-window; 
+           #  sh "${pkgs.writers.writeBashBin "niri-closer" { } # bash
+           #  ''
+           #    CURWINDOW=$(niri msg -j focused-window | jq -r .app_id)
+           #    if [ $CURWINDOW != "ulauncher" ]; then
+           #      niri msg action close-window
+           #    else
+           #      ${pkgs.ulauncher}/bin/ulauncher-toggle
+           #    fi
+           #  ''
+           #}/bin/niri-closer";
             "Mod+D".action = center-column;
             "Mod+S".action = maximize-column;
             "Mod+A".action = fullscreen-window;
 
             "Ctrl+Alt+S".action = screenshot-screen;
             "Shift+Alt+S".action = screenshot;
+            "Shift+Alt+P".action = sh "${pkgs.hyprpicker}/bin/hyprpicker -a";
 
-            "Mod+P".action = sh "${pkgs.hyprpicker}/bin/hyprpicker -a";
             "Mod+Y".action = sh "systemctl suspend";
 
             # Movement
@@ -162,7 +158,7 @@
           focus-ring.enable = false;
           border = {
             enable = true;
-            width = 2;
+            width = 1;
             active.color = "#${base07}";
             # active.gradient = {
             #   angle = 45;

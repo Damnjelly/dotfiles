@@ -10,7 +10,7 @@
     inputs.niri.homeModules.niri
     ./niri.nix
     ./waybar.nix
-    ./ulauncher.nix
+    ./rofi.nix
   ];
   home = {
     packages = with pkgs; [
