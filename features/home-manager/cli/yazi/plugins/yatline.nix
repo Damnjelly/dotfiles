@@ -2,7 +2,7 @@
 {
   xdg = lib.mkIf config.programs.yazi.enable {
     configFile."yazi/init.lua".text =
-      lib.mkAfter # lua
+      with config.lib.stylix.colors.withHashtag; lib.mkAfter # lua
         ''
             require("yatline"):setup({
           	section_separator = { open = "", close = "" },
@@ -12,13 +12,13 @@
           	style_a = {
           		fg = "black",
           		bg_mode = {
-          			normal = "#a89984",
-          			select = "#d79921",
-          			un_set = "#d65d0e"
+          			normal = "${base0D}",
+          			select = "${base0E}",
+          			un_set = "${base09}"
           		}
           	},
-          	style_b = { bg = "#665c54", fg = "#ebdbb2" },
-          	style_c = { bg = "#3c3836", fg = "#a89984" },
+          	style_b = { bg = "${base02}", fg = "${base05}" },
+          	style_c = { bg = "${base01}", fg = "${base04}" },
 
           	permissions_t_fg = "green",
           	permissions_r_fg = "yellow",
