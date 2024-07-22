@@ -5,6 +5,10 @@
       enable = true;
       indent = true;
       nixvimInjections = true;
+      nixGrammars = true;
+      settings = {
+        highlight.enable = true;
+      };
     };
     treesitter-refactor = {
       enable = true;
