@@ -27,13 +27,4 @@
   sops.secrets."nightglider/${config.home.username}/downonspot" = {
     path = "/home/${config.home.username}/.config/down_on_spot/settings.json";
   };
-  # programs.nyaa = {
-  #   enable = true;
-  #   scroll_padding = 6;
-  #   download_client = "RunCommand";
-  #   client.cmd = {
-  #     cmd = "fragments {torrent}";
-  #     shell_cmd = "sh -c";
-  #   };
-  # };
 }
