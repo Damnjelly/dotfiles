@@ -1,8 +1,12 @@
-{ pkgs, inputs, lib, config, ... }:
 {
-  imports = [
-    inputs.nyaa.homeManagerModule
-  ];
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}:
+{
+  imports = [ inputs.nyaa.homeManagerModule ];
   home = {
     packages = with pkgs; [
       amberol
@@ -20,6 +24,9 @@
     sessionVariables = {
       MUSIC = "amberol";
     };
+  };
+  sops.secrets."nightglider/${config.home.username}/downonspot" = {
+    path = "/home/${config.home.username}/.config/down_on_spot/settings.json";
   };
   # programs.nyaa = {
   #   enable = true;
