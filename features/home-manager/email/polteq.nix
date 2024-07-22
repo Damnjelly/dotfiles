@@ -1,14 +1,14 @@
 { config, ... }:
 {
-  emails.joren122gmail = {
-    flavor = "gmail.com";
-    address = "joren122@gmail.com";
+  emails.polteq = {
+    flavor = "outlook.office365.com";
+    address = "joren.bergsma@polteq.nl";
     passwordCommand = "cat ${config.sops.secrets."email/joren122gmail".path}";
     realName = "Joren Bergsma";
-    primary = true;
+    primary = false;
 
-    msmtp.enable = true;
     notmuch.enable = true;
+    msmtp.enable = true;
   };
   sops.secrets."email/joren122gmail" = { };
 }
