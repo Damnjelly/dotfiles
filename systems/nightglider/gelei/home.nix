@@ -44,7 +44,7 @@
 
       serif = {
         package = pkgs.cascadia-code;
-        name = "Cascadia Mono NF";
+        name = "Cascadia Code NF SemiLight";
       };
 
       sansSerif = config.stylix.fonts.serif;
