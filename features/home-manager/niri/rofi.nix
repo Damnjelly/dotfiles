@@ -53,11 +53,16 @@
         window {
             location:   center;
             width:      880;
-            padding:    16px;
+            padding:    24px;
+            background-color:   @bg0;
+        }
+
+        mainbox {
+            padding:    8px;
+            background-color:   @bg0;
 
             border:             1px;
             border-color:       ${base0B};
-            background-color:   @bg0;
         }
 
         inputbar {

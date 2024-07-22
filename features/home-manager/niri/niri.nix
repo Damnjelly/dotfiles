@@ -80,23 +80,12 @@
           in
           {
             # Open applications
-            #"Mod+W".action = sh "${pkgs.foot}/bin/foot sunbeam";
             "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
             "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
             "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
 
             # Actions
             "Mod+C".action = close-window; 
-           #  sh "${pkgs.writers.writeBashBin "niri-closer" { } # bash
-           #  ''
-           #    CURWINDOW=$(niri msg -j focused-window | jq -r .app_id)
-           #    if [ $CURWINDOW != "ulauncher" ]; then
-           #      niri msg action close-window
-           #    else
-           #      ${pkgs.ulauncher}/bin/ulauncher-toggle
-           #    fi
-           #  ''
-           #}/bin/niri-closer";
             "Mod+D".action = center-column;
             "Mod+S".action = maximize-column;
             "Mod+A".action = fullscreen-window;
