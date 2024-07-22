@@ -1,13 +1,13 @@
 { lib, fetchzip }:
 let
   pname = "kirsch";
-  version = "v0.0.6";
+  version = "v0.0.8";
 in
 fetchzip {
   name = "${pname}-${version}";
 
   url = "https://github.com/molarmanful/kirsch/releases/download/${version}/kirsch_${version}.zip";
-  sha256 = "sha256-BSfETygEniHJ4UGZJf+Kx+2QRPCvyOQBDOPIHlxBiwA=";
+  sha256 = "sha256-HCVSmkBlwmcoI8YV4YUpsY94IdCaE60pdvXob4y5X1M=";
 
   postFetch = ''
     mkdir -p $out/share/fonts/misc
