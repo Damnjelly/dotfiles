@@ -6,7 +6,6 @@
   ...
 }:
 {
-  imports = [ inputs.nyaa.homeManagerModule ];
   home = {
     packages = with pkgs; [
       amberol
