@@ -1,9 +1,8 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
   xdg.configFile."yazi/init.lua".text =
     lib.mkIf config.programs.yazi.enable # lua
       '''';
-  stylix.targets.yazi.enable = true;
   programs.yazi = {
     enable = true;
     enableBashIntegration = true;
@@ -11,6 +10,16 @@
     keymap = {
       manager = {
         prepend_keymap = [
+          {
+            exec = "cd /";
+            on = [ "g" "r" ];
+            desc = "Go to root";
+          }
+          {
+            exec = "cd /etc/nixos";
+            on = [ "g" "n" ];
+            desc = "Go to the nixos configuration directory";
+          }
           {
             exec = "seek -5";
             on = [ "<C-Up>" ];
@@ -54,13 +63,6 @@
         image_filter = "triangle";
         image_quality = 75;
         sixel_fraction = 15;
-        ueberzug_scale = 2;
-        ueberzug_offset = [
-          0
-          0
-          0
-          0
-        ];
       };
 
       opener = {
@@ -81,7 +83,7 @@
         ];
         reveal = [
           {
-            exec = ''exiftool "$1"; echo "Press enter to exit"; read _'';
+            exec = ''${pkgs.exiftool}/bin/exiftool "$1"; echo "Press enter to exit"; read _'';
             block = true;
             desc = "Show EXIF";
             for = "unix";
@@ -89,7 +91,7 @@
         ];
         extract = [
           {
-            exec = ''unar "$1"'';
+            exec = ''${pkgs.unar}/bin/unar "$1"'';
             desc = "Extract here";
             for = "unix";
           }
@@ -98,10 +100,11 @@
           {
             exec = ''$MUSIC "$@"'';
             orphan = true;
+            desc = "Open in music app";
             for = "unix";
           }
           {
-            exec = ''mediainfo "$1"; echo "Press enter to exit"; read _'';
+            exec = ''${pkgs.mediainfo}/bin/mediainfo "$1"; echo "Press enter to exit"; read _'';
             block = true;
             desc = "Show media info";
             for = "unix";
@@ -109,7 +112,7 @@
         ];
         viewPdf = [
           {
-            exec = ''zathura "$@"'';
+            exec = ''${pkgs.zathura}/bin/zathura "$@"'';
             desc = "View with pdf viewer";
             for = "unix";
           }
