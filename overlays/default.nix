@@ -19,5 +19,4 @@
     #     };
     #   });
   };
-  mons-package = final: prev: { monspkgs = import inputs.nixpkgs-mons { system = final.system; }; };
 }

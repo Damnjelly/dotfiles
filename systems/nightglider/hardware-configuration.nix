@@ -10,33 +10,52 @@
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (import ./disko.nix { device = "/dev/nvme0n1"; })
   ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+
+  boot = {
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
+    initrd.kernelModules = [ "dm-snapshot" ];
+    kernelModules = [ "amdgpu" "kvm-amd" "v4l2loopback" ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   fileSystems."/hdd" = {
     device = "/dev/disk/by-uuid/182307c0-fcdf-4d8f-a08f-9278d86d7e00";
     fsType = "btrfs";
   };
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp5s0f3u4u1.useDHCP = lib.mkDefault true;
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "amdgpu" ];
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    opengl = {
+      driSupport32Bit = true; # For 32 bit applications
+      extraPackages = with pkgs; [ amdvlk rocmPackages.clr.icd ];
+      extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    };
+  };
 }

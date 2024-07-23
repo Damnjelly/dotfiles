@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   users.users.gelei = {
     hashedPasswordFile = config.sops.secrets."nightglider/gelei/pcpassword".path;
@@ -10,9 +10,31 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "uinput"
     ];
   };
   home-manager.users.gelei = import ./home.nix;
+
+  hardware = {
+    # Enable opentabletdriver
+    opentabletdriver.enable = true;
+    opentabletdriver.daemon.enable = true;
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  security.polkit.enable = true;
+
+  programs.steam.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    configPackages = with pkgs; [ gnome.gnome-session ];
+  };
 
   # sops
   environment.sessionVariables.SOPS_AGE_KEY_FILE = /persist/sops/ags/keys.txt;

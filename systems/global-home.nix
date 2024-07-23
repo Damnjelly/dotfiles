@@ -19,6 +19,7 @@
   };
 
   config = {
+
     nixpkgs = {
       overlays = builtins.attrValues outputs.overlays;
       config = {
@@ -57,7 +58,7 @@
       enable = true;
       autoEnable = true;
       base16Scheme = ./../features/themes/${config.theme}/scheme.yaml;
-      image = ./../features/themes/${config.theme}/wallpapers/wallpaper.png;
+      image = ./../features/themes/${config.theme}/wallpapers/wallpaper2.png;
       cursor.size = 16;
     };
 

@@ -1,7 +1,9 @@
 {
+  pkgs,
   inputs,
   outputs,
   lib,
+  config,
   ...
 }:
 {
@@ -12,7 +14,42 @@
       description = "enable permanence";
     };
   };
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
   config = {
+    boot.initrd = lib.mkIf config.optinpermanence.enable {
+      postDeviceCommands = lib.mkAfter ''
+        mkdir /btrfs_tmp
+        mount /dev/root_vg/root /btrfs_tmp
+        if [[ -e /btrfs_tmp/root ]]; then
+        mkdir -p /btrfs_tmp/old_roots
+        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+        fi
+
+        delete_subvolume_recursively() {
+          IFS=$'\n'
+          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+          delete_subvolume_recursively "/btrfs_tmp/$i"
+          done
+          btrfs subvolume delete "$1"
+        }
+
+        for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+        delete_subvolume_recursively "$i"
+        done
+
+        btrfs subvolume create /btrfs_tmp/root
+        umount /btrfs_tmp
+      '';
+    };
+
+    systemd.tmpfiles = {
+      rules = lib.mkIf config.optinpermanence.enable [
+        "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+        "d /persist/home/ 0777 root root-"
+        "d /persist/home/gelei/ 0700 gelei users-"
+      ];
+    };
     programs.dconf.enable = true;
 
     security.rtkit.enable = true;
@@ -21,6 +58,8 @@
       defaultSopsFile = ./../secrets/secrets.yaml;
       defaultSopsFormat = "yaml";
     };
+
+    environment.sessionVariables.FLAKE = "/etc/nixos/";
 
     services = {
       xserver = {
@@ -67,7 +106,6 @@
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications
-        outputs.overlays.mons-package
       ];
       # Configure your nixpkgs instance
       config = {
@@ -78,7 +116,7 @@
         };
       };
     };
-    
+
     # Enable bluetooth
     hardware.bluetooth = {
       enable = true;
