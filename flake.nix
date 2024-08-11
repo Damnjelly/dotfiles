@@ -30,18 +30,17 @@
 
     niri.url = "github:sodiboo/niri-flake";
 
-    nixpkgs-mons.url = "github:UlyssesZh/nixpkgs/everest-mons";
-
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nix-gaming.url = "github:Damnjelly/nix-gaming";
 
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #stylix.url = "git+file:/home/gelei/Documents/stylix";
     stylix.url = "github:danth/stylix";
 
     sops-nix = {
@@ -91,7 +90,7 @@
             inherit inputs outputs;
           };
           modules = [
-            ./systems/nightglider/configuration.nix
+            ./systems/nightglider
             lix-module.nixosModules.default
           ];
         };
