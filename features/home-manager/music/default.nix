@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   config,
   ...
@@ -10,7 +9,7 @@
     packages = with pkgs; [
       amberol
       tagger
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       downonspot
       spotify
     ];
