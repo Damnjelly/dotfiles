@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./osu.nix
@@ -7,12 +7,18 @@
     ./openrct2.nix
     ./prismlauncher.nix
   ];
-  home.packages = with pkgs; [
-    monspkgs.everest-mons
-    opentabletdriver
-    osu-lazer-bin
-    r2modman
-    wl-gammactl
-    #bolt-launcher
-  ];
+  home.packages =
+    let
+      gamePkgs = inputs.nix-gaming.packages.${pkgs.hostPlatform.system};
+    in
+    with pkgs;
+    [
+      everest-mons
+      gamePkgs.osu-stable
+      wineWowPackages.waylandFull
+      osu-lazer-bin
+      r2modman
+      wl-gammactl
+      #bolt-launcher
+    ];
 }
