@@ -15,7 +15,7 @@
     manager = {
       prepend_keymap = [
         {
-          exec = "plugin --sync smart-enter";
+          run = "plugin --sync smart-enter";
           on = [ "<Enter>" ];
           desc = "Enter the child directory, or open the file";
         }

@@ -1,8 +1,21 @@
-{ lib, config, pkgs, ... }:
 {
-  xdg.configFile."yazi/init.lua".text =
-    lib.mkIf config.programs.yazi.enable # lua
-      '''';
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
+  xdg = {
+    configFile."yazi/init.lua".text =
+      lib.mkIf config.programs.yazi.enable # lua
+        '''';
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = [ "yazi.desktop" ];
+      };
+    };
+  };
   programs.yazi = {
     enable = true;
     enableBashIntegration = true;
@@ -11,32 +24,54 @@
       manager = {
         prepend_keymap = [
           {
-            exec = "cd /";
-            on = [ "g" "r" ];
+            run = "cd /";
+            on = [
+              "g"
+              "r"
+            ];
             desc = "Go to root";
           }
           {
-            exec = "cd /etc/nixos";
-            on = [ "g" "n" ];
+            run = "cd /etc/nixos";
+            on = [
+              "g"
+              "n"
+            ];
             desc = "Go to the nixos configuration directory";
           }
           {
-            exec = "seek -5";
+            run = "cd /smb/";
+            on = [
+              "g"
+              "s"
+            ];
+            desc = "Go to the smb shares";
+          }
+          {
+            run = "cd /hdd/";
+            on = [
+              "g"
+              "H"
+            ];
+            desc = "Go to the internal HDD";
+          }
+          {
+            run = "seek -5";
             on = [ "<C-Up>" ];
             desc = "Seek up 5 units in the preview";
           }
           {
-            exec = "seek 5";
+            run = "seek 5";
             on = [ "<C-Down>" ];
             desc = "Seek down 5 units in the preview";
           }
           {
-            exec = "seek -5";
+            run = "seek -5";
             on = [ "<C-k>" ];
             desc = "Seek up 5 units in the preview";
           }
           {
-            exec = "seek 5";
+            run = "seek 5";
             on = [ "<C-j>" ];
             desc = "Seek down 5 units in the preview";
           }
@@ -45,7 +80,7 @@
     };
 
     settings = {
-      headsup.disable_exec_warn = true;
+      headsup.disable_run_warn = true;
       manager = {
         ratio = [
           1
@@ -68,7 +103,7 @@
       opener = {
         edit = [
           {
-            exec = ''$EDITOR "$@"'';
+            run = ''$EDITOR "$@"'';
             desc = "Text edit";
             block = true;
             for = "unix";
@@ -76,14 +111,14 @@
         ];
         open = [
           {
-            exec = ''xdg-open "$@"'';
+            run = ''xdg-open "$@"'';
             desc = "Open";
             for = "linux";
           }
         ];
         reveal = [
           {
-            exec = ''${pkgs.exiftool}/bin/exiftool "$1"; echo "Press enter to exit"; read _'';
+            run = ''${pkgs.exiftool}/bin/exiftool "$1"; echo "Press enter to exit"; read _'';
             block = true;
             desc = "Show EXIF";
             for = "unix";
@@ -91,20 +126,20 @@
         ];
         extract = [
           {
-            exec = ''${pkgs.unar}/bin/unar "$1"'';
+            run = ''${pkgs.unar}/bin/unar "$1"'';
             desc = "Extract here";
             for = "unix";
           }
         ];
         play = [
           {
-            exec = ''$MUSIC "$@"'';
+            run = ''$MUSIC "$@"'';
             orphan = true;
             desc = "Open in music app";
             for = "unix";
           }
           {
-            exec = ''${pkgs.mediainfo}/bin/mediainfo "$1"; echo "Press enter to exit"; read _'';
+            run = ''${pkgs.mediainfo}/bin/mediainfo "$1"; echo "Press enter to exit"; read _'';
             block = true;
             desc = "Show media info";
             for = "unix";
@@ -112,7 +147,7 @@
         ];
         viewPdf = [
           {
-            exec = ''${pkgs.zathura}/bin/zathura "$@"'';
+            run = ''${pkgs.zathura}/bin/zathura "$@"'';
             desc = "View with pdf viewer";
             for = "unix";
           }
