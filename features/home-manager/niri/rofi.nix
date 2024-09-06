@@ -14,6 +14,7 @@
     enable = true;
     settings = {
       email = "juinen@proton.me";
+      lock_timeout = 90000;
       pinentry = pkgs.pinentry-rofi;
     };
   };
@@ -21,7 +22,7 @@
     enable = true;
     terminal = "${pkgs.foot}/bin/foot";
     package = pkgs.rofi-wayland;
-    plugins = with pkgs; [ (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; }) ];
+    #plugins = with pkgs; [ (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; }) ];
     extraConfig = {
       modes = "drun,window,ssh,combi,run,power:rofi-power-menu";
     };

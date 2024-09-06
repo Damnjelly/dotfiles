@@ -8,9 +8,9 @@ let
   polytiramisu = pkgs.writeShellScript "polytiramisu.sh" "${builtins.readFile ./waybar-polytiramisu.sh}";
 in
 {
-  programs.niri.settings.spawn-at-startup = lib.mkIf config.programs.niri.enable [
-    { command = [ "${pkgs.waybar}/bin/waybar" ]; }
-  ];
+# programs.niri.settings.spawn-at-startup = lib.mkIf config.programs.niri.enable [
+#   { command = [ "${pkgs.waybar}/bin/waybar" ]; }
+# ];
   home.packages = with pkgs; [
     tiramisu
     killall

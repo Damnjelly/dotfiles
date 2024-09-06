@@ -7,10 +7,11 @@
       settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
-        environment.DISPLAY = ":0";
+        environment.DISPLAY = ":1";
         spawn-at-startup = [
           { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
-          { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
+          { command = [ "ags" ]; }
+          { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ":1" ]; }
         ];
 
         window-rules = [
@@ -83,6 +84,10 @@
             "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
             "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
             "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
+            "Mod+B".action = sh "${pkgs.foot}/bin/foot ${pkgs.bluetuith}/bin/bluetuith";
+
+            "Mod+bracketright".action = sh "pactl set-sink-volume @DEFAULT_SINK@ +5%";
+            "Mod+bracketleft".action = sh "pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
             # Actions
             "Mod+C".action = close-window; 
@@ -97,14 +102,14 @@
             "Mod+Y".action = sh "systemctl suspend";
 
             # Movement
-            "Mod+Left".action = focus-column-or-monitor-left;
+            "Mod+Left".action = focus-column-left;
             "Mod+Down".action = focus-window-down;
             "Mod+Up".action = focus-window-up;
-            "Mod+Right".action = focus-column-or-monitor-right;
-            "Mod+H".action = focus-column-or-monitor-left;
+            "Mod+Right".action = focus-column-right;
+            "Mod+H".action = focus-column-left;
             "Mod+J".action = focus-window-down;
             "Mod+K".action = focus-window-up;
-            "Mod+L".action = focus-column-or-monitor-right;
+            "Mod+L".action = focus-column-right;
 
             "Mod+Shift+Left".action = focus-monitor-left;
             "Mod+Shift+Down".action = focus-monitor-down;
@@ -140,27 +145,27 @@
           };
 
         layout = with config.lib.stylix.colors; {
-          gaps = 12;
+          gaps = 16;
           default-column-width = {
             proportion = 0.5;
           };
           focus-ring.enable = false;
           border = {
             enable = true;
-            width = 1;
+            width = 2;
             active.color = "#${base07}";
             # active.gradient = {
             #   angle = 45;
             #   from = "#${base08}";
             #   to = "#${base07}";
             # };
-            inactive.color = "#${base04}00";
+            inactive.color = "#${base04}";
           };
           struts = {
-            left = 48;
-            right = 48;
-            top = 24;
-            bottom = 24;
+            left = 18;
+            right = 50;
+            top = 18;
+            bottom = 18;
           };
         };
 
