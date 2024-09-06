@@ -1,18 +1,18 @@
 scheme: "#Madotsuki"
 author: "#Gelei (https://github.com/JorenBergsma)"
-base00: "302133" 
-base01: "1e1221" 
-base02: "433145" 
-base03: "584259" 
-base04: "6d546d" 
-base05: "f7e2ec" 
-base06: "a7cad8" 
-base07: "98a3dd" 
-base08: "ce1270" 
-base09: "ec687c" 
-base0A: "fde8be" 
-base0B: "B9C68D" 
-base0C: "E5A48F" 
-base0D: "ffffff" 
-base0E: "f0c5f9" 
-base0F: "f99fbb" 
+base00: "302133" # ----
+base01: "180520" # ---
+base02: "524355" # --
+base03: "756677" # -
+base04: "988999" # +
+base05: "fff0fe" # ++
+base06: "f0f9ff" # +++
+base07: "fff9f0" # ++++
+base08: "f71686" # red
+base09: "ff9252" # orange
+base0A: "ffe2a7" # yellow
+base0B: "AEE941" # green
+base0C: "44ffd2" # aqua
+base0D: "5895e9" # blue
+base0E: "ff9de1" # purple
+base0F: "ff847b" # brown
