@@ -1,8 +1,12 @@
-{ ... }:
 {
   programs.nixvim = {
     globals.mapleader = " ";
     keymaps = [
+      {
+        action = "ggvG";
+        mode = "n";
+        key = "<C-a>";
+      }
       {
         action = "<cmd>Gitsigns toggle_current_line_blame<CR>";
         key = "<leader>gb";

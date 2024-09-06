@@ -17,6 +17,9 @@
         installRustc = true;
       };
       pylyzer.enable = true;
+      typos-lsp.enable = true;
+      tsserver.enable = true;
+
     };
   };
   programs.nixvim.keymaps = [ ];
