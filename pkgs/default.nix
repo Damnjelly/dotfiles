@@ -6,7 +6,6 @@
 rec {
   kirsch = pkgs.callPackage ./kirsch { };
   sunbeam = pkgs.callPackage ./sunbeam { };
-  geleisuperfile = pkgs.callPackage ./superfile { };
   xwayland-satellite = pkgs.callPackage ./xwayland_satellite { };
   bolt-launcher = pkgs.callPackage ./bolt-launcher { };
 }
