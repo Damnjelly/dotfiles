@@ -15,9 +15,10 @@
     ./../global-config.nix
 
     ./../../features/nixos/greetd.nix
-    ./../../features/nixos/kanata.nix
     ./../../features/nixos/shares.nix
+    #./../../features/nixos/kanata.nix
     ./../../features/nixos/ssh.nix
+    ./../../features/nixos/openrgb.nix
     ./../../features/nixos/stylix.nix
     ./../../features/nixos/system-packages.nix
     ./../../features/nixos/tailscale.nix

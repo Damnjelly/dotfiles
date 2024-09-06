@@ -130,7 +130,6 @@
         mountOnMedia = true;
         enable = true;
       };
-      blueman.enable = true;
     };
 
     nix.settings = {
@@ -158,5 +157,7 @@
         LC_TIME = "nl_NL.UTF-8";
       };
     };
+    services.xserver.displayManager.startx.enable = true;
+    services.xserver.desktopManager.xfce.enable = true;
   };
 }
