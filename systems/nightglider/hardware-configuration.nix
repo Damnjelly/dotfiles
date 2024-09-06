@@ -16,6 +16,8 @@
   ];
 
   boot = {
+    kernelPackages = pkgs.linuxPackages_xanmod_stable;
+
     initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
@@ -52,8 +54,8 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    opengl = {
-      driSupport32Bit = true; # For 32 bit applications
+    graphics = {
+      enable32Bit = true; # For 32 bit applications
       extraPackages = with pkgs; [ amdvlk rocmPackages.clr.icd ];
       extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
