@@ -4,7 +4,7 @@
   #stylix.targets.superfile.enable = true;
   programs.superfile = {
     enable = true;
-    package = pkgs.geleisuperfile;
+    package = pkgs.superfile;
     settings = {
       metadata = true;
       cd_on_quit = true;
@@ -66,7 +66,7 @@
     };
   };
     home.persistence = lib.mkIf config.optinpermanence.enable {
-      "/persist/home/${config.home.username}/Superfile" = {
+      "/persist/home/${config.home.username}/superfile" = {
         directories = [ ".local/share/superfile" ];
         allowOther = true;
       };
