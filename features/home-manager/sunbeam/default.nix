@@ -14,7 +14,7 @@
     bitwarden-cli
   ];
   home.persistence = lib.mkIf config.optinpermanence.enable {
-    "/persist/home/${config.home.username}/Sunbeam" = {
+    "/persist/home/${config.home.username}/sunbeam" = {
       files = [ ".config/Bitwarden CLI/data.json" ];
     };
   };
