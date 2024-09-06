@@ -5,9 +5,13 @@
   ...
 }:
 {
-  home.packages = with pkgs; [ python312Packages.adblock keyutils ];
+  home.packages = with pkgs; [
+    python312Packages.adblock
+    keyutils
+  ];
   programs.qutebrowser = {
     enable = true;
+    package = pkgs.qutebrowser.override { enableWideVine = true; };
     searchEngines = {
       DEFAULT = "https://www.startpage.com/do/dsearch?q={}&cat=web&language=english";
       nm = "https://mynixos.com/search?q={}";
@@ -15,7 +19,7 @@
       np = "https://search.nixos.org/packages?channel=unstable&size=50&sort=relevance&type=packages&query={}";
     };
     keyBindings = {
-      normal ={
+      normal = {
         "pa" = "spawn --userscript qute-bitwarden";
         "pu" = "spawn --userscript qute-bitwarden -e";
         "pw" = "spawn --userscript qute-bitwarden -w";
@@ -358,7 +362,7 @@
     executable = true;
   };
   home.persistence = lib.mkIf config.optinpermanence.enable {
-    "/persist/home/${config.home.username}/Qutebrowser" = {
+    "/persist/home/${config.home.username}/qutebrowser" = {
       directories = [
         ".cache/qutebrowser"
         ".local/share/qutebrowser"

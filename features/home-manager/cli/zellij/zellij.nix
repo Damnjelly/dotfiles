@@ -15,7 +15,7 @@
       };
     };
     home.persistence = lib.mkIf config.optinpermanence.enable {
-      "/persist/home/${config.home.username}/Zellij" = {
+      "/persist/home/${config.home.username}/zellij" = {
         directories = [ ".cache/zellij" ];
         allowOther = true;
       };

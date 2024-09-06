@@ -23,8 +23,9 @@
     };
     accounts.email.maildirBasePath = ".local/share/mail";
     home.persistence = lib.mkIf config.optinpermanence.enable {
-      "/persist/home/${config.home.username}/mail" = {
+      "/persist/home/${config.home.username}/email" = {
         directories = [ ".local/share/mail" ];
+        allowOther = false;
       };
     };
     accounts.email.accounts = lib.mapAttrs (n: v: v) config.emails;
