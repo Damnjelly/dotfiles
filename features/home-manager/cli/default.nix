@@ -11,7 +11,6 @@
   ];
   home.packages = with pkgs; [
     exiftool # read, write, edit EXIF meta info
-    fastfetch # fetcmodulesh
     ffmpegthumbnailer # video thumbnailer
     git # version control
     jq # JSON pretty printer and manipulator
