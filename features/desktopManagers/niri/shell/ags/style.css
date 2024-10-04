@@ -1,0 +1,143 @@
+box {
+	min-width: 18px;
+}
+
+.bar {
+	background-color: @window_bg_color; 
+	min-width: 24px;
+	padding: 4px;
+	margin: 8px;
+	border: 1px solid @purple_1;
+}
+
+button {
+	padding: unset;
+	min-width: 0;
+	border-radius: 0;
+	margin-top: 4px;
+	margin-bottom: 2px;
+	border-bottom: 2px solid transparent;
+	background-color: transparent;
+}
+
+button:active {
+	background-color: @theme_selected_bg_color;
+}
+
+button:hover {
+	border-bottom: 2px solid @theme_fg_color;
+}
+
+.spacer {
+	min-height: 2px;
+	background-color: @green_1;
+}
+
+.baricon {
+	all: unset;
+	min-width: 20px; 
+	min-height: 20px; 
+	background-size: cover;
+	border: 1px solid @green_1;
+}
+
+.bluetooth {
+	font-size: 12px;
+	padding: 0 0 0 3px;
+	border: 1px solid @green_1;
+}
+
+.volume {
+	all: unset;
+	min-height: 140px;
+	border: 1px solid @green_1;
+}
+
+.slider {
+	all: unset;
+}
+
+.slider trough{
+	all: unset;
+	padding: 6px;
+	border-radius: 0;
+}
+
+.icon {
+	font-size: 12px;
+	padding: 0px 0px 4px 4px;
+}
+
+.systray {
+	all: unset;
+	padding: 0px 2px 0px 2px; 
+	border: 1px solid @green_1;
+}
+
+.clock {
+	all: unset;
+	background-color: transparent;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 2px 2px 0px black;
+	padding: 0 4px 0 4px;
+}
+
+.mpris {
+	all: unset;
+	background-color: transparent;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 2px 2px 0px black;
+	padding: 0 4px 0 4px;
+}
+
+window.notification-popups box.notifications {
+	margin-bottom: 36px;
+	padding: .5em;
+}
+
+.notiicon {
+	min-width: 68px;
+	min-height: 68px;
+	margin-right: 1em;
+}
+
+.notiicon image {
+	font-size: 58px;
+	/* to center the icon */
+	margin: 5px;
+	color: @theme_fg_color;
+}
+
+.notification {
+	min-width: 350px;
+	padding: 1em;
+	border: 1px solid @purple_1;
+	background-color: @theme_bg_color;
+}
+
+.notification.critical {
+	border: 1px solid lightcoral;
+}
+
+.notititle {
+	color: @theme_fg_color;
+	font-size: 1.4em;
+}
+
+.notibody {
+	color: @theme_unfocused_fg_color;
+}
+
+.notiactions .notiaction-button {
+	margin-top: .8em;
+}
+
+.notiactions .notiaction-button:first-child {
+	margin-left: 0;
+}
+
+.notiactions .notiaction-button:last-child {
+	margin-right: 0;
+}

@@ -4,11 +4,6 @@
   inputs = {
     ags.url = "github:Aylur/ags";
 
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,29 +19,36 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
     impermanence.url = "github:nix-community/impermanence";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri.url = "github:sodiboo/niri-flake";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    nix-gaming.url = "github:Damnjelly/nix-gaming";
 
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs =
@@ -54,12 +56,6 @@
       self,
       nixpkgs,
       home-manager,
-      nixvim,
-      stylix,
-      disko,
-      sops-nix,
-      nixos-wsl,
-      lix-module,
       ...
     }@inputs:
     let
@@ -74,6 +70,20 @@
           config.allowUnfree = true;
         }
       );
+
+      standardModules = with inputs; [
+        disko.nixosModules.default
+        home-manager.nixosModules.home-manager
+        impermanence.nixosModules.impermanence
+        lix-module.nixosModules.default
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+        nix-minecraft.nixosModules.minecraft-servers
+
+        ./users
+        ./systems/defaults
+        ./features/system.nix
+      ];
     in
     {
       packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs; });
@@ -90,9 +100,9 @@
             inherit inputs outputs;
           };
           modules = [
-            ./systems/nightglider
-            lix-module.nixosModules.default
-          ];
+            ./systems/nightglider/config.nix
+            ./systems/nightglider/hardware.nix
+          ] ++ standardModules;
         };
 
         # work laptop (wsl)
@@ -108,26 +118,10 @@
           specialArgs = {
             inherit inputs outputs;
           };
-          modules = [ ./systems/moondancer/configuration.nix ];
-        };
-      };
-
-      homeConfigurations = {
-        "gelei@nightglider" = lib.homeManagerConfiguration {
-          modules = [ ./systems/nightglider/gelei/home.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-        };
-      };
-      homeConfigurations = {
-        "gelei@moondancer" = lib.homeManagerConfiguration {
-          modules = [ ./systems/moondancer/gelei/home.nix ];
-          pkgs = pkgsFor.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
+          modules = [
+            ./systems/moondancer/config.nix
+            ./systems/moondancer/hardware.nix
+          ] ++ standardModules;
         };
       };
     };

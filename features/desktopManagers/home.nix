@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./niri/home.nix
+  ];
+}
