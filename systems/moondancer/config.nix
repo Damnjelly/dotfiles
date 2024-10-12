@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   # System name
   networking.hostName = "moondancer";
@@ -13,11 +13,15 @@
     ssh.enable = true;
 
     # Server features
+    immich = {
+      enable = true;
+    };
+
     games.servers = {
-      minecraft = {
-        enable = true;
-        projectArchitect2.enable = true;
-      };
+     #minecraft = {
+     #  enable = true;
+     #  projectArchitect2.enable = true;
+     #};
 
       satisfactory = {
         enable = true;
@@ -54,6 +58,8 @@
 
   # System specific configuration
   services = {
+    greetd.enable = lib.mkForce false;
+    kmscon.enable = true;
     logind = {
       lidSwitch = "ignore";
       lidSwitchDocked = "ignore";

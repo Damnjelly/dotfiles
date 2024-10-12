@@ -20,6 +20,8 @@
     defaultSopsFormat = "yaml";
   };
 
+  environment.sessionVariables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+
   nix.settings = {
     warn-dirty = false;
     # Enable flakes and new 'nix' command
