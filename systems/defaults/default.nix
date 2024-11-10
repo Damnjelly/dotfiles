@@ -4,9 +4,6 @@
   ...
 }:
 {
-  options =
-    {
-    };
   config = {
     environment.systemPackages = with pkgs; [
       git
