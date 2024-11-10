@@ -32,7 +32,7 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 

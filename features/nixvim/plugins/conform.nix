@@ -14,6 +14,7 @@
           nix = [ "nixfmt" ];
           bash = [ "beautysh" ];
           javascript = [ "prettierd" ];
+          gdscript = [ "gdformat" ];
         };
       };
     };

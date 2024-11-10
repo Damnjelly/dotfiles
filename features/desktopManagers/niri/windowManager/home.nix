@@ -10,10 +10,6 @@
     lib.mkIf (builtins.elem config.home.username osConfig.features.desktopManagers.niri.enableFor)
       {
         home.packages = with pkgs; [
-          polkit_gnome
-          wl-clipboard # copy to clipboard
-          xwayland
-          xwayland-satellite # xorg manager
         ];
         programs.wpaperd = {
           enable = true;
@@ -116,7 +112,7 @@
                 "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
                 "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
                 "Mod+B".action = sh "${pkgs.foot}/bin/foot ${pkgs.bluetuith}/bin/bluetuith";
-
+                "Mod+V".action = sh "${pkgs.foot}/bin/foot ${pkgs.pulsemixer}/bin/pulsemixer";
                 "Mod+bracketright".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
                 "Mod+bracketleft".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
@@ -128,7 +124,6 @@
 
                 "Ctrl+Alt+S".action = screenshot-screen;
                 "Shift+Alt+S".action = screenshot;
-                "Shift+Alt+P".action = sh "${pkgs.hyprpicker}/bin/hyprpicker -a";
 
                 "Mod+Y".action = sh "${pkgs.systemd}/bin/systemctl suspend";
 

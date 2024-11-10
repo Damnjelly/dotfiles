@@ -1,5 +1,5 @@
 {
-  inputs,
+  pkgs,
   config,
   lib,
   ...
@@ -28,10 +28,11 @@ in
         "${config.networking.hostName}/${username}/pcpassword".neededForUsers = true;
         "${config.networking.hostName}/${username}/sshjuinened22519" = {
           owner = "${username}";
-          path = "home/${username}/.ssh/id_ed25519";
+          path = "/home/${username}/.ssh/id_ed25519";
         };
       };
     };
+
 
     home-manager.users.${username} =
       {

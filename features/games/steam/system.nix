@@ -8,13 +8,12 @@ let
   cfg = config.features.games;
 in
 
-  with lib;
+with lib;
 
 {
   options.users.users = mkOption {
     type = types.attrsOf (
       types.submodule (
-        { config, ... }:
         {
           extraGroups = [ "gamemode" ];
         }
@@ -23,7 +22,10 @@ in
   };
   config = mkIf (cfg.enable && cfg.enableFor != null) {
     programs = {
-      steam.enable = true;
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+      };
 
       gamemode = {
         enable = true;
@@ -46,6 +48,9 @@ in
         };
       };
     };
+
+    networking.firewall.allowedTCPPorts = [ 27036 ];
+    networking.firewall.allowedUDPPorts = [ 27036 ];
 
     services.udev.packages = with pkgs; [ game-devices-udev-rules ];
   };

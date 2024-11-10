@@ -5,6 +5,6 @@
     ./fetcher
     ./resourceMonitor
     ./plugins
-    ./shell
+    ./shell/home.nix
   ];
 }

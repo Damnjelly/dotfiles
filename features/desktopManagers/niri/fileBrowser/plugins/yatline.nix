@@ -158,7 +158,6 @@
         local permissions_s_fg
 
         local tab_width
-        local tab_use_inverse
 
         local selected_icon
         local copied_icon
@@ -222,9 +221,20 @@
         --- @return Line line A Line which has component and separator.
         local function connect_separator(component, side, separator_type)
         	local open, close
-        	if separator_type == SeparatorType.OUTER then
+        	if separator_type == SeparatorType.OUTER and not (separator_style.bg == "reset" and separator_style.fg == "reset") then
         		open = ui.Span(section_separator_open)
         		close = ui.Span(section_separator_close)
+
+        		if separator_style.fg == "reset" then
+        			if separator_style.bg ~= "reset" and separator_style.bg ~= nil then
+        				open = ui.Span(inverse_separator_open)
+        				close = ui.Span(inverse_separator_close)
+
+        				separator_style.fg, separator_style.bg = separator_style.bg, separator_style.fg
+        			else
+        				return ui.Line { component }
+        			end
+        		end
         	else
         		open = ui.Span(part_separator_open)
         		close = ui.Span(part_separator_close)
@@ -365,7 +375,21 @@
         --- Gets the path of the current active tab.
         --- @return string path Current active tab's path.
         function Yatline.string.get:tab_path()
-        	return ya.readable_path(tostring(cx.active.current.cwd))
+        	local cwd = cx.active.current.cwd
+        	local filter = cx.active.current.files.filter
+
+        	local search = cwd.is_search and string.format(" (search: %s", cwd:frag()) or ""
+
+        	local suffix
+        	if not filter then
+        		suffix = search == "" and search or search .. ")"
+        	elseif search == "" then
+        		suffix = string.format(" (filter: %s)", tostring(filter))
+        	else
+        		suffix = string.format("%s, filter: %s)", search, tostring(filter))
+        	end
+
+        	return ya.readable_path(tostring(cx.active.current.cwd)) .. suffix
         end
 
         --- Gets the mode of active tab.
@@ -470,12 +494,18 @@
         			set_mode_style(cx.tabs[i].mode)
         			set_component_style(span, ComponentType.A)
 
-        			separator_style.fg = style_a.bg
-        			if show_background then
-        				separator_style.bg = style_c.bg
-        			end
+        			if style_a.bg ~= "reset" or show_background then
+        				separator_style.fg = style_a.bg
+        				if show_background then
+        					separator_style.bg = style_c.bg
+        				end
 
-        			lines[#lines + 1] = connect_separator(span, in_side, SeparatorType.OUTER)
+        				lines[#lines + 1] = connect_separator(span, in_side, SeparatorType.OUTER)
+        			else
+        				separator_style.fg = style_a.fg
+
+        				lines[#lines + 1] = connect_separator(span, in_side, SeparatorType.INNER)
+        			end
         		else
         			local span = ui.Span(" " .. text .. " ")
         			if show_background then
@@ -488,22 +518,29 @@
         				set_mode_style(cx.tabs[i + 1].mode)
 
         				local open, close
-        				if tab_use_inverse then
-        					separator_style.fg = style_a.bg
-        					if show_background then
-        						separator_style.bg = style_c.bg
-        					end
+        				if style_a.bg ~= "reset" or ( show_background and style_c.bg ~= "reset" ) then
+        					if not show_background or ( show_background and style_c.bg == "reset" ) then
+        						separator_style.fg = style_a.bg
+        						if show_background then
+        							separator_style.bg = style_c.bg
+        						end
 
-        					open = ui.Span(inverse_separator_open)
-        					close = ui.Span(inverse_separator_close)
+        						open = ui.Span(inverse_separator_open)
+        						close = ui.Span(inverse_separator_close)
+        					else
+        						separator_style.bg = style_a.bg
+        						if show_background then
+        							separator_style.fg = style_c.bg
+        						end
+
+        						open = ui.Span(section_separator_open)
+        						close = ui.Span(section_separator_close)
+        					end
         				else
-        					separator_style.bg = style_a.bg
-        					if show_background then
-        						separator_style.fg = style_c.bg
-        					end
+        					separator_style.fg = style_c.fg
 
-        					open = ui.Span(section_separator_open)
-        					close = ui.Span(section_separator_close)
+        					open = ui.Span(part_separator_open)
+        					close = ui.Span(part_separator_close)
         				end
 
         				open:style(separator_style)
@@ -884,7 +921,8 @@
         		config = config or {}
 
         		tab_width = config.tab_width or 20
-        		tab_use_inverse = config.tab_use_inverse or false
+
+        		local component_positions = config.component_positions or { "header", "tab", "status" }
 
         		show_background = config.show_background or false
 
@@ -1022,7 +1060,7 @@
         				return { config_paragraph(self._area) }
         			end
 
-        			local gauge = ui.Gauge(self.area)
+        			local gauge = ui.Gauge(self._area)
         			if progress.fail == 0 then
         				gauge = gauge:gauge_style(THEME.status.progress_normal)
         			else
@@ -1083,41 +1121,38 @@
 
         		Root.layout = function(self)
         			local constraints = {}
-        			if display_header_line then
-        				table.insert(constraints, ui.Constraint.Length(1))
+        			for _, component in ipairs(component_positions) do
+        				if (component == "header" and display_header_line) or (component == "status" and display_status_line) then
+        					table.insert(constraints, ui.Constraint.Length(1))
+        				elseif component == "tab" then
+        					table.insert(constraints, ui.Constraint.Fill(1))
+        				end
         			end
 
-        			table.insert(constraints, ui.Constraint.Fill(1))
-
-        			if display_status_line then
-        				table.insert(constraints, ui.Constraint.Length(1))
-        			end
-
-        			self._chunks = ui.Layout()
-        			:direction(ui.Layout.VERTICAL)
-        			:constraints(constraints)
-        			:split(self._area)
+        			self._chunks = ui.Layout():direction(ui.Layout.VERTICAL):constraints(constraints):split(self._area)
         		end
 
         		Root.build = function(self)
         			local childrens = {}
+
         			local i = 1
-        			if display_header_line then
-        				table.insert(childrens, Header:new(self._chunks[i], cx.active))
-        				i = i + 1
-        			end
-
-        			table.insert(childrens, Tab:new(self._chunks[i], cx.active))
-        			i = i + 1
-
-        			if display_status_line then
-        				table.insert(childrens, Status:new(self._chunks[i], cx.active))
+        			for _, component in ipairs(component_positions) do
+        				if component == "header" and display_header_line then
+        					table.insert(childrens, Header:new(self._chunks[i], cx.active))
+        					i = i + 1
+        				elseif component == "tab" then
+        					table.insert(childrens, Tab:new(self._chunks[i], cx.active))
+        					i = i + 1
+        				elseif component == "status" and display_status_line then
+        					table.insert(childrens, Status:new(self._chunks[i], cx.active))
+        					i = i + 1
+        				end
         			end
 
         			self._children = childrens
         		end
         	end,
-        }      
+        }
       '';
   };
 }

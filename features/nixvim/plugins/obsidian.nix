@@ -13,7 +13,7 @@
     plugins.obsidian = {
       enable = true;
       settings = {
-        dir = "/smb/galaxy/Obsidian";
+        dir = "~/Documents/obsidian";
         completion = {
           min_chars = 2;
           nvim_cmp = true;

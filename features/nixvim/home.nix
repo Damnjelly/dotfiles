@@ -9,5 +9,7 @@
 
   config = lib.mkIf (builtins.elem config.home.username osConfig.features.neovim.enableFor) {
     programs.nixvim.enable = true;
+
+    home.sessionVariables.EDITOR = "nvim";
   };
 }

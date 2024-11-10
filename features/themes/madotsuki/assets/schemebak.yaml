@@ -1,11 +1,11 @@
 scheme: "#Madotsuki"
 author: "#Gelei (https://github.com/JorenBergsma)"
 base00: "241424" # ----
-base01: "2d1a2d" # ---
-base02: "352036" # --
-base03: "6b4e6f" # -
-base04: "795d7e" # +
-base05: "f9dce7" # ++
+base01: "2a1a2b" # ---
+base02: "2f2031" # --
+base03: "463249" # -
+base04: "d1af96" # +
+base05: "efdfc7" # ++
 base06: "c2d7e5" # +++
 base07: "a981bd" # ++++
 base08: "f71686" # red

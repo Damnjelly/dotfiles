@@ -10,15 +10,17 @@
 
   config.home = lib.mkIf config.features.productivity.enable {
     packages = with pkgs; [
-      citrix_workspace
+      stable.citrix_workspace
       onlyoffice-bin_latest
       teams-for-linux
+      beeper
     ];
 
     persistence = lib.mkIf osConfig.optinpermanence.enable {
       "/persist/home/${config.home.username}/productivity" = {
         directories = [
           ".config/JetBrains"
+          ".config/Beeper"
           ".config/teams-for-linux"
           ".local/share/JetBrains"
           ".ICAClient"

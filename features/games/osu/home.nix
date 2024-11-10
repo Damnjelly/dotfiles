@@ -17,7 +17,6 @@
         [
           gamePkgs.osu-stable
           gamePkgs.osu-lazer-bin
-          wineWowPackages.waylandFull
           wl-gammactl
         ];
       persistence = lib.mkIf osConfig.optinpermanence.enable {
@@ -26,13 +25,13 @@
             ".config/OpenTabletDriver"
             ".config/xfce4"
             ".local/share/osu"
-            ".osu"
+            {
+              directory = ".osu"; 
+              method = "symlink";
+            }
           ];
           allowOther = true;
         };
-      };
-      sessionVariables = {
-        vblank_mode = 0;
       };
     };
   };

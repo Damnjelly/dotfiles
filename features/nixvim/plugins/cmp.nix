@@ -1,63 +1,139 @@
 {
-  programs.nixvim.plugins = {
-    luasnip.enable = true;
-    lspkind.enable = true;
-    cmp = {
-      enable = true;
-      settings = {
-        sources = [
-          { name = "treesitter"; }
-          { name = "buffer"; }
-          { name = "nvim_lsp"; }
-          { name = "path"; }
-          { name = "luasnip"; }
-          { name = "dotenv"; }
-          { name = "fonts"; }
-          { name = "calc"; }
-        ];
-        snippet.expand = # lua
-          ''
-            function(args)
-              require('luasnip').lsp_expand(args.body)
+  programs.nixvim =
+    let
+      get_bufnrs.__raw = ''
+        function()
+          local buf_size_limit = 1024 * 1024 -- 1MB size limit
+          local bufs = vim.api.nvim_list_bufs()
+          local valid_bufs = {}
+          for _, buf in ipairs(bufs) do
+            if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf)) < buf_size_limit then
+              table.insert(valid_bufs, buf)
             end
-          '';
-        mapping = {
-          "<CR>" = "cmp.mapping.confirm({select = true })";
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
-          "<C-Space>" = "cmp.mapping.complete()";
-          "<Tab>" = # lua
-            ''
-              cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_next_item()
-                -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                -- they way you will only jump inside the snippet region
-                elseif luasnip.expand_or_locally_jumpable() then
-                  luasnip.expand_or_jump()
-                elseif has_words_before() then
-                  cmp.complete()
-                else
-                  fallback()
-                end
-              end, { "i", "s" })
-            '';
-          "<S-Tab>" = # lua
-            ''
-              cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                  luasnip.jump(-1)
-                else
-                  fallback()
-                end
-              end, { "i", "s" })
-            '';
-          "<Down>" = "cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
-          "<Up>" = "cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'})";
+          end
+          return valid_bufs
+        end
+      '';
+    in
+    {
+      opts.completeopt = [
+        "menu"
+        "menuone"
+        "noselect"
+      ];
+
+      plugins = {
+        cmp = {
+          enable = true;
+          autoEnableSources = true;
+
+          settings = {
+            mapping = {
+              "<C-d>" = # Lua
+                "cmp.mapping.scroll_docs(-4)";
+              "<C-f>" = # Lua
+                "cmp.mapping.scroll_docs(4)";
+              "<C-Space>" = # Lua
+                "cmp.mapping.complete()";
+              "<C-e>" = # Lua
+                "cmp.mapping.close()";
+              "<Tab>" = # Lua
+                "cmp.mapping(cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}), {'i', 's'})";
+              "<S-Tab>" = # Lua
+                "cmp.mapping(cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}), {'i', 's'})";
+              "<CR>" = # Lua
+                "cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace })";
+            };
+
+            preselect = # Lua
+              "cmp.PreselectMode.None";
+
+            snippet.expand = # Lua
+              "function(args) require('luasnip').lsp_expand(args.body) end";
+
+            sources = [
+              {
+                name = "nvim_lsp";
+                priority = 1000;
+                option =
+                  {
+                  };
+              }
+              {
+                name = "nvim_lsp_signature_help";
+                priority = 1000;
+                option =
+                  {
+                  };
+              }
+              {
+                name = "nvim_lsp_document_symbol";
+                priority = 1000;
+                option =
+                  {
+                  };
+              }
+              {
+                name = "treesitter";
+                priority = 850;
+                option = {
+                  inherit get_bufnrs;
+                };
+              }
+              {
+                name = "luasnip";
+                priority = 750;
+              }
+              {
+                name = "codeium";
+                priority = 600;
+              }
+              {
+                name = "buffer";
+                priority = 500;
+                option = {
+                  inherit get_bufnrs;
+                };
+              }
+              {
+                name = "path";
+                priority = 300;
+              }
+              {
+                name = "cmdline";
+                priority = 300;
+              }
+              {
+                name = "spell";
+                priority = 300;
+              }
+              {
+                name = "fish";
+                priority = 250;
+              }
+              {
+                name = "git";
+                priority = 250;
+              }
+              {
+                name = "emoji";
+                priority = 100;
+              }
+              {
+                name = "calc";
+                priority = 150;
+              }
+            ];
+
+            window = {
+              completion.__raw = ''cmp.config.window.bordered()'';
+              documentation.__raw = ''cmp.config.window.bordered()'';
+            };
+          };
         };
+
+        friendly-snippets.enable = true;
+        luasnip.enable = true;
       };
     };
-  };
 }

@@ -33,6 +33,7 @@ with lib;
     extraSpecialArgs = {
       inherit inputs;
     };
+    backupFileExtension = "backup";
     sharedModules = [
       ./defaults
 

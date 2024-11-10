@@ -1,5 +1,7 @@
+{ pkgs, ... }:
 {
   imports = [
+    ./godot
     ./minecraft
     ./openrct2
     ./osrs

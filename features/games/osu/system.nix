@@ -1,5 +1,5 @@
 {
-    # Enable opentabletdriver
+  # Enable opentabletdriver
   hardware = {
     opentabletdriver.enable = true;
     uinput.enable = true;
