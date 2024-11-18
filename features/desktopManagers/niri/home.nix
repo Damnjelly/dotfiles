@@ -10,6 +10,8 @@
     ./appLauncher
     ./browser
     ./fileBrowser
+    ./lockScreen
+    ./mediaPlayer
     ./shell
     ./terminal
     ./windowManager/home.nix
