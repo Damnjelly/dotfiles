@@ -14,5 +14,6 @@
     trouble.enable = true;
     which-key.enable = true;
     web-devicons.enable = true;
+    render-markdown.enable = true;
   };
 }
