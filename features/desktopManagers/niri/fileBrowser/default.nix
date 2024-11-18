@@ -205,24 +205,30 @@
                   for = "windows";
                 }
               ];
-              play = [
-                {
-                  run = ''${pkgs.mpv}/bin/mpv --force-window "$@"'';
-                  orphan = true;
-                  for = "unix";
-                }
-                {
-                  run = ''${pkgs.mpv}/bin/mpv --force-window %*'';
-                  orphan = true;
-                  for = "windows";
-                }
-                {
-                  run = ''${pkgs.mediainfo}/bin/mediainfo "$1"; echo "Press enter to exit"; read _'';
-                  block = true;
-                  desc = "Show media info";
-                  for = "unix";
-                }
-              ];
+              play =
+                let
+                  mpvapp = if config.programs.mpv.enable == true then "mpv" else pkgs.mpv;
+                in
+                [
+                  {
+                    run = ''${mpvapp} --force-window "$@"'';
+                    desc = "Play with media player";
+                    orphan = true;
+                    for = "unix";
+                  }
+                  {
+                    run = ''${mpvapp} --force-window %*'';
+                    desc = "Play with media player";
+                    orphan = true;
+                    for = "windows";
+                  }
+                  {
+                    run = ''${pkgs.mediainfo}/bin/mediainfo "$1"; echo "Press enter to exit"; read _'';
+                    block = true;
+                    desc = "Show media info";
+                    for = "unix";
+                  }
+                ];
             };
 
             open = {
