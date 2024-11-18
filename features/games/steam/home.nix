@@ -11,6 +11,7 @@
       packages = with pkgs; [
         dotnet-sdk_8
         everest-mons
+        plastic
         r2modman
       ];
       persistence = lib.mkIf osConfig.optinpermanence.enable {

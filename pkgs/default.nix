@@ -8,4 +8,5 @@ rec {
   sunbeam = pkgs.callPackage ./sunbeam { };
   bolt-launcher = pkgs.callPackage ./bolt-launcher { };
   wavetracker = pkgs.callPackage ./wavetracker { };
+  plastic = pkgs.callPackage ./plastic { };
 }
