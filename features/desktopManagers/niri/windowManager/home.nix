@@ -127,6 +127,8 @@
 
                 "Mod+Y".action = sh "${pkgs.systemd}/bin/systemctl suspend";
 
+                "Mod+End".action = sh "${pkgs.hyprlock}/bin/hyprlock";
+
                 # Movement
                 "Mod+Left".action = focus-column-left;
                 "Mod+Down".action = focus-window-down;
