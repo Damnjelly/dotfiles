@@ -11,5 +11,11 @@
     programs.nixvim.enable = true;
 
     home.sessionVariables.EDITOR = "nvim";
+#   home.persistence = lib.mkIf osConfig.optinpermanence.enable {
+#     "/persist/home/${config.home.username}/nvim" = {
+#       directories = [ ".cache/nvim" ];
+#       allowOther = false;
+#     };
+#   };
   };
 }

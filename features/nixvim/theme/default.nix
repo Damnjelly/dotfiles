@@ -2,7 +2,7 @@
 {
   stylix.targets.nixvim.enable = false;
   programs.nixvim = {
-    plugins.cmp.settings.window.completion.border = "rounded";
+    plugins.cmp.settings.window.completion.border = "solid";
     colorschemes.kanagawa = {
       enable = true;
       settings = {

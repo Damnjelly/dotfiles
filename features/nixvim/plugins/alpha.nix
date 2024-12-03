@@ -43,10 +43,9 @@
             };
           in
           [
-            (mkButton "f" "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>" "🔍 Find File"
+            (mkButton "f" "<CMD>lua require('telescope.builtin').find_files()<CR>" "🔍 Find File"
               "Operator"
             )
-            (mkButton "q" "<CMD>qa<CR>" "💣 Quit Neovim" "String")
           ];
       }
       {

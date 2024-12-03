@@ -3,7 +3,7 @@
     globals.mapleader = " ";
     keymaps = [
       {
-        action = "ggvG";
+        action = "ggVG$";
         mode = "n";
         key = "<C-a>";
       }

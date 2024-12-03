@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = [ pkgs.gdb ];
   programs.nixvim = {
     plugins.dap = {
-      enable = true;
+      enable =  lib.mkDefault false;
       signs = {
         dapBreakpoint = {
           text = "●";
