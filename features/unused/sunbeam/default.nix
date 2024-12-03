@@ -1,4 +1,10 @@
-{ pkgs, outputs, lib, config, ... }:
+{
+  pkgs,
+  outputs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     outputs.homeManagerModules.sunbeam

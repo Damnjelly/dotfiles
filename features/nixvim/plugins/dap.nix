@@ -3,7 +3,7 @@
   home.packages = [ pkgs.gdb ];
   programs.nixvim = {
     plugins.dap = {
-      enable =  lib.mkDefault false;
+      enable = lib.mkDefault false;
       signs = {
         dapBreakpoint = {
           text = "●";

@@ -18,10 +18,10 @@
     };
 
     games.servers = {
-     #minecraft = {
-     #  enable = true;
-     #  projectArchitect2.enable = true;
-     #};
+      #minecraft = {
+      #  enable = true;
+      #  projectArchitect2.enable = true;
+      #};
 
       satisfactory = {
         enable = true;

@@ -37,7 +37,7 @@
       ];
 
       fastfetch = ./assets/fastfetch.sixel;
-      
+
       image = ./wallpapers/wallpaper.png;
     };
 

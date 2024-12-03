@@ -10,7 +10,6 @@
       lsp = {
         enable = true;
         servers = {
-          buf_ls.package = pkgs.buf;
           nixd = {
             enable = true;
             settings.formatting.command = [ "nixpkgs-fmt" ];

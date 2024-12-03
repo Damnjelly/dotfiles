@@ -13,11 +13,9 @@ with lib;
 {
   options.users.users = mkOption {
     type = types.attrsOf (
-      types.submodule (
-        {
-          extraGroups = [ "gamemode" ];
-        }
-      )
+      types.submodule ({
+        extraGroups = [ "gamemode" ];
+      })
     );
   };
   config = mkIf (cfg.enable && cfg.enableFor != null) {

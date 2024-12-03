@@ -43,9 +43,7 @@
             };
           in
           [
-            (mkButton "f" "<CMD>lua require('telescope.builtin').find_files()<CR>" "🔍 Find File"
-              "Operator"
-            )
+            (mkButton "f" "<CMD>lua require('telescope.builtin').find_files()<CR>" "🔍 Find File" "Operator")
           ];
       }
       {

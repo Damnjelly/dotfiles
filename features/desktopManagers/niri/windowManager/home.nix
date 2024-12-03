@@ -1,15 +1,18 @@
-{ pkgs
-, config
-, lib
-, osConfig
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  osConfig,
+  ...
 }:
 {
   config =
     lib.mkIf (builtins.elem config.home.username osConfig.features.desktopManagers.niri.enableFor)
       {
-        home.packages = with pkgs; [
-        ];
+        home.packages =
+          with pkgs;
+          [
+          ];
         programs.wpaperd = {
           enable = true;
           settings = {
@@ -56,7 +59,7 @@
                 clip-to-geometry = true;
               }
               {
-                matches = [{ app-id = "^vesktop$"; }];
+                matches = [ { app-id = "^vesktop$"; } ];
                 open-on-output = "HDMI-A-1";
                 open-fullscreen = true;
               }
@@ -66,7 +69,7 @@
                   h = 1006;
                 in
                 {
-                  matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
+                  matches = [ { app-id = "^net-runelite-client-RuneLite$"; } ];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -79,7 +82,7 @@
                   h = 300;
                 in
                 {
-                  matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
+                  matches = [ { app-id = "^net-runelite-launcher-Launcher$"; } ];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -92,7 +95,7 @@
                   h = 800;
                 in
                 {
-                  matches = [{ title = "^Sunbeam$"; }];
+                  matches = [ { title = "^Sunbeam$"; } ];
                   default-column-width.proportion = w;
                   max-height = h;
                   min-height = h;

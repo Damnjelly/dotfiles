@@ -16,7 +16,7 @@
         with pkgs;
         [
           gamePkgs.osu-stable
-          gamePkgs.osu-lazer-bin
+          #gamePkgs.osu-lazer-bin
           wl-gammactl
         ];
       persistence = lib.mkIf osConfig.optinpermanence.enable {
@@ -26,7 +26,7 @@
             ".config/xfce4"
             ".local/share/osu"
             {
-              directory = ".osu"; 
+              directory = ".osu";
               method = "symlink";
             }
           ];

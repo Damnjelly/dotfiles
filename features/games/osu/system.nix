@@ -1,9 +1,13 @@
 {
   # Enable opentabletdriver
   hardware = {
-    opentabletdriver.enable = true;
+    opentabletdriver.enable = false;
     uinput.enable = true;
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    #"dotnet-runtime-6.0.428"
+  ];
 
   nix.settings = {
     substituters = [ "https://nix-gaming.cachix.org" ];

@@ -1,4 +1,10 @@
-{ outputs, pkgs, lib, config, ... }:
+{
+  outputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [ outputs.homeManagerModules.superfile ];
   #stylix.targets.superfile.enable = true;
@@ -14,61 +20,175 @@
 
     hotkeys = {
       #globals
-      quit = [ "esc" "" ];
+      quit = [
+        "esc"
+        ""
+      ];
 
-      list_up = [ "k" "" ];
-      list_down = [ "j" "" ];
+      list_up = [
+        "k"
+        ""
+      ];
+      list_down = [
+        "j"
+        ""
+      ];
 
-      pinned_directory = [ "p" "" ];
-      close_file_panel = [ "N" "" ];
-      create_new_file_panel = [ "n" "" ];
-      
-      next_file_panel = [ "L" "" ];
-      previous_file_panel = [ "H" "" ];
-      focus_on_process_bar = [ "P" "" ];
-      focus_on_sidebar = [ "B" "" ];
-      focus_on_metadata = [ "M" "" ];
+      pinned_directory = [
+        "p"
+        ""
+      ];
+      close_file_panel = [
+        "N"
+        ""
+      ];
+      create_new_file_panel = [
+        "n"
+        ""
+      ];
 
-      change_panel_mode = [ "v" "" ];
-      open_help_menu = [ "?" "" ];
+      next_file_panel = [
+        "L"
+        ""
+      ];
+      previous_file_panel = [
+        "H"
+        ""
+      ];
+      focus_on_process_bar = [
+        "P"
+        ""
+      ];
+      focus_on_sidebar = [
+        "B"
+        ""
+      ];
+      focus_on_metadata = [
+        "M"
+        ""
+      ];
 
-      file_panel_directory_create = ["A" "" ];
-      file_panel_file_create = ["a" "" ];
-      file_panel_item_rename = ["r" "" ];
-      paste_item = ["p" "" ];
-      extract_file = ["z" "" ];
-      compress_file = ["Z" "" ];
-      toggle_dot_file = [ "." "" ];
+      change_panel_mode = [
+        "v"
+        ""
+      ];
+      open_help_menu = [
+        "?"
+        ""
+      ];
 
-      oepn_file_with_editor = ["e" "" ];
-      open_current_directory_with_editor = ["E" "" ];
+      file_panel_directory_create = [
+        "A"
+        ""
+      ];
+      file_panel_file_create = [
+        "a"
+        ""
+      ];
+      file_panel_item_rename = [
+        "r"
+        ""
+      ];
+      paste_item = [
+        "p"
+        ""
+      ];
+      extract_file = [
+        "z"
+        ""
+      ];
+      compress_file = [
+        "Z"
+        ""
+      ];
+      toggle_dot_file = [
+        "."
+        ""
+      ];
 
-      cancel = [ "backspace" "q" ];
-      confirm = ["enter" "l" ];
+      oepn_file_with_editor = [
+        "e"
+        ""
+      ];
+      open_current_directory_with_editor = [
+        "E"
+        ""
+      ];
+
+      cancel = [
+        "backspace"
+        "q"
+      ];
+      confirm = [
+        "enter"
+        "l"
+      ];
 
       # normal mode
-      delete_item = [ "d" "" ];
-      select_item = [ "enter" "l" ];
-      parent_directory = [ "backspace" "h" ];
-      copy_single_item = [ "y" "" ];
-      cut_single_item = [ "x" "" ];
-      search_bar = [ "/" "" ];
-      command_line = [":" "" ];
+      delete_item = [
+        "d"
+        ""
+      ];
+      select_item = [
+        "enter"
+        "l"
+      ];
+      parent_directory = [
+        "backspace"
+        "h"
+      ];
+      copy_single_item = [
+        "y"
+        ""
+      ];
+      cut_single_item = [
+        "x"
+        ""
+      ];
+      search_bar = [
+        "/"
+        ""
+      ];
+      command_line = [
+        ":"
+        ""
+      ];
 
       # select mode
-      file_panel_select_mode_item_single_select = [ "enter" "l" ];
-      file_panel_select_mode_item_select_down = [ "shift+down" "J" ];
-      file_panel_select_mode_item_select_up = [ "shift+up" "K" ];
-      file_panel_select_mode_item_delete = [ "delete" "d" ];
-      file_panel_select_mode_item_copy = [ "y" "" ];
-      file_panel_select_mode_item_cut = [ "x" "" ];
-      file_panel_select_all_item = [ "A" "" ];
+      file_panel_select_mode_item_single_select = [
+        "enter"
+        "l"
+      ];
+      file_panel_select_mode_item_select_down = [
+        "shift+down"
+        "J"
+      ];
+      file_panel_select_mode_item_select_up = [
+        "shift+up"
+        "K"
+      ];
+      file_panel_select_mode_item_delete = [
+        "delete"
+        "d"
+      ];
+      file_panel_select_mode_item_copy = [
+        "y"
+        ""
+      ];
+      file_panel_select_mode_item_cut = [
+        "x"
+        ""
+      ];
+      file_panel_select_all_item = [
+        "A"
+        ""
+      ];
     };
   };
-    home.persistence = lib.mkIf config.optinpermanence.enable {
-      "/persist/home/${config.home.username}/superfile" = {
-        directories = [ ".local/share/superfile" ];
-        allowOther = true;
-      };
+  home.persistence = lib.mkIf config.optinpermanence.enable {
+    "/persist/home/${config.home.username}/superfile" = {
+      directories = [ ".local/share/superfile" ];
+      allowOther = true;
     };
+  };
 }

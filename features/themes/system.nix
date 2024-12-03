@@ -72,7 +72,7 @@
           sansSerif = config.stylix.fonts.serif;
           emoji = config.stylix.fonts.monospace;
           sizes = {
-            terminal = 14;
+            terminal = 12;
           };
         };
 

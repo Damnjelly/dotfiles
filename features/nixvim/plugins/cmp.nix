@@ -6,7 +6,7 @@
       "noselect"
     ];
 
-   plugins = {
+    plugins = {
       lspkind = {
         enable = true;
 

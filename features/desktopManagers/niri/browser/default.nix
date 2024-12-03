@@ -70,9 +70,9 @@
             };
           };
           extraConfig = # python
-          ''
-            c.tabs.padding = {"bottom": 4, "left": 4, "right": 4, "top": 4}
-          '';
+            ''
+              c.tabs.padding = {"bottom": 4, "left": 4, "right": 4, "top": 4}
+            '';
         };
         home.persistence = lib.mkIf osConfig.optinpermanence.enable {
           "/persist/home/${config.home.username}/qutebrowser" = {
