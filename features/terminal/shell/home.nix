@@ -1,8 +1,7 @@
-{
-  lib,
-  config,
-  osConfig,
-  ...
+{ lib
+, config
+, osConfig
+, ...
 }:
 let
   bashEnabled = {
@@ -31,17 +30,9 @@ let
           starship.enableFishIntegration = true;
         };
       };
+  terminalOptions = lib.mkIf osConfig.features.terminal.enable { };
 in
 {
-  config =
-    lib.mkIf osConfig.features.terminal.enable {
-      programs = {
-        direnv = {
-          enable = true;
-          nix-direnv.enable = true;
-        };
-      };
-    }
-    // bashEnabled
-    // fishEnabled;
+  # for some reason terminalOptions should be first, else fish config is not added
+  config = { } // terminalOptions // bashEnabled // fishEnabled;
 }
