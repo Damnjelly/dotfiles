@@ -54,7 +54,7 @@
   };
 
   # Secrets keyfile location
-  sops.age.keyFile = /persist/sops/ags/keys.txt;
+  sops.age.keyFile = "/persist/sops/age/keys.txt";
 
   # Nix config path
   environment.sessionVariables = {

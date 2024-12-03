@@ -43,7 +43,6 @@ with lib;
           impermanence.nixosModules.home-manager.impermanence
           nixvim.homeManagerModules.nixvim
           sops-nix.homeManagerModules.sops
-          ags.homeManagerModules.default
           niri.homeModules.niri
         ];
       }

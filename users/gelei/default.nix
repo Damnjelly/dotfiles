@@ -26,9 +26,13 @@ in
     sops = {
       secrets = {
         "${config.networking.hostName}/${username}/pcpassword".neededForUsers = true;
-        "${config.networking.hostName}/${username}/sshjuinened22519" = {
+        "${config.networking.hostName}/${username}/ed22519/priv" = {
           owner = "${username}";
           path = "/home/${username}/.ssh/id_ed25519";
+        };
+        "${config.networking.hostName}/${username}/ed22519/pub" = {
+          owner = "${username}";
+          path = "/home/${username}/.ssh/id_ed25519.pub";
         };
       };
     };
