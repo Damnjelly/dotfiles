@@ -12,7 +12,7 @@
     ./fileBrowser
     ./lockScreen
     ./mediaPlayer
-    ./shell
+    #./shell
     ./terminal
     ./windowManager/home.nix
   ];

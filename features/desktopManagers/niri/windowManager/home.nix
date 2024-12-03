@@ -1,9 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  osConfig,
-  ...
+{ pkgs
+, config
+, lib
+, osConfig
+, ...
 }:
 {
   config =
@@ -32,7 +31,7 @@
             environment.DISPLAY = ":1";
             spawn-at-startup = [
               { command = [ "${pkgs.wpaperd}/bin/wpaperd" ]; }
-              { command = [ "ags" ]; }
+              #{ command = [ "ags" ]; }
               {
                 command = [
                   "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
@@ -57,7 +56,7 @@
                 clip-to-geometry = true;
               }
               {
-                matches = [ { app-id = "^vesktop$"; } ];
+                matches = [{ app-id = "^vesktop$"; }];
                 open-on-output = "HDMI-A-1";
                 open-fullscreen = true;
               }
@@ -67,7 +66,7 @@
                   h = 1006;
                 in
                 {
-                  matches = [ { app-id = "^net-runelite-client-RuneLite$"; } ];
+                  matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -80,7 +79,7 @@
                   h = 300;
                 in
                 {
-                  matches = [ { app-id = "^net-runelite-launcher-Launcher$"; } ];
+                  matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -93,7 +92,7 @@
                   h = 800;
                 in
                 {
-                  matches = [ { title = "^Sunbeam$"; } ];
+                  matches = [{ title = "^Sunbeam$"; }];
                   default-column-width.proportion = w;
                   max-height = h;
                   min-height = h;
@@ -110,9 +109,9 @@
                 # Open applications
                 "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
                 "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
-                "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
-                "Mod+B".action = sh "${pkgs.foot}/bin/foot ${pkgs.bluetuith}/bin/bluetuith";
-                "Mod+V".action = sh "${pkgs.foot}/bin/foot ${pkgs.pulsemixer}/bin/pulsemixer";
+                "Mod+Q".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.zellij}/bin/zellij -l welcome";
+                "Mod+B".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.bluetuith}/bin/bluetuith";
+                "Mod+V".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.pulsemixer}/bin/pulsemixer";
                 "Mod+bracketright".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
                 "Mod+bracketleft".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
@@ -180,8 +179,8 @@
               focus-ring.enable = false;
               border = {
                 enable = true;
-                width = 2;
-                active.color = "#${base0A}";
+                width = 3;
+                active.color = "#${base05}";
                 # active.gradient = {
                 #   angle = 45;
                 #   from = "#${base08}";
@@ -191,7 +190,7 @@
               };
               struts = {
                 left = 18;
-                right = 50;
+                right = 4;
                 top = 18;
                 bottom = 18;
               };

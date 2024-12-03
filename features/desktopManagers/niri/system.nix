@@ -29,6 +29,7 @@ in
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     security.polkit.enable = true;
+    environment.defaultPackages = with pkgs; [ wl-clipboard-rs ];
     xdg = {
       portal = {
         enable = true;

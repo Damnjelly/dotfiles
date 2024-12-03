@@ -12,7 +12,7 @@
       let
         fonts = config.stylix.fonts;
       in
-      {
+      lib.mkForce {
         # BACKGROUND
         background = [
           {
