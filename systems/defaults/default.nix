@@ -1,7 +1,6 @@
-{
-  outputs,
-  pkgs,
-  ...
+{ outputs
+, pkgs
+, ...
 }:
 {
   config = {
@@ -53,7 +52,7 @@
       overlays = [
         outputs.overlays.additions
         outputs.overlays.modifications
-        outputs.overlays.stable-packages
+        outputs.overlays.unstable-packages
       ];
       # Configure your nixpkgs instance
       config = {

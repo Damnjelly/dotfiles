@@ -1,16 +1,15 @@
-{
-  pkgs,
-  lib,
-  config,
-  osConfig,
-  ...
+{ pkgs
+, lib
+, config
+, osConfig
+, ...
 }:
 {
   options.features.productivity.enable = lib.mkEnableOption "productivity";
 
   config.home = lib.mkIf config.features.productivity.enable {
     packages = with pkgs; [
-      stable.citrix_workspace
+      citrix_workspace
       onlyoffice-bin_latest
       teams-for-linux
       beeper

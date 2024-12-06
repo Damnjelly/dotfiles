@@ -15,7 +15,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,7 +32,7 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
@@ -49,17 +49,16 @@
     };
 
     stylix = {
-      url = "github:danth/stylix/release-24.05";
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
+    { self
+    , nixpkgs
+    , home-manager
+    , ...
     }@inputs:
     let
       inherit (self) outputs;

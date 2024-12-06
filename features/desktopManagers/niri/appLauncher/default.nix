@@ -1,9 +1,8 @@
-{
-  pkgs,
-  lib,
-  config,
-  osConfig,
-  ...
+{ pkgs
+, lib
+, config
+, osConfig
+, ...
 }:
 
 {
@@ -25,7 +24,7 @@
         programs.rofi = {
           enable = true;
           terminal = "${pkgs.foot}/bin/foot";
-          package = pkgs.rofi-wayland;
+          package = pkgs.unstable.rofi-wayland;
           #plugins = with pkgs; [ (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; }) ];
           extraConfig = {
             modes = "drun,window,ssh,combi,run,power:rofi-power-menu";
