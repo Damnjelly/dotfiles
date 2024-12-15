@@ -53,6 +53,13 @@
     };
   };
 
+  services.mpd.enable = true;
+  environment.persistence."/persist/system" = {
+    hideMounts = true;
+    directories = [
+      "/var/lib/mpd"
+    ];
+  };
   # Secrets keyfile location
   sops.age.keyFile = "/persist/sops/age/keys.txt";
 

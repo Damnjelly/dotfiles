@@ -7,7 +7,7 @@
   ];
   programs.nixvim = {
     plugins.conform-nvim = {
-      enable = true;
+      enable = false;
       settings = {
         notify_on_error = true;
         formatters_by_ft = {

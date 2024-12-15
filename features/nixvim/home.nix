@@ -1,8 +1,7 @@
-{
-  lib,
-  config,
-  osConfig,
-  ...
+{ lib
+, config
+, osConfig
+, ...
 }:
 {
 
@@ -11,6 +10,7 @@
     ./plugins
     ./settings
     ./theme
+    ./dev
   ];
 
   config = lib.mkIf (builtins.elem config.home.username osConfig.features.neovim.enableFor) {

@@ -15,6 +15,23 @@
         ];
         programs.rbw = {
           enable = true;
+          package = pkgs.rbw.overrideAttrs (_: {
+            src = pkgs.fetchFromGitHub {
+              owner = "davla";
+              repo = "rbw";
+              rev = "fix/client-name-header";
+              sha256 = "sha256-Sgs+qjKdtS5i7zF86TLSZMVKTDoeYhIgKEwjUUXw/cc=";
+            };
+            cargoDeps = pkgs.rustPlatform.importCargoLock {
+              lockFile = (
+                pkgs.fetchurl {
+                  url = "https://raw.githubusercontent.com/davla/rbw/dd6b65427de3a4b38d27350d8ad7ebacb29e97ff/Cargo.lock";
+                  hash = "sha256-bAELLBb0x0BOGPMLBRX/s0qxqN8XOxUW9OUa55WjeaA=";
+                }
+              );
+              allowBuiltinFetchGit = true;
+            };
+          });
           settings = {
             email = "juinen@proton.me";
             lock_timeout = 90000;
@@ -29,7 +46,7 @@
           extraConfig = {
             modes = "drun,window,ssh,combi,run,power:rofi-power-menu";
           };
-          font = lib.mkForce "${config.stylix.fonts.monospace.name} SemiBold 12";
+          font = lib.mkForce "kirsch 12";
           theme =
             with config.lib.stylix.colors.withHashtag;
             lib.mkForce "${pkgs.writeText "theme.rasi" # rasi
@@ -64,7 +81,7 @@
                 }
 
                 mainbox {
-                  padding:    8px;
+                  padding:    4px;
                   background-color:   @bg0;
 
                   border:             1px;
@@ -72,8 +89,8 @@
                 }
 
                 inputbar {
-                  spacing:    8px; 
-                  padding:    8px;
+                  spacing:    4px; 
+                  padding:    4px;
 
                   background-color:   @bg1;
                 }
@@ -87,12 +104,12 @@
                 }
 
                 textbox {
-                  padding:            8px;
+                  padding:            4px;
                   background-color:   @bg1;
                 }
 
                 listview {
-                  padding:    4px 0;
+                  padding:    2px 0;
                   lines:      8;
                   columns:    1;
 
@@ -100,8 +117,8 @@
                 }
 
                 element {
-                  padding:    8px;
-                  spacing:    8px;
+                  padding:    4px;
+                  spacing:    4px;
                 }
 
                 element normal normal {

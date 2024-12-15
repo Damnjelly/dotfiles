@@ -1,9 +1,8 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
+{ inputs
+, config
+, lib
+, pkgs
+, ...
 }:
 let
   cfg = config.features.desktopManagers.niri;
@@ -29,7 +28,7 @@ in
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     security.polkit.enable = true;
-    environment.defaultPackages = with pkgs; [ wl-clipboard-rs ];
+    environment.defaultPackages = with pkgs; [ wl-clipboard-rs nautilus ];
     xdg = {
       portal = {
         enable = true;

@@ -1,10 +1,9 @@
-{
-  lib,
-  inputs,
-  config,
-  osConfig,
-  pkgs,
-  ...
+{ lib
+, inputs
+, config
+, osConfig
+, pkgs
+, ...
 }:
 {
   config = lib.mkIf (builtins.elem config.home.username osConfig.features.games.enableFor) {
@@ -16,7 +15,7 @@
         with pkgs;
         [
           gamePkgs.osu-stable
-          #gamePkgs.osu-lazer-bin
+          gamePkgs.osu-lazer-bin
           wl-gammactl
         ];
       persistence = lib.mkIf osConfig.optinpermanence.enable {

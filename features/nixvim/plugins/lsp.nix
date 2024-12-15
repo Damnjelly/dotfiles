@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.nixvim = {
     plugins = {
@@ -17,13 +17,11 @@
               offset_encoding = "utf-8";
             };
           };
-          bashls.enable = true;
           rust_analyzer = {
             enable = true;
             installCargo = true;
             installRustc = true;
           };
-          pylyzer.enable = true;
           ts_ls.enable = true;
           gdscript = {
             enable = true;

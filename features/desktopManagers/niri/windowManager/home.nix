@@ -1,9 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  osConfig,
-  ...
+{ pkgs
+, config
+, lib
+, osConfig
+, ...
 }:
 {
   config =
@@ -59,7 +58,7 @@
                 clip-to-geometry = true;
               }
               {
-                matches = [ { app-id = "^vesktop$"; } ];
+                matches = [{ app-id = "^vesktop$"; }];
                 open-on-output = "HDMI-A-1";
                 open-fullscreen = true;
               }
@@ -69,7 +68,7 @@
                   h = 1006;
                 in
                 {
-                  matches = [ { app-id = "^net-runelite-client-RuneLite$"; } ];
+                  matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -82,7 +81,7 @@
                   h = 300;
                 in
                 {
-                  matches = [ { app-id = "^net-runelite-launcher-Launcher$"; } ];
+                  matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -95,7 +94,7 @@
                   h = 800;
                 in
                 {
-                  matches = [ { title = "^Sunbeam$"; } ];
+                  matches = [{ title = "^Sunbeam$"; }];
                   default-column-width.proportion = w;
                   max-height = h;
                   min-height = h;
@@ -112,9 +111,9 @@
                 # Open applications
                 "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
                 "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
-                "Mod+Q".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.zellij}/bin/zellij -l welcome";
-                "Mod+B".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.bluetuith}/bin/bluetuith";
-                "Mod+V".action = sh "${pkgs.kitty}/bin/kitty ${pkgs.pulsemixer}/bin/pulsemixer";
+                "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
+                "Mod+B".action = sh "${pkgs.foot}/bin/foot ${pkgs.bluetuith}/bin/bluetuith";
+                "Mod+V".action = sh "${pkgs.foot}/bin/foot ${pkgs.pulsemixer}/bin/pulsemixer";
                 "Mod+bracketright".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
                 "Mod+bracketleft".action = sh "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
@@ -182,8 +181,8 @@
               focus-ring.enable = false;
               border = {
                 enable = true;
-                width = 3;
-                active.color = "#${base05}";
+                width = 2;
+                active.color = "#${base07}";
                 # active.gradient = {
                 #   angle = 45;
                 #   from = "#${base08}";
@@ -194,8 +193,8 @@
               struts = {
                 left = 18;
                 right = 4;
-                top = 18;
-                bottom = 18;
+                top = 22;
+                bottom = 4;
               };
             };
 
@@ -232,6 +231,60 @@
                 y = 1440;
               };
             };
+            animations =
+              let
+                animation = {
+                  spring = {
+                    damping-ratio = 1.0;
+                    stiffness = 800;
+                    epsilon = 0.0001;
+                  };
+                };
+              in
+              {
+                window-open = { } // animation;
+                window-close = { } // animation;
+                shaders = {
+                  window-open = #rust 
+                    ''
+                      vec4 slide_open(vec3 coords_geo, vec3 size_geo) {
+                          vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                          vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                          vec2 coords = (coords_geo.xy - vec2(0, 0)) * size_geo.xy;
+                          coords = coords / length(size_geo.xy);
+
+                          float p = niri_clamped_progress;
+                          if (coords.x > p)
+                              color = vec4(0.0);
+
+                          return color;
+                      }
+                      vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+                          return slide_open(coords_geo, size_geo);
+                      }
+                    '';
+                  window-close = #rust
+                    ''
+                      vec4 slide_close(vec3 coords_geo, vec3 size_geo) {
+                          vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                          vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                          vec2 coords = (coords_geo.xy - vec2(0, 0)) * size_geo.xy;
+                          coords = coords / length(size_geo.xy);
+
+                          float p = (1.0 - niri_clamped_progress);
+                          if (coords.x > p)
+                              color = vec4(0.0);
+
+                          return color;
+                      }
+                      vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                          return slide_close(coords_geo, size_geo);
+                      }
+                    '';
+                };
+              };
           };
         };
       };
