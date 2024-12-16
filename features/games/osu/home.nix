@@ -1,9 +1,10 @@
-{ lib
-, inputs
-, config
-, osConfig
-, pkgs
-, ...
+{
+  lib,
+  inputs,
+  config,
+  osConfig,
+  pkgs,
+  ...
 }:
 {
   config = lib.mkIf (builtins.elem config.home.username osConfig.features.games.enableFor) {

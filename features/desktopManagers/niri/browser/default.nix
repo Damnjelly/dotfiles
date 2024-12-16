@@ -1,8 +1,9 @@
-{ lib
-, config
-, osConfig
-, pkgs
-, ...
+{
+  lib,
+  config,
+  osConfig,
+  pkgs,
+  ...
 }:
 {
   config =
@@ -72,7 +73,7 @@
             };
           };
           #greasemonkey = with config.lib.stylix.colors.withHashtag; [
-          #  (pkgs.writeText "darkreader.js" # javascript 
+          #  (pkgs.writeText "darkreader.js" # javascript
           #    ''
           #      // ==UserScript==
           #      // @name          Dark Reader (Unofficial)

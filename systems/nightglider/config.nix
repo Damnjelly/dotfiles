@@ -53,7 +53,6 @@
     };
   };
 
-  services.mpd.enable = true;
   environment.persistence."/persist/system" = {
     hideMounts = true;
     directories = [

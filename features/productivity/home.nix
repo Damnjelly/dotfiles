@@ -1,8 +1,9 @@
-{ pkgs
-, lib
-, config
-, osConfig
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  osConfig,
+  ...
 }:
 {
   options.features.productivity.enable = lib.mkEnableOption "productivity";

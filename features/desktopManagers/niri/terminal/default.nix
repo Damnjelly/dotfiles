@@ -1,8 +1,9 @@
-{ pkgs
-, lib
-, config
-, osConfig
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  osConfig,
+  ...
 }:
 {
   config =
@@ -12,7 +13,10 @@
           configFile."xdg-terminals.list".text = "${pkgs.foot}/bin/foot";
         };
         stylix.targets.foot.enable = true;
-        home.packages = with pkgs; [ kirsch scientifica ];
+        home.packages = with pkgs; [
+          kirsch
+          scientifica
+        ];
         programs.foot = {
           enable = true;
           settings.main = {

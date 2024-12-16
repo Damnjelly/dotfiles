@@ -2,7 +2,6 @@
   imports = [
     ./alpha.nix
     ./cmp.nix
-    ./conform.nix
     ./dap.nix
     ./lint.nix
     ./lsp.nix

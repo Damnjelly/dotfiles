@@ -12,7 +12,7 @@
         servers = {
           nixd = {
             enable = true;
-            settings.formatting.command = [ "nixpkgs-fmt" ];
+            settings.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
             extraOptions = {
               offset_encoding = "utf-8";
             };

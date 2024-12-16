@@ -16,10 +16,8 @@
   config =
     lib.mkIf (builtins.elem config.home.username osConfig.features.desktopManagers.niri.enableFor)
       {
-        home.packages =
-          with pkgs;
-          [
-          ];
+        home.packages = with pkgs; [
+        ];
         xdg = {
           configFile."yazi/init.lua".text =
             lib.mkIf config.programs.yazi.enable # lua

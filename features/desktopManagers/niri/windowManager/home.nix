@@ -1,17 +1,16 @@
-{ pkgs
-, config
-, lib
-, osConfig
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  osConfig,
+  ...
 }:
 {
   config =
     lib.mkIf (builtins.elem config.home.username osConfig.features.desktopManagers.niri.enableFor)
       {
-        home.packages =
-          with pkgs;
-          [
-          ];
+        home.packages = with pkgs; [
+        ];
         programs.wpaperd = {
           enable = true;
           settings = {
@@ -58,7 +57,7 @@
                 clip-to-geometry = true;
               }
               {
-                matches = [{ app-id = "^vesktop$"; }];
+                matches = [ { app-id = "^vesktop$"; } ];
                 open-on-output = "HDMI-A-1";
                 open-fullscreen = true;
               }
@@ -68,7 +67,7 @@
                   h = 1006;
                 in
                 {
-                  matches = [{ app-id = "^net-runelite-client-RuneLite$"; }];
+                  matches = [ { app-id = "^net-runelite-client-RuneLite$"; } ];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -81,7 +80,7 @@
                   h = 300;
                 in
                 {
-                  matches = [{ app-id = "^net-runelite-launcher-Launcher$"; }];
+                  matches = [ { app-id = "^net-runelite-launcher-Launcher$"; } ];
                   default-column-width.fixed = w;
                   min-width = w;
                   max-height = h;
@@ -94,7 +93,7 @@
                   h = 800;
                 in
                 {
-                  matches = [{ title = "^Sunbeam$"; }];
+                  matches = [ { title = "^Sunbeam$"; } ];
                   default-column-width.proportion = w;
                   max-height = h;
                   min-height = h;
@@ -109,7 +108,8 @@
               in
               {
                 # Open applications
-                "Mod+W".action = sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
+                "Mod+W".action =
+                  sh "${pkgs.rofi-wayland}/bin/rofi -show combi -combi-modes 'window,drun,ssh,power' -show-icons";
                 "Mod+P".action = sh "${pkgs.rofi-rbw-wayland}/bin/rofi-rbw";
                 "Mod+Q".action = sh "${pkgs.foot}/bin/foot ${pkgs.zellij}/bin/zellij -l welcome";
                 "Mod+B".action = sh "${pkgs.foot}/bin/foot ${pkgs.bluetuith}/bin/bluetuith";
@@ -245,7 +245,7 @@
                 window-open = { } // animation;
                 window-close = { } // animation;
                 shaders = {
-                  window-open = #rust 
+                  window-open = # rust
                     ''
                       vec4 slide_open(vec3 coords_geo, vec3 size_geo) {
                           vec3 coords_tex = niri_geo_to_tex * coords_geo;
@@ -264,7 +264,7 @@
                           return slide_open(coords_geo, size_geo);
                       }
                     '';
-                  window-close = #rust
+                  window-close = # rust
                     ''
                       vec4 slide_close(vec3 coords_geo, vec3 size_geo) {
                           vec3 coords_tex = niri_geo_to_tex * coords_geo;

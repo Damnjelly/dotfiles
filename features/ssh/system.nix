@@ -8,8 +8,10 @@
       startAgent = true;
       enableAskPassword = false;
       knownHosts = {
-        "github.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-        "git.tkppensioen.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGPJsU66W41oUGj4PW/NpKbthBQ4U2h62gtzchAwGAgY";
+        "github.com".publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        "git.tkppensioen.com".publicKey =
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGPJsU66W41oUGj4PW/NpKbthBQ4U2h62gtzchAwGAgY";
         "[galaxy]:145" = {
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOXNK+8zCSAQM/OK52rfnIHY4zYhLfeAw0RNdInPMKr8";
           extraHostNames = [

@@ -7,7 +7,8 @@
 {
 
   config = lib.mkIf osConfig.features.terminal.enable {
-    home.file.".config/zellij/layouts/development.kdl".text = "${builtins.readFile ./layouts/development.kdl}";
+    home.file.".config/zellij/layouts/development.kdl".text =
+      "${builtins.readFile ./layouts/development.kdl}";
 
     programs.zellij = {
       enable = true;
