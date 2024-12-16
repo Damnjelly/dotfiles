@@ -14,15 +14,10 @@
 
     # Server features
     immich = {
-      enable = true;
+      enable = false;
     };
 
     games.servers = {
-      #minecraft = {
-      #  enable = true;
-      #  projectArchitect2.enable = true;
-      #};
-
       satisfactory = {
         enable = false;
         maxPlayers = 8;
@@ -51,10 +46,12 @@
   };
 
   # Secrets keyfile location
-  sops.age.keyFile = /etc/secrets/keys.txt;
+  sops.age.keyFile = "/etc/secrets/keys.txt";
 
-  # Nix config path
-  environment.sessionVariables.FLAKE = "/etc/nixos/";
+  environment.sessionVariables = {
+    SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+    FLAKE = "/etc/nixos/";
+  };
 
   # System specific configuration
   services = {
