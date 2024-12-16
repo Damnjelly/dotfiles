@@ -12,6 +12,8 @@
     shares.enable = true;
     ssh.enable = true;
 
+    tutter.enable = true;
+
     # Server features
     immich = {
       enable = false;
