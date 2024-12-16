@@ -24,8 +24,8 @@
       #};
 
       satisfactory = {
-        enable = true;
-        maxPlayers = 7;
+        enable = false;
+        maxPlayers = 8;
         address = config.networking.defaultGateway.address;
       };
     };

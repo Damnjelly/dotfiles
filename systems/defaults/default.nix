@@ -1,6 +1,7 @@
-{ outputs
-, pkgs
-, ...
+{
+  outputs,
+  pkgs,
+  ...
 }:
 {
   config = {
@@ -10,6 +11,7 @@
       sops
       vim
       wget
+      yazi
     ];
 
     sops = {
