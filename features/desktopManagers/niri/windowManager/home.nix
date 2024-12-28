@@ -174,7 +174,7 @@
               };
 
             layout = with config.lib.stylix.colors; {
-              gaps = 16;
+              gaps = 10;
               default-column-width = {
                 proportion = 0.5;
               };
@@ -192,7 +192,7 @@
               };
               struts = {
                 left = 18;
-                right = 4;
+                right = 0;
                 top = 22;
                 bottom = 4;
               };

@@ -72,33 +72,34 @@
               javascript.clipboard = "access-paste";
             };
           };
-          #greasemonkey = with config.lib.stylix.colors.withHashtag; [
-          #  (pkgs.writeText "darkreader.js" # javascript
-          #    ''
-          #      // ==UserScript==
-          #      // @name          Dark Reader (Unofficial)
-          #      // @icon          https://darkreader.org/images/darkreader-icon-256x256.png
-          #      // @namespace     DarkReader
-          #      // @description	  Inverts the brightness of pages to reduce eye strain
-          #      // @version       4.7.15
-          #      // @author        https://github.com/darkreader/darkreader#contributors
-          #      // @homepageURL   https://darkreader.org/ | https://github.com/darkreader/darkreader
-          #      // @run-at        document-end
-          #      // @grant         none
-          #      // @include       http*
-          #      // @require       https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js
-          #      // @noframes
-          #      // ==/UserScript==
+          greasemonkey = with config.lib.stylix.colors.withHashtag; [
+            (pkgs.writeText "darkreader.js" # javascript
+              ''
+                // ==UserScript==
+                // @name          Dark Reader (Unofficial)
+                // @icon          https://darkreader.org/images/darkreader-icon-256x256.png
+                // @namespace     DarkReader
+                // @description	  Inverts the brightness of pages to reduce eye strain
+                // @version       4.7.15
+                // @author        https://github.com/darkreader/darkreader#contributors
+                // @homepageURL   https://darkreader.org/ | https://github.com/darkreader/darkreader
+                // @run-at        document-end
+                // @grant         none
+                // @include       http*
+                // @require       https://cdn.jsdelivr.net/npm/darkreader/darkreader.min.js
+                // @noframes
+                // ==/UserScript==
 
-          #      DarkReader.auto({
-          #        darkSchemeBackgroundColor: "${base01}",
-          #        darkSchemeTextColor: "${base05}",
-          #      	brightness: 100,
-          #      	contrast: 100,
-          #      	sepia: 0,
-          #      });
-          #    '')
-          #];
+                DarkReader.auto({
+                  darkSchemeBackgroundColor: "${base01}",
+                  darkSchemeTextColor: "${base05}",
+                	brightness: 100,
+                	contrast: 100,
+                	sepia: 0,
+                });
+              ''
+            )
+          ];
           extraConfig = # python
             ''
               c.tabs.padding = {"bottom": 4, "left": 4, "right": 4, "top": 4}

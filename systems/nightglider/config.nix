@@ -68,5 +68,8 @@
     FLAKE = "/etc/nixos/";
   };
 
+  networking.firewall.allowedTCPPorts = [ 6600 ];
+  networking.firewall.allowedUDPPorts = [ 6600 ];
+
   system.stateVersion = "23.11";
 }

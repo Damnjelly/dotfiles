@@ -15,13 +15,13 @@
         stylix.targets.foot.enable = true;
         home.packages = with pkgs; [
           kirsch
-          scientifica
+          cozette
         ];
         programs.foot = {
           enable = true;
           settings.main = {
             pad = "16x11center";
-            font = lib.mkForce "scientifica:size=16";
+            font = lib.mkForce "kirsch:size=11";
           };
         };
       };

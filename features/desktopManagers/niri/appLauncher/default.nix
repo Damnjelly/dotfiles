@@ -47,7 +47,7 @@
           extraConfig = {
             modes = "drun,window,ssh,combi,run,power:rofi-power-menu";
           };
-          font = lib.mkForce "kirsch 12";
+          font = lib.mkForce "scientifica 16";
           theme =
             with config.lib.stylix.colors.withHashtag;
             lib.mkForce "${pkgs.writeText "theme.rasi" # rasi
@@ -82,7 +82,7 @@
                 }
 
                 mainbox {
-                  padding:    4px;
+                  padding:    6px;
                   background-color:   @bg0;
 
                   border:             1px;
@@ -90,8 +90,8 @@
                 }
 
                 inputbar {
-                  spacing:    4px; 
-                  padding:    4px;
+                  spacing:    6px; 
+                  padding:    6px;
 
                   background-color:   @bg1;
                 }
@@ -105,7 +105,7 @@
                 }
 
                 textbox {
-                  padding:            4px;
+                  padding:            6px;
                   background-color:   @bg1;
                 }
 
@@ -118,8 +118,8 @@
                 }
 
                 element {
-                  padding:    4px;
-                  spacing:    4px;
+                  padding:    6px;
+                  spacing:    6px;
                 }
 
                 element normal normal {
